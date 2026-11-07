@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Embajadas y Consulados - TIB Bolivia</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .dropdown:hover .dropdown-menu,
+    .dropdown:focus-within .dropdown-menu { display: block; }
+  </style>
+</head>
+<body class="bg-[#FBFBFA] text-slate-800 antialiased">
+
+  <!-- NAVBAR -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-40">
+    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2">
+        <span class="w-8 h-8 rounded-lg bg-slate-900 text-white font-extrabold text-sm flex items-center justify-center">T</span>
+        <span class="font-extrabold text-base tracking-tight text-slate-900">TIB <span class="text-red-700">Bolivia</span></span>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-6 text-xs font-semibold text-slate-600">
+        <a href="index.html" class="hover:text-slate-900">Inicio</a>
+        
+        <div class="relative dropdown py-3">
+          <button type="button" class="flex items-center gap-1 text-slate-900 font-bold py-1">
+            <span>Servicios</span>
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="dropdown-menu hidden absolute left-0 top-full w-56 bg-white rounded-xl shadow-lg border border-slate-200 p-1.5 z-50">
+            <a href="agencias.html" class="block px-3 py-2 rounded-lg text-xs font-medium text-slate-700 hover:bg-slate-50">Agencias de Viaje</a>
+            <a href="instituciones.html" class="block px-3 py-2 rounded-lg text-xs font-medium text-slate-700 hover:bg-slate-50">Instituciones y Municipios</a>
+            <a href="hoteles.html" class="block px-3 py-2 rounded-lg text-xs font-medium text-slate-700 hover:bg-slate-50">Hoteles y Hospedajes</a>
+            <a href="transporte.html" class="block px-3 py-2 rounded-lg text-xs font-medium text-slate-700 hover:bg-slate-50">Transporte Turístico</a>
+            <a href="embajadas.html" class="block px-3 py-2 rounded-lg text-xs font-bold text-red-700 bg-red-50">Embajadas y Consulados</a>
+            <a href="servicios-especiales.html" class="block px-3 py-2 rounded-lg text-xs font-medium text-slate-700 hover:bg-slate-50">Otros Servicios</a>
+          </div>
+        </div>
+
+        <a href="index.html#departamentos" class="hover:text-slate-900">Departamentos</a>
+        <a href="index.html#destinos" class="hover:text-slate-900">Destinos</a>
+        <a href="index.html#socios" class="hover:text-slate-900">Socios</a>
+      </nav>
+
+      <a href="index.html#contacto" class="text-xs font-bold text-slate-700 hover:text-slate-900">
+        Asistencia
+      </a>
+    </div>
+  </header>
+
+  <!-- CABECERA -->
+  <section class="bg-white border-b border-slate-200 py-10 px-4">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-4">
+      <div>
+        <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Categoría 5 de 6</span>
+        <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">Embajadas y Consulados</h1>
+        <p class="text-xs sm:text-sm text-slate-500 mt-1 max-w-xl">
+          Misiones diplomáticas y representaciones acreditadas en La Paz para asistencia al viajero, información de visados y cooperación cultural.
+        </p>
+      </div>
+      <div class="text-xs font-semibold text-slate-500 bg-slate-50 px-3 py-2 rounded-lg border border-slate-200 shrink-0">
+        Total: <span class="font-bold text-slate-900">3 sedes principales</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTENIDO: FICHAS CONSULARES Y DIPLOMÁTICAS -->
+  <main class="max-w-6xl mx-auto px-4 py-8">
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+      
+      <!-- Sede 1 -->
+      <article class="bg-white border border-slate-200 rounded-xl p-6 flex flex-col justify-between">
+        <div>
+          <span class="text-[10px] font-bold uppercase text-slate-500 bg-slate-100 px-2 py-0.5 rounded">Misión Diplomática</span>
+          <h2 class="text-lg font-bold text-slate-900 mt-2">Embajada de México</h2>
+          <p class="text-xs text-slate-500 mt-1">Sección consular acreditada ante el Estado Plurinacional de Bolivia. Gestión de visados para residentes y asistencia consular.</p>
+          
+          <div class="mt-4 pt-4 border-t border-slate-100 space-y-2 text-xs text-slate-600">
+            <div>
+              <span class="block font-semibold text-slate-400 text-[11px] uppercase">Ubicación</span>
+              <span>Calacoto, Calle 18 #8002, La Paz</span>
+            </div>
+            <div>
+              <span class="block font-semibold text-slate-400 text-[11px] uppercase">Servicios</span>
+              <span>Visados turísticos, legalizaciones, protección ciudadana</span>
+            </div>
+          </div>
+        </div>
+        <div class="mt-6 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+          <span class="text-slate-400">Atención con cita</span>
+          <a href="#" class="font-bold text-red-700 hover:underline">Portal Consular →</a>
+        </div>
+      </article>
+
+      <!-- Sede 2 -->
+      <article class="bg-white border border-slate-200 rounded-xl p-6 flex flex-col justify-between">
+        <div>
+          <span class="text-[10px] font-bold uppercase text-slate-500 bg-slate-100 px-2 py-0.5 rounded">Misión Diplomática</span>
+          <h2 class="text-lg font-bold text-slate-900 mt-2">Embajada de Costa Rica</h2>
+          <p class="text-xs text-slate-500 mt-1">Representación diplomática para el fomento de intercambios comerciales, ecoturismo y cooperación cultural centroamericana.</p>
+          
+          <div class="mt-4 pt-4 border-t border-slate-100 space-y-2 text-xs text-slate-600">
+            <div>
+              <span class="block font-semibold text-slate-400 text-[11px] uppercase">Ubicación</span>
+              <span>San Jorge, Av. Arce, La Paz</span>
+            </div>
+            <div>
+              <span class="block font-semibold text-slate-400 text-[11px] uppercase">Servicios</span>
+              <span>Consultas de ingreso, cooperación turística, trámites consulares</span>
+            </div>
+          </div>
+        </div>
+        <div class="mt-6 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+          <span class="text-slate-400">Atención consular</span>
+          <a href="#" class="font-bold text-red-700 hover:underline">Portal Consular →</a>
+        </div>
+      </article>
+
+      <!-- Sede 3 -->
+      <article class="bg-white border border-slate-200 rounded-xl p-6 flex flex-col justify-between">
+        <div>
+          <span class="text-[10px] font-bold uppercase text-slate-500 bg-slate-100 px-2 py-0.5 rounded">Misión Diplomática / HIS</span>
+          <h2 class="text-lg font-bold text-slate-900 mt-2">Embajada de Japón - HIS</h2>
+          <p class="text-xs text-slate-500 mt-1">Sección consular de Japón en La Paz y enlace con plataformas de promoción turística japonesa para viajeros y agencias receptoras.</p>
+          
+          <div class="mt-4 pt-4 border-t border-slate-100 space-y-2 text-xs text-slate-600">
+            <div>
+              <span class="block font-semibold text-slate-400 text-[11px] uppercase">Ubicación</span>
+              <span>Sopocachi, Calle Rosendo Gutiérrez, La Paz</span>
+            </div>
+            <div>
+              <span class="block font-semibold text-slate-400 text-[11px] uppercase">Servicios</span>
+              <span>Visados, programas culturales, asistencia a viajeros japoneses</span>
+            </div>
+          </div>
+        </div>
+        <div class="mt-6 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+          <span class="text-slate-400">Atención oficial</span>
+          <a href="#" class="font-bold text-red-700 hover:underline">Portal Consular →</a>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-white border-t border-slate-200 py-8 text-xs text-slate-500 mt-16">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <span>TIB Bolivia · Directorio de Embajadas y Consulados</span>
+      <div class="flex gap-4">
+        <a href="index.html" class="hover:text-slate-900">Inicio</a>
+        <a href="agencias.html" class="hover:text-slate-900">Agencias</a>
+        <a href="instituciones.html" class="hover:text-slate-900">Instituciones</a>
+        <a href="hoteles.html" class="hover:text-slate-900">Hoteles</a>
+        <a href="transporte.html" class="hover:text-slate-900">Transporte</a>
+        <a href="servicios-especiales.html" class="hover:text-slate-900">Otros Servicios</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TIB Bolivia - Directorio Turístico</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    
+    .dropdown:hover .dropdown-menu,
+    .dropdown:focus-within .dropdown-menu {
+      display: block;
+    }
+  </style>
+</head>
+<body class="bg-[#FBFBFA] text-slate-800 antialiased">
+
+  <!-- ========================================================= -->
+  <!-- NAVBAR                                                    -->
+  <!-- ========================================================= -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-40">
+    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+      
+      <!-- Brand -->
+      <a href="index.html" class="flex items-center gap-2">
+        <span class="w-8 h-8 rounded-lg bg-slate-900 text-white font-extrabold text-sm flex items-center justify-center">
+          T
+        </span>
+        <span class="font-extrabold text-base tracking-tight text-slate-900">
+          TIB <span class="text-red-700">Bolivia</span>
+        </span>
+      </a>
+
+      <!-- Navegación -->
+      <nav class="hidden md:flex items-center gap-6 text-xs font-semibold text-slate-600">
+        <a href="index.html" class="text-slate-900 font-bold">Inicio</a>
+        
+        <!-- Dropdown Servicios -->
+        <div class="relative dropdown py-3">
+          <button type="button" class="flex items-center gap-1 text-slate-700 hover:text-slate-900 py-1">
+            <span>Servicios</span>
+            <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+
+          <div class="dropdown-menu hidden absolute left-0 top-full w-56 bg-white rounded-xl shadow-lg border border-slate-200 p-1.5 z-50">
+            <a href="agencias.html" class="block px-3 py-2 rounded-lg text-xs font-medium text-slate-700 hover:bg-slate-50 hover:text-slate-900">
+              Agencias de Viaje
+            </a>
+            <a href="instituciones.html" class="block px-3 py-2 rounded-lg text-xs font-medium text-slate-700 hover:bg-slate-50 hover:text-slate-900">
+              Instituciones y Municipios
+            </a>
+            <a href="hoteles.html" class="block px-3 py-2 rounded-lg text-xs font-medium text-slate-700 hover:bg-slate-50 hover:text-slate-900">
+              Hoteles y Hospedajes
+            </a>
+            <a href="transporte.html" class="block px-3 py-2 rounded-lg text-xs font-medium text-slate-700 hover:bg-slate-50 hover:text-slate-900">
+              Transporte Turístico
+            </a>
+            <a href="embajadas.html" class="block px-3 py-2 rounded-lg text-xs font-medium text-slate-700 hover:bg-slate-50 hover:text-slate-900">
+              Embajadas y Consulados
+            </a>
+            <a href="servicios-especiales.html" class="block px-3 py-2 rounded-lg text-xs font-medium text-slate-700 hover:bg-slate-50 hover:text-slate-900">
+              Otros Servicios
+            </a>
+          </div>
+        </div>
+
+        <a href="#departamentos" class="hover:text-slate-900">Departamentos</a>
+        <a href="#destinos" class="hover:text-slate-900">Destinos</a>
+        <a href="#empresas" class="hover:text-slate-900">Empresas</a>
+        <a href="#socios" class="hover:text-slate-900">Socios</a>
+      </nav>
+
+      <a href="#" class="bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs px-3.5 py-2 rounded-lg transition-colors">
+        Registrar Empresa
+      </a>
+    </div>
+  </header>
+
+
+  <!-- ========================================================= -->
+  <!-- HERO SIMPLE & BUSCADOR                                    -->
+  <!-- ========================================================= -->
+  <section class="bg-white border-b border-slate-200 py-14 px-4">
+    <div class="max-w-4xl mx-auto text-center">
+      
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+        Directorio Turístico de Bolivia
+      </h1>
+      <p class="text-xs sm:text-sm text-slate-500 mt-2 max-w-lg mx-auto">
+        Agencias, hospedajes, transporte y servicios en los 9 departamentos.
+      </p>
+
+      <!-- Buscador Directo -->
+      <form class="mt-8 max-w-2xl mx-auto grid grid-cols-1 sm:grid-cols-12 gap-2" onsubmit="event.preventDefault(); buscar();">
+        <div class="sm:col-span-5">
+          <input
+            id="input-destino"
+            type="text"
+            placeholder="Destino o ciudad (ej. Uyuni, La Paz)..."
+            class="w-full text-xs px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-lg outline-none focus:border-slate-400 text-slate-800"
+          >
+        </div>
+
+        <div class="sm:col-span-4">
+          <select id="select-servicio" class="w-full text-xs px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-lg outline-none focus:border-slate-400 text-slate-700">
+            <option value="">Todas las categorías</option>
+            <option value="agencias">Agencias de Viaje</option>
+            <option value="instituciones">Instituciones y Municipios</option>
+            <option value="hoteles">Hoteles y Hospedajes</option>
+            <option value="transporte">Transporte Turístico</option>
+            <option value="embajadas">Embajadas y Consulados</option>
+            <option value="servicios-especiales">Otros Servicios</option>
+          </select>
+        </div>
+
+        <div class="sm:col-span-3">
+          <button type="submit" class="w-full h-full min-h-[38px] bg-red-700 hover:bg-red-800 text-white font-bold text-xs rounded-lg transition-colors">
+            Buscar
+          </button>
+        </div>
+      </form>
+
+    </div>
+  </section>
+
+
+  <!-- ========================================================= -->
+  <!-- LAS 6 CATEGORÍAS (ENLACES A CADA ARCHIVO)                 -->
+  <!-- ========================================================= -->
+  <section class="max-w-6xl mx-auto px-4 py-12">
+    <div class="flex items-center justify-between mb-6">
+      <h2 class="text-sm font-bold uppercase tracking-wider text-slate-500">Categorías de Servicio</h2>
+      <span class="text-xs text-slate-400">6 secciones</span>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      
+      <a href="agencias.html" class="p-4 bg-white border border-slate-200 rounded-xl hover:border-slate-400 transition-colors flex items-center justify-between">
+        <div>
+          <h3 class="font-bold text-slate-900 text-sm">Agencias de Viaje</h3>
+          <span class="text-xs text-slate-400">28 operadores</span>
+        </div>
+        <span class="text-xs text-slate-400 font-bold">→</span>
+      </a>
+
+      <a href="instituciones.html" class="p-4 bg-white border border-slate-200 rounded-xl hover:border-slate-400 transition-colors flex items-center justify-between">
+        <div>
+          <h3 class="font-bold text-slate-900 text-sm">Instituciones y Municipios</h3>
+          <span class="text-xs text-slate-400">12 entidades</span>
+        </div>
+        <span class="text-xs text-slate-400 font-bold">→</span>
+      </a>
+
+      <a href="hoteles.html" class="p-4 bg-white border border-slate-200 rounded-xl hover:border-slate-400 transition-colors flex items-center justify-between">
+        <div>
+          <h3 class="font-bold text-slate-900 text-sm">Hoteles y Hospedajes</h3>
+          <span class="text-xs text-slate-400">10 alojamientos</span>
+        </div>
+        <span class="text-xs text-slate-400 font-bold">→</span>
+      </a>
+
+      <a href="transporte.html" class="p-4 bg-white border border-slate-200 rounded-xl hover:border-slate-400 transition-colors flex items-center justify-between">
+        <div>
+          <h3 class="font-bold text-slate-900 text-sm">Transporte Turístico</h3>
+          <span class="text-xs text-slate-400">6 empresas</span>
+        </div>
+        <span class="text-xs text-slate-400 font-bold">→</span>
+      </a>
+
+      <a href="embajadas.html" class="p-4 bg-white border border-slate-200 rounded-xl hover:border-slate-400 transition-colors flex items-center justify-between">
+        <div>
+          <h3 class="font-bold text-slate-900 text-sm">Embajadas y Consulados</h3>
+          <span class="text-xs text-slate-400">3 sedes</span>
+        </div>
+        <span class="text-xs text-slate-400 font-bold">→</span>
+      </a>
+
+      <a href="servicios-especiales.html" class="p-4 bg-white border border-slate-200 rounded-xl hover:border-slate-400 transition-colors flex items-center justify-between">
+        <div>
+          <h3 class="font-bold text-slate-900 text-sm">Otros Servicios</h3>
+          <span class="text-xs text-slate-400">Vinos, café y artesanía</span>
+        </div>
+        <span class="text-xs text-slate-400 font-bold">→</span>
+      </a>
+
+    </div>
+  </section>
+
+
+  <!-- ========================================================= -->
+  <!-- SELECTOR POR DEPARTAMENTO                                 -->
+  <!-- ========================================================= -->
+  <section id="departamentos" class="max-w-6xl mx-auto px-4 py-8 border-t border-slate-200">
+    <div class="mb-4">
+      <h2 class="text-sm font-bold uppercase tracking-wider text-slate-500">Filtrar por Departamento</h2>
+    </div>
+
+    <div class="grid grid-cols-3 sm:grid-cols-5 lg:grid-cols-9 gap-2">
+      <a href="agencias.html?dept=lapaz" class="py-2.5 px-2 bg-white border border-slate-200 rounded-lg text-center text-xs font-semibold text-slate-700 hover:border-slate-900 hover:text-slate-900 transition-colors">La Paz</a>
+      <a href="agencias.html?dept=santacruz" class="py-2.5 px-2 bg-white border border-slate-200 rounded-lg text-center text-xs font-semibold text-slate-700 hover:border-slate-900 hover:text-slate-900 transition-colors">Santa Cruz</a>
+      <a href="agencias.html?dept=cochabamba" class="py-2.5 px-2 bg-white border border-slate-200 rounded-lg text-center text-xs font-semibold text-slate-700 hover:border-slate-900 hover:text-slate-900 transition-colors">Cochabamba</a>
+      <a href="agencias.html?dept=potosi" class="py-2.5 px-2 bg-white border border-slate-200 rounded-lg text-center text-xs font-semibold text-slate-700 hover:border-slate-900 hover:text-slate-900 transition-colors">Potosí</a>
+      <a href="agencias.html?dept=chuquisaca" class="py-2.5 px-2 bg-white border border-slate-200 rounded-lg text-center text-xs font-semibold text-slate-700 hover:border-slate-900 hover:text-slate-900 transition-colors">Chuquisaca</a>
+      <a href="agencias.html?dept=tarija" class="py-2.5 px-2 bg-white border border-slate-200 rounded-lg text-center text-xs font-semibold text-slate-700 hover:border-slate-900 hover:text-slate-900 transition-colors">Tarija</a>
+      <a href="agencias.html?dept=oruro" class="py-2.5 px-2 bg-white border border-slate-200 rounded-lg text-center text-xs font-semibold text-slate-700 hover:border-slate-900 hover:text-slate-900 transition-colors">Oruro</a>
+      <a href="agencias.html?dept=beni" class="py-2.5 px-2 bg-white border border-slate-200 rounded-lg text-center text-xs font-semibold text-slate-700 hover:border-slate-900 hover:text-slate-900 transition-colors">Beni</a>
+      <a href="agencias.html?dept=pando" class="py-2.5 px-2 bg-white border border-slate-200 rounded-lg text-center text-xs font-semibold text-slate-700 hover:border-slate-900 hover:text-slate-900 transition-colors">Pando</a>
+    </div>
+  </section>
+
+
+  <!-- ========================================================= -->
+  <!-- DESTINOS PRINCIPALES                                      -->
+  <!-- ========================================================= -->
+  <section id="destinos" class="max-w-6xl mx-auto px-4 py-12 border-t border-slate-200">
+    <div class="mb-6">
+      <h2 class="text-sm font-bold uppercase tracking-wider text-slate-500">Destinos Principales</h2>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      
+      <a href="agencias.html?q=uyuni" class="block bg-white border border-slate-200 rounded-xl overflow-hidden hover:border-slate-400 transition-colors">
+        <img src="https://images.unsplash.com/photo-1589556264800-08ae9e129a8c?auto=format&fit=crop&w=600&q=80" alt="Salar de Uyuni" class="h-40 w-full object-cover">
+        <div class="p-4">
+          <span class="text-[10px] font-bold text-slate-400 uppercase">Potosí</span>
+          <h3 class="font-bold text-slate-900 text-sm mt-0.5">Salar de Uyuni</h3>
+        </div>
+      </a>
+
+      <a href="hoteles.html?q=titicaca" class="block bg-white border border-slate-200 rounded-xl overflow-hidden hover:border-slate-400 transition-colors">
+        <img src="https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=600&q=80" alt="Lago Titicaca" class="h-40 w-full object-cover">
+        <div class="p-4">
+          <span class="text-[10px] font-bold text-slate-400 uppercase">La Paz</span>
+          <h3 class="font-bold text-slate-900 text-sm mt-0.5">Lago Titicaca</h3>
+        </div>
+      </a>
+
+      <a href="agencias.html?q=madidi" class="block bg-white border border-slate-200 rounded-xl overflow-hidden hover:border-slate-400 transition-colors">
+        <img src="https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=600&q=80" alt="Parque Madidi" class="h-40 w-full object-cover">
+        <div class="p-4">
+          <span class="text-[10px] font-bold text-slate-400 uppercase">Beni</span>
+          <h3 class="font-bold text-slate-900 text-sm mt-0.5">Parque Nacional Madidi</h3>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+
+  <!-- ========================================================= -->
+  <!-- EMPRESAS DESTACADAS                                       -->
+  <!-- ========================================================= -->
+  <section id="empresas" class="max-w-6xl mx-auto px-4 py-12 border-t border-slate-200">
+    <div class="flex items-center justify-between mb-6">
+      <h2 class="text-sm font-bold uppercase tracking-wider text-slate-500">Empresas Registradas</h2>
+      <a href="agencias.html" class="text-xs font-semibold text-slate-700 hover:underline">Ver todas →</a>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      
+      <div class="p-4 bg-white border border-slate-200 rounded-xl">
+        <span class="text-[10px] font-bold text-slate-400 uppercase">Agencia · Potosí</span>
+        <h3 class="font-bold text-slate-900 text-sm mt-1">Futurismo Group</h3>
+        <a href="agencias.html" class="text-xs text-red-700 font-semibold mt-3 block hover:underline">Ver ficha</a>
+      </div>
+
+      <div class="p-4 bg-white border border-slate-200 rounded-xl">
+        <span class="text-[10px] font-bold text-slate-400 uppercase">Institución · La Paz</span>
+        <h3 class="font-bold text-slate-900 text-sm mt-1">Dirección de Turismo GAMLP</h3>
+        <a href="instituciones.html" class="text-xs text-red-700 font-semibold mt-3 block hover:underline">Ver ficha</a>
+      </div>
+
+      <div class="p-4 bg-white border border-slate-200 rounded-xl">
+        <span class="text-[10px] font-bold text-slate-400 uppercase">Hospedaje · Copacabana</span>
+        <h3 class="font-bold text-slate-900 text-sm mt-1">Kalluchi Ecolodge</h3>
+        <a href="hoteles.html" class="text-xs text-red-700 font-semibold mt-3 block hover:underline">Ver ficha</a>
+      </div>
+
+      <div class="p-4 bg-white border border-slate-200 rounded-xl">
+        <span class="text-[10px] font-bold text-slate-400 uppercase">Transporte · La Paz</span>
+        <h3 class="font-bold text-slate-900 text-sm mt-1">Todo Turismo</h3>
+        <a href="transporte.html" class="text-xs text-red-700 font-semibold mt-3 block hover:underline">Ver ficha</a>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ========================================================= -->
+  <!-- SOCIOS & ALIADOS (SOLO LOGOS)                             -->
+  <!-- ========================================================= -->
+  <section id="socios" class="max-w-6xl mx-auto px-4 py-12 border-t border-slate-200">
+    <div class="mb-6">
+      <h2 class="text-sm font-bold uppercase tracking-wider text-slate-500">Socios y Aliados</h2>
+    </div>
+
+    <!-- Espacio exclusivo para logos sin texto inventado -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+      
+      <div class="h-24 bg-white border border-slate-200 rounded-xl flex items-center justify-center p-4">
+        <!-- Reemplazar src con el logo oficial -->
+        <span class="text-sm font-bold text-slate-700 tracking-wider">SCATUR</span>
+      </div>
+
+      <div class="h-24 bg-white border border-slate-200 rounded-xl flex items-center justify-center p-4">
+        <span class="text-sm font-bold text-slate-700 tracking-wider">AGB</span>
+      </div>
+
+      <div class="h-24 bg-white border border-slate-200 rounded-xl flex items-center justify-center p-4">
+        <span class="text-sm font-bold text-slate-700 tracking-wider">BLACK BULLS</span>
+      </div>
+
+      <div class="h-24 bg-white border border-slate-200 rounded-xl flex items-center justify-center p-4">
+        <span class="text-sm font-bold text-slate-700 tracking-wider">DOMOS</span>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ========================================================= -->
+  <!-- FOOTER                                                    -->
+  <!-- ========================================================= -->
+  <footer class="bg-white border-t border-slate-200 py-8 text-xs text-slate-500">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <span>TIB Bolivia · Directorio Turístico</span>
+      <div class="flex gap-4">
+        <a href="agencias.html" class="hover:text-slate-900">Agencias</a>
+        <a href="instituciones.html" class="hover:text-slate-900">Instituciones</a>
+        <a href="hoteles.html" class="hover:text-slate-900">Hoteles</a>
+        <a href="transporte.html" class="hover:text-slate-900">Transporte</a>
+        <a href="embajadas.html" class="hover:text-slate-900">Embajadas</a>
+        <a href="servicios-especiales.html" class="hover:text-slate-900">Otros Servicios</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function buscar() {
+      const servicio = document.getElementById('select-servicio').value;
+      const destino = document.getElementById('input-destino').value.trim();
+      
+      const archivoDestino = servicio ? (servicio + '.html') : 'agencias.html';
+      const url = destino ? (archivoDestino + '?q=' + encodeURIComponent(destino)) : archivoDestino;
+      window.location.href = url;
+    }
+  </script>
+
+</body>
+</html>
