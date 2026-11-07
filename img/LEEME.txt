@@ -1,0 +1,8 @@
+CARPETA DE LOGOS E IMÁGENES
+===========================
+
+Para cambiar el logo de la cabecera:
+1. Guarda tu logo en esta carpeta con el nombre:
+   - logo.png (o logo.svg, logo.webp, logo.jpg)
+2. El tamaño recomendado es de aproximadamente 40px a 50px de alto (proporción horizontal).
+3. Si aún no tienes el logo definitivo, el sistema mostrará automáticamente el placeholder "logo-placeholder.svg".
