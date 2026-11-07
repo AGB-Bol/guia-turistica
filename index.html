@@ -30,31 +30,64 @@
 
 
   <!-- ========================================================= -->
-  <!-- HERO SIMPLE & BUSCADOR                                    -->
+  <!-- HERO FULLSCREEN & BUSCADOR SPA                            -->
   <!-- ========================================================= -->
-  <section class="bg-white border-b border-slate-200 py-14 px-4">
-    <div class="max-w-4xl mx-auto text-center">
-      
-      <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+  <section id="hero-section" class="relative overflow-hidden min-h-[calc(100vh-4rem)] flex flex-col justify-between items-center px-4 py-8 sm:py-12 text-white">
+    
+    <!-- Imagen de fondo con temática turística de Bolivia (Salar de Uyuni / Andes / Titicaca) -->
+    <div 
+      id="hero-bg-image" 
+      class="absolute inset-0 bg-cover bg-center transition-all duration-1000 transform scale-105" 
+      style="background-image: url('https://images.unsplash.com/photo-1589556264800-08ae9e129a8c?auto=format&fit=crop&w=2000&q=85');"
+    ></div>
+
+    <!-- Capa de overlay degradado oscuro cinematográfico con textura -->
+    <div class="absolute inset-0 bg-gradient-to-b from-slate-950/85 via-slate-900/70 to-slate-950/90 backdrop-blur-[1.5px]"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.08)_1px,transparent_1px)] [background-size:28px_28px] pointer-events-none"></div>
+
+    <!-- Selector flotante de fondos (Interactivo) -->
+    <div class="relative z-10 w-full max-w-5xl flex items-center justify-end text-xs text-slate-300">
+      <!-- Controles para cambiar fondo temático -->
+      <div class="flex items-center gap-1.5 bg-black/40 p-1 rounded-xl border border-white/10 backdrop-blur-md text-[11px]">
+        <button type="button" onclick="cambiarFondoHero('uyuni', 'https://images.unsplash.com/photo-1589556264800-08ae9e129a8c?auto=format&fit=crop&w=2000&q=85', this)" class="hero-bg-tab active px-2.5 py-1 rounded-lg font-bold bg-white/20 text-white transition-all cursor-pointer">Salar</button>
+        <button type="button" onclick="cambiarFondoHero('titicaca', 'https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=2000&q=85', this)" class="hero-bg-tab px-2.5 py-1 rounded-lg text-slate-300 hover:text-white hover:bg-white/10 transition-all cursor-pointer">Titicaca</button>
+        <button type="button" onclick="cambiarFondoHero('madidi', 'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=2000&q=85', this)" class="hero-bg-tab px-2.5 py-1 rounded-lg text-slate-300 hover:text-white hover:bg-white/10 transition-all cursor-pointer">Madidi</button>
+      </div>
+    </div>
+
+    <!-- Contenedor central -->
+    <div class="relative z-10 my-auto max-w-4xl w-full text-center py-6">
+
+      <!-- Título principal -->
+      <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight sm:leading-none drop-shadow-md">
         Directorio Turístico de Bolivia
       </h1>
-      <p class="text-xs sm:text-sm text-slate-500 mt-2 max-w-lg mx-auto">
-        Agencias, hospedajes, transporte y servicios en los 9 departamentos.
+
+      <!-- Subtítulo -->
+      <p class="text-xs sm:text-base text-slate-200 mt-4 max-w-xl mx-auto leading-relaxed font-light drop-shadow">
+        Agencias certificadas, hospedajes comunitarios, transporte seguro y servicios en los 9 departamentos del país.
       </p>
 
-      <!-- Buscador Directo -->
-      <form class="mt-8 max-w-2xl mx-auto grid grid-cols-1 sm:grid-cols-12 gap-2" onsubmit="event.preventDefault(); buscar();">
-        <div class="sm:col-span-5">
-          <input
-            id="input-destino"
-            type="text"
-            placeholder="Destino o ciudad (ej. Uyuni, La Paz)..."
-            class="w-full text-xs px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-lg outline-none focus:border-slate-400 text-slate-800"
-          >
+      <!-- Buscador Destacado estilo Card Flotante -->
+      <form class="mt-8 sm:mt-10 max-w-2xl mx-auto bg-white/95 backdrop-blur-md p-2.5 sm:p-3 rounded-2xl shadow-2xl shadow-black/40 border border-white/40 grid grid-cols-1 sm:grid-cols-12 gap-2 text-left text-slate-800" onsubmit="event.preventDefault(); buscar();">
+        <div class="sm:col-span-5 relative">
+          <label for="input-destino" class="sr-only">Destino o ciudad</label>
+          <div class="relative flex items-center">
+            <span class="absolute left-3 text-slate-400">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            </span>
+            <input
+              id="input-destino"
+              type="text"
+              placeholder="Destino o ciudad (ej. Uyuni, La Paz)..."
+              class="w-full text-xs sm:text-sm pl-9 pr-3.5 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-red-600 focus:bg-white text-slate-800 transition-colors"
+            >
+          </div>
         </div>
 
         <div class="sm:col-span-4">
-          <select id="select-servicio" class="w-full text-xs px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-lg outline-none focus:border-slate-400 text-slate-700">
+          <label for="select-servicio" class="sr-only">Categoría</label>
+          <select id="select-servicio" class="w-full text-xs sm:text-sm px-3.5 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-red-600 focus:bg-white text-slate-700 transition-colors cursor-pointer">
             <option value="">Todas las categorías</option>
             <option value="agencias">Agencias de Viaje</option>
             <option value="instituciones">Instituciones y Municipios</option>
@@ -66,20 +99,43 @@
         </div>
 
         <div class="sm:col-span-3">
-          <button type="submit" class="w-full h-full min-h-[38px] bg-red-700 hover:bg-red-800 text-white font-bold text-xs rounded-lg transition-colors">
-            Buscar
+          <button type="submit" class="w-full h-full min-h-[46px] bg-red-700 hover:bg-red-800 active:scale-[0.98] text-white font-bold text-xs sm:text-sm rounded-xl transition-all shadow-lg shadow-red-900/30 flex items-center justify-center gap-1.5 cursor-pointer">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+            </svg>
+            <span>Buscar</span>
           </button>
         </div>
       </form>
 
+      <!-- Píldoras de búsqueda rápida de destinos emblemáticos -->
+      <div id="hero-pills" class="flex flex-wrap items-center justify-center gap-2 mt-5 text-xs text-slate-300">
+        <span class="font-medium text-slate-400">Rutas sugeridas:</span>
+        <button type="button" onclick="prepararBusqueda('Uyuni', 'agencias')" class="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white border border-white/20 backdrop-blur-md transition-all cursor-pointer">Salar de Uyuni</button>
+        <button type="button" onclick="prepararBusqueda('Copacabana', 'hoteles')" class="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white border border-white/20 backdrop-blur-md transition-all cursor-pointer">Copacabana & Lago</button>
+        <button type="button" onclick="prepararBusqueda('Madidi', 'agencias')" class="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white border border-white/20 backdrop-blur-md transition-all cursor-pointer">Parque Madidi</button>
+        <button type="button" onclick="prepararBusqueda('La Paz', 'transporte')" class="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white border border-white/20 backdrop-blur-md transition-all cursor-pointer">La Paz & Rutas</button>
+      </div>
+
     </div>
+
+    <!-- Indicador de Scroll hacia abajo (estilo SPA) -->
+    <div id="hero-scroll" class="relative z-10 flex flex-col items-center gap-1.5 cursor-pointer pb-2 text-slate-300 hover:text-white transition-colors select-none" onclick="document.getElementById('seccion-categorias').scrollIntoView({ behavior: 'smooth' });">
+      <span class="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-slate-300 drop-shadow">Explorar Secciones</span>
+      <div class="w-8 h-8 rounded-full border border-white/30 bg-black/30 backdrop-blur-md flex items-center justify-center shadow-lg hover:border-white transition-colors">
+        <svg class="w-4 h-4 animate-bounce text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+        </svg>
+      </div>
+    </div>
+
   </section>
 
 
   <!-- ========================================================= -->
   <!-- LAS 6 CATEGORÍAS (ENLACES A CADA ARCHIVO)                 -->
   <!-- ========================================================= -->
-  <section class="max-w-6xl mx-auto px-4 py-12">
+  <section id="seccion-categorias" class="max-w-6xl mx-auto px-4 py-16 scroll-mt-16">
     <div class="flex items-center justify-between mb-6">
       <h2 class="text-sm font-bold uppercase tracking-wider text-slate-500">Categorías de Servicio</h2>
       <span class="text-xs text-slate-400">6 secciones</span>
@@ -287,15 +343,367 @@
     </div>
   </footer>
 
-  <script>
-    function buscar() {
-      const servicio = document.getElementById('select-servicio').value;
-      const destino = document.getElementById('input-destino').value.trim();
+  <!-- ========================================================= -->
+  <!-- MODAL DE BÚSQUEDA INTERACTIVO (SPA)                      -->
+  <!-- ========================================================= -->
+  <div id="modal-busqueda" class="fixed inset-0 z-50 hidden flex items-center justify-center p-3 sm:p-4 bg-slate-950/70 backdrop-blur-md transition-opacity duration-200">
+    <div id="modal-caja" class="bg-white rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl border border-slate-200 transform scale-95 opacity-0 transition-all duration-200 flex flex-col max-h-[90vh]">
       
-      const archivoDestino = servicio ? (servicio + '.html') : 'agencias.html';
-      const url = destino ? (archivoDestino + '?q=' + encodeURIComponent(destino)) : archivoDestino;
-      window.location.href = url;
+      <!-- Cabecera Destacada del Modal -->
+      <div class="relative bg-gradient-to-r from-slate-900 via-slate-800 to-red-950 text-white p-5 sm:p-6 shrink-0">
+        <!-- Textura de fondo -->
+        <div class="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.08)_1px,transparent_1px)] [background-size:20px_20px] pointer-events-none"></div>
+
+        <div class="relative z-10 flex items-start justify-between gap-4">
+          <div>
+            <div class="flex items-center gap-2 mb-1.5">
+              <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-red-600 text-white uppercase tracking-wider">
+                Directorio Verificado
+              </span>
+              <span id="modal-contador-coincidencias" class="text-xs text-slate-300 font-medium">Resultados encontrados</span>
+            </div>
+            <h3 class="font-extrabold text-xl sm:text-2xl text-white tracking-tight" id="modal-titulo">
+              Búsqueda en Bolivia
+            </h3>
+            <p class="text-xs text-slate-300 mt-1" id="modal-subtitulo">
+              Operadores, rutas y servicios disponibles
+            </p>
+          </div>
+
+          <button type="button" onclick="cerrarModal()" class="text-slate-400 hover:text-white p-1.5 rounded-xl bg-white/10 hover:bg-white/20 transition-all cursor-pointer shrink-0" aria-label="Cerrar modal">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Filtros rápidos interactivos dentro del modal -->
+        <div class="relative z-10 flex items-center gap-1.5 mt-4 overflow-x-auto pb-1 text-xs no-scrollbar" id="modal-pills-filtro">
+          <!-- Inyectado dinámicamente -->
+        </div>
+      </div>
+
+      <!-- Cuerpo del Modal: Lista de resultados de muestra con scroll -->
+      <div class="p-4 sm:p-6 overflow-y-auto space-y-3 grow bg-slate-50/60" id="modal-cuerpo">
+        <!-- Inyectado dinámicamente -->
+      </div>
+
+      <!-- Pie del Modal con acciones y garantías -->
+      <div class="p-4 sm:p-5 bg-white border-t border-slate-200 shrink-0 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div class="flex items-center gap-3 text-[11px] text-slate-500 font-medium">
+          <span class="flex items-center gap-1 text-emerald-700 font-semibold">
+            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+            100% Certificados
+          </span>
+          <span class="hidden sm:inline text-slate-300">·</span>
+          <span class="hidden sm:inline">Sin intermediarios</span>
+        </div>
+
+        <div class="flex items-center gap-2 w-full sm:w-auto justify-end">
+          <button type="button" onclick="cerrarModal()" class="px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-100 rounded-xl transition-colors cursor-pointer">
+            Cerrar
+          </button>
+          <a id="modal-btn-ir" href="agencias.html" class="grow sm:grow-0 px-5 py-2.5 text-xs font-bold bg-red-700 hover:bg-red-800 text-white rounded-xl transition-all shadow-md shadow-red-900/20 flex items-center justify-center gap-1.5 cursor-pointer">
+            <span id="modal-btn-texto">Ver catálogo completo</span>
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // Catálogo de muestras reales para el buscador interactivo
+    const directorioMuestras = [
+      {
+        categoria: "agencias",
+        categoriaNombre: "Agencias de Viaje",
+        nombre: "Futurismo Group & Travel",
+        ciudad: "Potosí / Uyuni",
+        desc: "Especialistas en expediciones al Salar de Uyuni, lagunas altiplánicas y rutas 4x4 privadas.",
+        tags: ["Salar de Uyuni", "Rutas 4x4", "Receptivo"],
+        enlace: "agencias.html?q=uyuni",
+        tipo: "Receptivo",
+        rating: "4.9",
+        destacado: true
+      },
+      {
+        categoria: "agencias",
+        categoriaNombre: "Agencias de Viaje",
+        nombre: "Travel Konnection",
+        ciudad: "Santa Cruz",
+        desc: "Operaciones B2B, paquetes aéreos y terrestres, conexiones con Chiquitania y Sudamérica.",
+        tags: ["Chiquitania", "B2B", "Corporativo"],
+        enlace: "agencias.html?q=santacruz",
+        tipo: "Mayorista",
+        rating: "4.8"
+      },
+      {
+        categoria: "agencias",
+        categoriaNombre: "Agencias de Viaje",
+        nombre: "Rahima - SRZ",
+        ciudad: "Santa Cruz / Samaipata",
+        desc: "Circuitos culturales y de naturaleza en los valles cruceños, Samaipata y Pantanal boliviano.",
+        tags: ["Ecoturismo", "Samaipata", "Pantanal"],
+        enlace: "agencias.html?q=samaipata",
+        tipo: "Receptivo",
+        rating: "4.9"
+      },
+      {
+        categoria: "hoteles",
+        categoriaNombre: "Hoteles y Hospedajes",
+        nombre: "Kalluchi Ecolodge",
+        ciudad: "Copacabana · Isla del Sol",
+        desc: "Hospedaje ecológico en la parte alta de la Isla del Sol con vista abierta al lago y comida andina.",
+        tags: ["Vista al Lago", "Comunitario", "Energía Solar"],
+        enlace: "hoteles.html?q=titicaca",
+        tipo: "Ecolodge",
+        rating: "4.9",
+        destacado: true
+      },
+      {
+        categoria: "hoteles",
+        categoriaNombre: "Hoteles y Hospedajes",
+        nombre: "Dos Ríos Camping & Lodge",
+        ciudad: "Coroico · Yungas",
+        desc: "Cabañas rústicas y zona de acampada organizada en la confluencia de dos ríos en los Yungas.",
+        tags: ["Yungas", "Naturaleza", "Fogatas"],
+        enlace: "hoteles.html?q=coroico",
+        tipo: "Lodge & Camping",
+        rating: "4.7"
+      },
+      {
+        categoria: "transporte",
+        categoriaNombre: "Transporte Turístico",
+        nombre: "Todo Turismo",
+        ciudad: "La Paz · Oruro · Uyuni",
+        desc: "Servicio nocturno premium clase ejecutiva conectando La Paz con Uyuni con cena andina a bordo.",
+        tags: ["Bus Cama", "La Paz - Uyuni", "Wifi y Calefacción"],
+        enlace: "transporte.html?q=uyuni",
+        tipo: "Flota Turística",
+        rating: "4.8",
+        destacado: true
+      },
+      {
+        categoria: "instituciones",
+        categoriaNombre: "Instituciones y Municipios",
+        nombre: "Dirección de Turismo GAMLP",
+        ciudad: "La Paz",
+        desc: "Información turística municipal, centros de atención al visitante y certificación de operadores.",
+        tags: ["Municipal", "Información", "Centro Histórico"],
+        enlace: "instituciones.html?q=lapaz",
+        tipo: "Institución",
+        rating: "Oficial"
+      },
+      {
+        categoria: "servicios-especiales",
+        categoriaNombre: "Otros Servicios",
+        nombre: "Ruta del Vino & Singani Tarija",
+        ciudad: "Tarija",
+        desc: "Bodegas boutique de altura, catas de singani tradicional y gastronomía en los valles tarijeños.",
+        tags: ["Enoturismo", "Bodegas de Altura", "Valles"],
+        enlace: "servicios-especiales.html?q=tarija",
+        tipo: "Enoturismo",
+        rating: "5.0",
+        destacado: true
+      }
+    ];
+
+    const categoriaNombres = {
+      agencias: "Agencias de Viaje",
+      instituciones: "Instituciones y Municipios",
+      hoteles: "Hoteles y Hospedajes",
+      transporte: "Transporte Turístico",
+      embajadas: "Embajadas y Consulados",
+      "servicios-especiales": "Otros Servicios"
+    };
+
+    // Cambiar fondo del Hero interactivamente
+    function cambiarFondoHero(key, url, boton) {
+      const bgImage = document.getElementById("hero-bg-image");
+      
+      if (bgImage) {
+        bgImage.style.opacity = "0.4";
+        setTimeout(() => {
+          bgImage.style.backgroundImage = `url('${url}')`;
+          bgImage.style.opacity = "1";
+        }, 200);
+      }
+
+      document.querySelectorAll(".hero-bg-tab").forEach(tab => {
+        tab.classList.remove("bg-white/20", "text-white", "font-bold");
+        tab.classList.add("text-slate-300");
+      });
+      if (boton) {
+        boton.classList.add("bg-white/20", "text-white", "font-bold");
+        boton.classList.remove("text-slate-300");
+      }
     }
+
+    function prepararBusqueda(destino, servicio) {
+      document.getElementById('input-destino').value = destino;
+      document.getElementById('select-servicio').value = servicio;
+      buscar();
+    }
+
+    function buscar(categoriaFiltroModal = null) {
+      const selectServicio = document.getElementById('select-servicio');
+      const inputDestino = document.getElementById('input-destino');
+      
+      const servicio = categoriaFiltroModal !== null ? categoriaFiltroModal : selectServicio.value;
+      const destino = inputDestino.value.trim();
+
+      const archivoDestino = servicio ? (servicio + '.html') : 'agencias.html';
+      const urlDestino = destino ? (archivoDestino + '?q=' + encodeURIComponent(destino)) : archivoDestino;
+      const nombreCategoria = servicio ? (categoriaNombres[servicio] || servicio) : "Todas las categorías";
+
+      const modal = document.getElementById('modal-busqueda');
+      const modalCaja = document.getElementById('modal-caja');
+      const modalTitulo = document.getElementById('modal-titulo');
+      const modalSubtitulo = document.getElementById('modal-subtitulo');
+      const modalContador = document.getElementById('modal-contador-coincidencias');
+      const modalPillsFiltro = document.getElementById('modal-pills-filtro');
+      const modalCuerpo = document.getElementById('modal-cuerpo');
+      const modalBtnIr = document.getElementById('modal-btn-ir');
+      const modalBtnTexto = document.getElementById('modal-btn-texto');
+
+      // Título y subtítulo dinámico
+      modalTitulo.textContent = destino ? `Explorando "${destino}"` : `Directorio: ${nombreCategoria}`;
+      modalSubtitulo.textContent = servicio ? `Filtrando por ${nombreCategoria} en Bolivia` : 'Mostrando opciones destacadas de todo el país';
+
+      // Píldoras para alternar categoría dentro del modal
+      const categoriasDisponibles = [
+        { key: "", label: "Todas" },
+        { key: "agencias", label: "Agencias" },
+        { key: "hoteles", label: "Hoteles" },
+        { key: "transporte", label: "Transporte" },
+        { key: "servicios-especiales", label: "Experiencias" }
+      ];
+
+      modalPillsFiltro.innerHTML = categoriasDisponibles.map(cat => {
+        const esActivo = (cat.key === servicio);
+        return `
+          <button 
+            type="button" 
+            onclick="buscar('${cat.key}')" 
+            class="px-3 py-1 rounded-full whitespace-nowrap font-semibold transition-all cursor-pointer ${
+              esActivo 
+                ? 'bg-red-600 text-white shadow-sm' 
+                : 'bg-white/10 hover:bg-white/20 text-slate-300'
+            }"
+          >
+            ${cat.label}
+          </button>
+        `;
+      }).join('');
+
+      // Filtrar muestras por destino y categoría
+      let resultados = directorioMuestras.filter(item => {
+        const matchCategoria = !servicio || item.categoria === servicio;
+        const matchDestino = !destino || 
+          item.ciudad.toLowerCase().includes(destino.toLowerCase()) || 
+          item.nombre.toLowerCase().includes(destino.toLowerCase()) ||
+          item.tags.some(t => t.toLowerCase().includes(destino.toLowerCase()));
+        return matchCategoria && matchDestino;
+      });
+
+      // Si no hay coincidencias estrictas, ofrecer sugerencias de la categoría
+      const sinCoincidenciaExacta = (resultados.length === 0);
+      if (sinCoincidenciaExacta) {
+        resultados = directorioMuestras.filter(item => !servicio || item.categoria === servicio);
+      }
+
+      modalContador.textContent = `${resultados.length} opciones sugeridas`;
+
+      // Renderizar tarjetas de muestra dentro del modal
+      let cuerpoHTML = '';
+
+      if (sinCoincidenciaExacta && destino) {
+        cuerpoHTML += `
+          <div class="p-3 bg-amber-50 border border-amber-200 rounded-2xl flex items-center gap-2.5 text-xs text-amber-800">
+            <svg class="w-4 h-4 text-amber-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <span>No hay registros con nombre exacto <strong>"${destino}"</strong>, pero estas opciones verificadas conectan con esa zona o categoría:</span>
+          </div>
+        `;
+      }
+
+      cuerpoHTML += resultados.map(item => `
+        <article class="bg-white border border-slate-200/90 rounded-2xl p-4 hover:border-slate-400 hover:shadow-md transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3 group">
+          <div class="space-y-1.5 grow">
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="text-[10px] font-extrabold px-2 py-0.5 rounded-md bg-slate-100 text-slate-700">
+                ${item.tipo}
+              </span>
+              <span class="text-xs font-semibold text-slate-500 flex items-center gap-1">
+                <svg class="w-3.5 h-3.5 text-red-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/></svg>
+                ${item.ciudad}
+              </span>
+              ${item.destacado ? '<span class="text-[10px] font-bold text-amber-700 bg-amber-50 border border-amber-200 px-1.5 py-0.5 rounded">Destacado</span>' : ''}
+            </div>
+
+            <h4 class="text-sm font-bold text-slate-900 group-hover:text-red-700 transition-colors">
+              ${item.nombre}
+            </h4>
+            <p class="text-xs text-slate-500 leading-relaxed line-clamp-2">
+              ${item.desc}
+            </p>
+
+            <div class="flex flex-wrap gap-1 pt-1">
+              ${item.tags.map(tag => `
+                <span class="text-[10px] bg-slate-50 border border-slate-200 text-slate-600 px-2 py-0.5 rounded-md">
+                  ${tag}
+                </span>
+              `).join('')}
+            </div>
+          </div>
+
+          <div class="shrink-0 flex sm:flex-col items-center sm:items-end justify-between border-t sm:border-t-0 pt-2 sm:pt-0 border-slate-100">
+            <a href="${item.enlace}" class="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-bold text-red-700 bg-red-50 hover:bg-red-700 hover:text-white rounded-lg transition-colors">
+              <span>Ver ficha</span>
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </article>
+      `).join('');
+
+      modalCuerpo.innerHTML = cuerpoHTML;
+
+      // Actualizar botón de llamada a la acción
+      modalBtnIr.href = urlDestino;
+      modalBtnTexto.textContent = servicio ? `Abrir todo ${nombreCategoria}` : 'Abrir directorio completo';
+
+      // Mostrar modal suavemente
+      modal.classList.remove('hidden');
+      setTimeout(() => {
+        modalCaja.classList.remove('scale-95', 'opacity-0');
+        modalCaja.classList.add('scale-100', 'opacity-100');
+      }, 10);
+    }
+
+    function cerrarModal() {
+      const modal = document.getElementById('modal-busqueda');
+      const modalCaja = document.getElementById('modal-caja');
+      if (!modal || !modalCaja) return;
+      modalCaja.classList.remove('scale-100', 'opacity-100');
+      modalCaja.classList.add('scale-95', 'opacity-0');
+      setTimeout(() => {
+        modal.classList.add('hidden');
+      }, 200);
+    }
+
+    // Cerrar al hacer clic en el backdrop o con tecla ESC
+    document.getElementById('modal-busqueda')?.addEventListener('click', (e) => {
+      if (e.target.id === 'modal-busqueda') {
+        cerrarModal();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        cerrarModal();
+      }
+    });
   </script>
 
   <!-- ========================================================= -->

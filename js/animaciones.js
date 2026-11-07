@@ -23,22 +23,43 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ==================================================================
-  // ANIMACIÓN 1: Hero y Buscador Principal (Entrada al cargar la página)
+  // ANIMACIÓN 1: Hero Fullscreen y Buscador Principal
   // ==================================================================
-  const heroSection = document.querySelector("section.py-14");
+  const heroSection = document.getElementById("hero-section") || document.querySelector("section.py-14");
   if (heroSection) {
     const heroTitle = heroSection.querySelector("h1");
     const heroSubtitle = heroSection.querySelector("p");
     const heroForm = heroSection.querySelector("form");
+    const heroPills = heroSection.querySelector("#hero-pills");
+    const heroScroll = heroSection.querySelector("#hero-scroll");
+    const heroBgImage = heroSection.querySelector("#hero-bg-image");
+
+    // Efecto Parallax en la imagen turística de fondo
+    if (heroBgImage && typeof ScrollTrigger !== "undefined") {
+      gsap.to(heroBgImage, {
+        scrollTrigger: {
+          trigger: heroSection,
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
+        y: 70,
+        scale: 1.15,
+        ease: "none",
+      });
+    }
 
     const heroTimeline = gsap.timeline({ defaults: { ease: "power3.out" } });
 
     if (heroTitle) {
-      heroTimeline.from(heroTitle, {
-        opacity: 0,
-        y: 25,
-        duration: 0.8,
-      });
+      heroTimeline.from(
+        heroTitle,
+        {
+          opacity: 0,
+          y: 25,
+          duration: 0.8,
+        }
+      );
     }
 
     if (heroSubtitle) {
@@ -49,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
           y: 15,
           duration: 0.6,
         },
-        "-=0.5" // Comienza antes de que termine el título
+        "-=0.5"
       );
     }
 
@@ -63,6 +84,30 @@ document.addEventListener("DOMContentLoaded", () => {
           duration: 0.7,
         },
         "-=0.4"
+      );
+    }
+
+    if (heroPills) {
+      heroTimeline.from(
+        heroPills,
+        {
+          opacity: 0,
+          y: 10,
+          duration: 0.5,
+        },
+        "-=0.3"
+      );
+    }
+
+    if (heroScroll) {
+      heroTimeline.from(
+        heroScroll,
+        {
+          opacity: 0,
+          y: -10,
+          duration: 0.6,
+        },
+        "-=0.2"
       );
     }
   }
