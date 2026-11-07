@@ -199,131 +199,151 @@
 
           <!-- 1. Sombra en el suelo -->
           <g class="kiosk-particula" id="k-sombra">
-            <ellipse cx="260" cy="465" rx="195" ry="20" fill="#000000" opacity="0.45"/>
+            <g class="k-gas" data-idx="0">
+              <ellipse cx="260" cy="465" rx="195" ry="20" fill="#000000" opacity="0.45"/>
+            </g>
           </g>
 
           <!-- 2. Base / Plataforma de madera -->
           <g class="kiosk-particula" id="k-base">
-            <rect x="85" y="420" width="350" height="26" rx="6" fill="#78350F"/>
-            <rect x="95" y="423" width="330" height="4" fill="#92400E" opacity="0.6"/>
-            <line x1="165" y1="420" x2="165" y2="446" stroke="#451A03" stroke-width="2"/>
-            <line x1="260" y1="420" x2="260" y2="446" stroke="#451A03" stroke-width="2"/>
-            <line x1="355" y1="420" x2="355" y2="446" stroke="#451A03" stroke-width="2"/>
+            <g class="k-gas" data-idx="1">
+              <rect x="85" y="420" width="350" height="26" rx="6" fill="#78350F"/>
+              <rect x="95" y="423" width="330" height="4" fill="#92400E" opacity="0.6"/>
+              <line x1="165" y1="420" x2="165" y2="446" stroke="#451A03" stroke-width="2"/>
+              <line x1="260" y1="420" x2="260" y2="446" stroke="#451A03" stroke-width="2"/>
+              <line x1="355" y1="420" x2="355" y2="446" stroke="#451A03" stroke-width="2"/>
+            </g>
           </g>
 
           <!-- 3. Fondo interior cálido del kiosko -->
           <g class="kiosk-particula" id="k-interior">
-            <rect x="130" y="145" width="260" height="135" fill="#381504" rx="4"/>
-            <!-- Luz ambiental interior -->
-            <rect x="140" y="155" width="240" height="115" fill="#78350F" opacity="0.3"/>
-            <!-- Repisas con siluetas de artesanías / frascos -->
-            <rect x="145" y="200" width="230" height="6" rx="2" fill="#B45309"/>
-            <rect x="170" y="178" width="18" height="22" rx="3" fill="#F59E0B" opacity="0.8"/>
-            <rect x="195" y="182" width="14" height="18" rx="2" fill="#EF4444" opacity="0.7"/>
-            <circle cx="230" cy="189" r="10" fill="#10B981" opacity="0.7"/>
-            <rect x="255" y="175" width="22" height="25" rx="3" fill="#F59E0B" opacity="0.85"/>
-            <rect x="285" y="184" width="16" height="16" rx="2" fill="#3B82F6" opacity="0.7"/>
-            <circle cx="320" cy="190" r="9" fill="#EC4899" opacity="0.75"/>
+            <g class="k-gas" data-idx="2">
+              <rect x="130" y="145" width="260" height="135" fill="#381504" rx="4"/>
+              <!-- Luz ambiental interior -->
+              <rect x="140" y="155" width="240" height="115" fill="#78350F" opacity="0.3"/>
+              <!-- Repisas con siluetas de artesanías / frascos -->
+              <rect x="145" y="200" width="230" height="6" rx="2" fill="#B45309"/>
+              <rect x="170" y="178" width="18" height="22" rx="3" fill="#F59E0B" opacity="0.8"/>
+              <rect x="195" y="182" width="14" height="18" rx="2" fill="#EF4444" opacity="0.7"/>
+              <circle cx="230" cy="189" r="10" fill="#10B981" opacity="0.7"/>
+              <rect x="255" y="175" width="22" height="25" rx="3" fill="#F59E0B" opacity="0.85"/>
+              <rect x="285" y="184" width="16" height="16" rx="2" fill="#3B82F6" opacity="0.7"/>
+              <circle cx="320" cy="190" r="9" fill="#EC4899" opacity="0.75"/>
+            </g>
           </g>
 
           <!-- 4. Postes de soporte de madera -->
           <g class="kiosk-particula" id="k-postes">
-            <!-- Poste Izquierdo -->
-            <rect x="120" y="115" width="18" height="165" rx="3" fill="url(#grad-madera)"/>
-            <rect x="123" y="115" width="4" height="165" fill="#FCD34D" opacity="0.2"/>
-            <!-- Poste Derecho -->
-            <rect x="382" y="115" width="18" height="165" rx="3" fill="url(#grad-madera)"/>
-            <rect x="385" y="115" width="4" height="165" fill="#FCD34D" opacity="0.2"/>
-            <!-- Tirante horizontal superior -->
-            <rect x="120" y="130" width="280" height="12" rx="2" fill="#78350F"/>
+            <g class="k-gas" data-idx="3">
+              <!-- Poste Izquierdo -->
+              <rect x="120" y="115" width="18" height="165" rx="3" fill="url(#grad-madera)"/>
+              <rect x="123" y="115" width="4" height="165" fill="#FCD34D" opacity="0.2"/>
+              <!-- Poste Derecho -->
+              <rect x="382" y="115" width="18" height="165" rx="3" fill="url(#grad-madera)"/>
+              <rect x="385" y="115" width="4" height="165" fill="#FCD34D" opacity="0.2"/>
+              <!-- Tirante horizontal superior -->
+              <rect x="120" y="130" width="280" height="12" rx="2" fill="#78350F"/>
+            </g>
           </g>
 
           <!-- 5. Mostrador principal (Front Counter) -->
           <g class="kiosk-particula" id="k-mostrador">
-            <!-- Cuerpo del mostrador con tablones -->
-            <rect x="105" y="280" width="310" height="140" rx="8" fill="#B45309"/>
-            <!-- Tablas verticales de madera -->
-            <line x1="150" y1="280" x2="150" y2="420" stroke="#78350F" stroke-width="2.5"/>
-            <line x1="195" y1="280" x2="195" y2="420" stroke="#78350F" stroke-width="2.5"/>
-            <line x1="240" y1="280" x2="240" y2="420" stroke="#78350F" stroke-width="2.5"/>
-            <line x1="280" y1="280" x2="280" y2="420" stroke="#78350F" stroke-width="2.5"/>
-            <line x1="325" y1="280" x2="325" y2="420" stroke="#78350F" stroke-width="2.5"/>
-            <line x1="370" y1="280" x2="370" y2="420" stroke="#78350F" stroke-width="2.5"/>
-            <!-- Tablero superior (mostrador donde se atiende) -->
-            <rect x="95" y="268" width="330" height="18" rx="5" fill="#D97706"/>
-            <rect x="98" y="270" width="324" height="4" fill="#FDE68A" opacity="0.3"/>
-            <rect x="105" y="284" width="310" height="6" fill="#78350F" opacity="0.4"/>
+            <g class="k-gas" data-idx="4">
+              <!-- Cuerpo del mostrador con tablones -->
+              <rect x="105" y="280" width="310" height="140" rx="8" fill="#B45309"/>
+              <!-- Tablas verticales de madera -->
+              <line x1="150" y1="280" x2="150" y2="420" stroke="#78350F" stroke-width="2.5"/>
+              <line x1="195" y1="280" x2="195" y2="420" stroke="#78350F" stroke-width="2.5"/>
+              <line x1="240" y1="280" x2="240" y2="420" stroke="#78350F" stroke-width="2.5"/>
+              <line x1="280" y1="280" x2="280" y2="420" stroke="#78350F" stroke-width="2.5"/>
+              <line x1="325" y1="280" x2="325" y2="420" stroke="#78350F" stroke-width="2.5"/>
+              <line x1="370" y1="280" x2="370" y2="420" stroke="#78350F" stroke-width="2.5"/>
+              <!-- Tablero superior (mostrador donde se atiende) -->
+              <rect x="95" y="268" width="330" height="18" rx="5" fill="#D97706"/>
+              <rect x="98" y="270" width="324" height="4" fill="#FDE68A" opacity="0.3"/>
+              <rect x="105" y="284" width="310" height="6" fill="#78350F" opacity="0.4"/>
+            </g>
           </g>
 
           <!-- 6. Accesorios del mostrador: cajón y maceta -->
           <g class="kiosk-particula" id="k-detalles">
-            <!-- Cajita rústica a un costado -->
-            <rect x="115" y="385" width="45" height="35" rx="3" fill="#78350F"/>
-            <line x1="115" y1="402" x2="160" y2="402" stroke="#451A03" stroke-width="2"/>
-            <!-- Planta estilizada sobre la caja -->
-            <circle cx="130" cy="378" r="8" fill="#10B981"/>
-            <circle cx="145" cy="375" r="9" fill="#059669"/>
-            <circle cx="138" cy="368" r="10" fill="#34D399"/>
+            <g class="k-gas" data-idx="5">
+              <!-- Cajita rústica a un costado -->
+              <rect x="115" y="385" width="45" height="35" rx="3" fill="#78350F"/>
+              <line x1="115" y1="402" x2="160" y2="402" stroke="#451A03" stroke-width="2"/>
+              <!-- Planta estilizada sobre la caja -->
+              <circle cx="130" cy="378" r="8" fill="#10B981"/>
+              <circle cx="145" cy="375" r="9" fill="#059669"/>
+              <circle cx="138" cy="368" r="10" fill="#34D399"/>
+            </g>
           </g>
 
           <!-- 7. Toldo / Techo a rayas de feria (Canopy) -->
           <g class="kiosk-particula" id="k-toldo">
-            <!-- Estructura del toldo curvado a rayas rojas y blancas -->
-            <path d="M70,120 Q260,75 450,120 L440,65 Q260,25 80,65 Z" fill="#991B1B" opacity="0.3"/>
-            <!-- Franja 1 Roja -->
-            <path d="M70,120 L80,65 L125,60 L120,124 Q95,123 70,120 Z" fill="url(#grad-toldo-rojo)"/>
-            <!-- Franja 2 Blanca -->
-            <path d="M120,124 L125,60 L180,56 L175,127 Q147,126 120,124 Z" fill="url(#grad-toldo-blanco)"/>
-            <!-- Franja 3 Roja -->
-            <path d="M175,127 L180,56 L235,53 L230,128 Q202,128 175,127 Z" fill="url(#grad-toldo-rojo)"/>
-            <!-- Franja 4 Blanca -->
-            <path d="M230,128 L235,53 L285,53 L290,128 Q260,129 230,128 Z" fill="url(#grad-toldo-blanco)"/>
-            <!-- Franja 5 Roja -->
-            <path d="M290,128 L285,53 L340,56 L345,127 Q318,128 290,128 Z" fill="url(#grad-toldo-rojo)"/>
-            <!-- Franja 6 Blanca -->
-            <path d="M345,127 L340,56 L395,60 L400,124 Q372,126 345,127 Z" fill="url(#grad-toldo-blanco)"/>
-            <!-- Franja 7 Roja -->
-            <path d="M400,124 L395,60 L440,65 L450,120 Q425,123 400,124 Z" fill="url(#grad-toldo-rojo)"/>
-            <!-- Cenefa ondeada inferior (scallop) -->
-            <path d="M70,120 Q82,132 95,122 Q107,132 120,124 Q133,134 147,126 Q161,135 175,127 Q189,136 203,128 Q216,136 230,128 Q245,137 260,129 Q275,137 290,128 Q304,136 317,128 Q331,135 345,127 Q359,135 372,126 Q386,133 400,124 Q412,132 425,122 Q438,131 450,120 L450,116 Q260,70 70,116 Z" fill="#7F1D1D"/>
+            <g class="k-gas" data-idx="6">
+              <!-- Estructura del toldo curvado a rayas rojas y blancas -->
+              <path d="M70,120 Q260,75 450,120 L440,65 Q260,25 80,65 Z" fill="#991B1B" opacity="0.3"/>
+              <!-- Franja 1 Roja -->
+              <path d="M70,120 L80,65 L125,60 L120,124 Q95,123 70,120 Z" fill="url(#grad-toldo-rojo)"/>
+              <!-- Franja 2 Blanca -->
+              <path d="M120,124 L125,60 L180,56 L175,127 Q147,126 120,124 Z" fill="url(#grad-toldo-blanco)"/>
+              <!-- Franja 3 Roja -->
+              <path d="M175,127 L180,56 L235,53 L230,128 Q202,128 175,127 Z" fill="url(#grad-toldo-rojo)"/>
+              <!-- Franja 4 Blanca -->
+              <path d="M230,128 L235,53 L285,53 L290,128 Q260,129 230,128 Z" fill="url(#grad-toldo-blanco)"/>
+              <!-- Franja 5 Roja -->
+              <path d="M290,128 L285,53 L340,56 L345,127 Q318,128 290,128 Z" fill="url(#grad-toldo-rojo)"/>
+              <!-- Franja 6 Blanca -->
+              <path d="M345,127 L340,56 L395,60 L400,124 Q372,126 345,127 Z" fill="url(#grad-toldo-blanco)"/>
+              <!-- Franja 7 Roja -->
+              <path d="M400,124 L395,60 L440,65 L450,120 Q425,123 400,124 Z" fill="url(#grad-toldo-rojo)"/>
+              <!-- Cenefa ondeada inferior (scallop) -->
+              <path d="M70,120 Q82,132 95,122 Q107,132 120,124 Q133,134 147,126 Q161,135 175,127 Q189,136 203,128 Q216,136 230,128 Q245,137 260,129 Q275,137 290,128 Q304,136 317,128 Q331,135 345,127 Q359,135 372,126 Q386,133 400,124 Q412,132 425,122 Q438,131 450,120 L450,116 Q260,70 70,116 Z" fill="#7F1D1D"/>
+            </g>
           </g>
 
           <!-- 8. Banderines festivos colgantes (Bunting) -->
           <g class="kiosk-particula" id="k-banderines">
-            <!-- Guirnalda curvada -->
-            <path d="M125,138 Q260,165 395,138" stroke="#FFFFFF" stroke-width="2" fill="none" opacity="0.6"/>
-            <!-- Banderines de colores -->
-            <polygon points="145,142 165,145 155,168" fill="#EF4444"/>
-            <polygon points="180,148 200,150 190,173" fill="#F59E0B"/>
-            <polygon points="215,151 235,152 225,175" fill="#10B981"/>
-            <polygon points="250,152 270,152 260,175" fill="#3B82F6"/>
-            <polygon points="285,151 305,150 295,173" fill="#EC4899"/>
-            <polygon points="320,148 340,146 330,169" fill="#F59E0B"/>
-            <polygon points="355,144 375,141 365,165" fill="#EF4444"/>
+            <g class="k-gas" data-idx="7">
+              <!-- Guirnalda curvada -->
+              <path d="M125,138 Q260,165 395,138" stroke="#FFFFFF" stroke-width="2" fill="none" opacity="0.6"/>
+              <!-- Banderines de colores -->
+              <polygon points="145,142 165,145 155,168" fill="#EF4444"/>
+              <polygon points="180,148 200,150 190,173" fill="#F59E0B"/>
+              <polygon points="215,151 235,152 225,175" fill="#10B981"/>
+              <polygon points="250,152 270,152 260,175" fill="#3B82F6"/>
+              <polygon points="285,151 305,150 295,173" fill="#EC4899"/>
+              <polygon points="320,148 340,146 330,169" fill="#F59E0B"/>
+              <polygon points="355,144 375,141 365,165" fill="#EF4444"/>
+            </g>
           </g>
 
           <!-- 9. Farolito colgante con resplandor -->
           <g class="kiosk-particula" id="k-farol">
-            <!-- Hilo / cadena -->
-            <line x1="391" y1="130" x2="415" y2="165" stroke="#451A03" stroke-width="2.5"/>
-            <!-- Resplandor del farol -->
-            <circle cx="415" cy="182" r="28" fill="#FBBF24" opacity="0.25" filter="url(#glow-luz)"/>
-            <!-- Cuerpo del farol -->
-            <polygon points="405,170 425,170 422,192 408,192" fill="#F59E0B"/>
-            <rect x="408" y="167" width="14" height="4" rx="1" fill="#78350F"/>
-            <circle cx="415" cy="181" r="5" fill="#FEF3C7"/>
+            <g class="k-gas" data-idx="8">
+              <!-- Hilo / cadena -->
+              <line x1="391" y1="130" x2="415" y2="165" stroke="#451A03" stroke-width="2.5"/>
+              <!-- Resplandor del farol -->
+              <circle cx="415" cy="182" r="28" fill="#FBBF24" opacity="0.25" filter="url(#glow-luz)"/>
+              <!-- Cuerpo del farol -->
+              <polygon points="405,170 425,170 422,192 408,192" fill="#F59E0B"/>
+              <rect x="408" y="167" width="14" height="4" rx="1" fill="#78350F"/>
+              <circle cx="415" cy="181" r="5" fill="#FEF3C7"/>
+            </g>
           </g>
 
           <!-- 10. Partículas y destellos flotantes alrededor -->
           <g class="kiosk-particula" id="k-destellos">
-            <circle cx="70" cy="200" r="4" fill="#F59E0B" opacity="0.7"/>
-            <polygon points="450,220 453,227 460,230 453,233 450,240 447,233 440,230 447,227" fill="#EF4444" opacity="0.8"/>
-            <circle cx="470" cy="160" r="3" fill="#3B82F6" opacity="0.6"/>
-            <polygon points="90,100 93,107 100,110 93,113 90,120 87,113 80,110 87,107" fill="#FCD34D" opacity="0.9"/>
-            <circle cx="390" cy="40" r="4" fill="#10B981" opacity="0.7"/>
-            <polygon points="260,15 262,20 267,22 262,24 260,29 258,24 253,22 258,20" fill="#F59E0B" opacity="0.8"/>
-            <circle cx="480" cy="380" r="3.5" fill="#EC4899" opacity="0.6"/>
-            <circle cx="50" cy="360" r="3" fill="#60A5FA" opacity="0.7"/>
+            <g class="k-gas" data-idx="9">
+              <circle cx="70" cy="200" r="4" fill="#F59E0B" opacity="0.7"/>
+              <polygon points="450,220 453,227 460,230 453,233 450,240 447,233 440,230 447,227" fill="#EF4444" opacity="0.8"/>
+              <circle cx="470" cy="160" r="3" fill="#3B82F6" opacity="0.6"/>
+              <polygon points="90,100 93,107 100,110 93,113 90,120 87,113 80,110 87,107" fill="#FCD34D" opacity="0.9"/>
+              <circle cx="390" cy="40" r="4" fill="#10B981" opacity="0.7"/>
+              <polygon points="260,15 262,20 267,22 262,24 260,29 258,24 253,22 258,20" fill="#F59E0B" opacity="0.8"/>
+              <circle cx="480" cy="380" r="3.5" fill="#EC4899" opacity="0.6"/>
+              <circle cx="50" cy="360" r="3" fill="#60A5FA" opacity="0.7"/>
+            </g>
           </g>
         </svg>
       </div>
