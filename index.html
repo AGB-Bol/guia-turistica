@@ -11,12 +11,58 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
 
+  <!-- Leaflet CSS (CDN estable sin bloqueos CORS de origen local) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" />
+
   <style>
     body { font-family: 'Plus Jakarta Sans', sans-serif; }
     
     .dropdown:hover .dropdown-menu,
     .dropdown:focus-within .dropdown-menu {
       display: block;
+    }
+
+    /* Estilo limpio para Leaflet en tema oscuro */
+    .leaflet-container {
+      background-color: #090D17 !important;
+      font-family: inherit;
+      width: 100% !important;
+      height: 100% !important;
+    }
+    .leaflet-div-icon {
+      background: transparent !important;
+      border: none !important;
+    }
+
+    /* Filtro nocturno estilo Mapbox Dark sobre OpenStreetMap (100% libre, sin API key) */
+    .osm-dark-tiles {
+      filter: invert(100%) hue-rotate(190deg) brightness(80%) contrast(125%) saturate(35%) !important;
+    }
+
+    /* Quitar borde blanco/cuadrado de foco al hacer clic en elementos SVG de Leaflet */
+    .leaflet-container :focus,
+    .leaflet-container path:focus,
+    .leaflet-interactive:focus,
+    .leaflet-marker-icon:focus,
+    path.leaflet-interactive:focus,
+    path.leaflet-interactive {
+      outline: none !important;
+      -webkit-tap-highlight-color: transparent !important;
+      box-shadow: none !important;
+    }
+
+    /* Tooltip personalizado para el contorno de Bolivia */
+    .tooltip-pais-custom {
+      background-color: rgba(15, 20, 34, 0.95) !important;
+      border: 1px solid rgba(255, 255, 255, 0.2) !important;
+      color: white !important;
+      border-radius: 12px !important;
+      padding: 6px 12px !important;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6) !important;
+      font-family: inherit !important;
+    }
+    .tooltip-pais-custom::before {
+      border-top-color: rgba(15, 20, 34, 0.95) !important;
     }
   </style>
 </head>
@@ -366,8 +412,64 @@
 
     </div>
 
+    <!-- Indicador de Scroll hacia el Mapa Interactivo -->
+    <div class="relative z-10 flex flex-col items-center gap-1.5 cursor-pointer pb-2 text-slate-400 hover:text-white transition-colors select-none" onclick="document.getElementById('seccion-mapa').scrollIntoView({ behavior: 'smooth' });">
+      <span class="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-slate-400">Explorar Mapa Interactivo</span>
+      <div class="w-8 h-8 rounded-full border border-white/20 bg-white/5 backdrop-blur-md flex items-center justify-center shadow-lg hover:border-white/50 transition-colors">
+        <svg class="w-4 h-4 animate-bounce text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+        </svg>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- ========================================================= -->
+  <!-- SECCIÓN MAPA INTERACTIVO 2D: MUNDO A BOLIVIA              -->
+  <!-- ========================================================= -->
+  <section id="seccion-mapa" class="relative min-h-[calc(100vh-4rem)] flex flex-col justify-between items-center px-4 py-8 sm:py-10 bg-[#07090E] text-white overflow-hidden scroll-mt-16">
+    
+    <!-- Resplandores ambientales de fondo -->
+    <div class="absolute top-1/4 left-10 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute bottom-10 right-10 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+    <!-- Encabezado de la Sección (Título corto y limpio) -->
+    <div class="relative z-10 w-full max-w-7xl mx-auto flex items-center justify-between gap-4 mb-3">
+      <div>
+        <h2 class="text-xl sm:text-3xl font-black text-white tracking-tight flex items-center gap-2.5">
+          <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+          Mapa Turístico
+        </h2>
+      </div>
+      <span class="text-xs font-mono text-slate-400 flex items-center gap-1.5">
+        <span class="inline-block w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+        Selecciona Bolivia para explorar
+      </span>
+    </div>
+
+    <!-- Contenedor del Mapa Amplio (Ocupa casi toda la pantalla) -->
+    <div class="relative z-10 w-full max-w-7xl mx-auto flex-1 rounded-3xl bg-[#090D17] border border-white/10 shadow-2xl overflow-hidden my-auto" style="height: 78vh; min-height: 520px;">
+      
+      <!-- Botón flotante para Volver al Mundo (Aparece al hacer zoom en Bolivia) -->
+      <button 
+        id="btn-volver-mundo" 
+        type="button" 
+        class="hidden absolute top-4 left-4 z-[500] px-4 py-2.5 rounded-2xl text-xs font-bold bg-[#0B0F19]/90 hover:bg-white text-white hover:text-slate-900 border border-white/20 shadow-2xl backdrop-blur-md flex items-center gap-2 transition-all cursor-pointer select-none active:scale-95"
+        title="Regresar a vista global"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+        </svg>
+        <span>Volver al mundo</span>
+      </button>
+
+      <!-- Lienzo de Leaflet con Tiles Dark Matter -->
+      <div id="mapa-leaflet" class="w-full h-full" style="width: 100%; height: 100%; min-height: 520px; z-index: 1;"></div>
+    </div>
+
     <!-- Indicador de Scroll hacia las categorías -->
-    <div class="relative z-10 flex flex-col items-center gap-1.5 cursor-pointer pb-2 text-slate-400 hover:text-white transition-colors select-none" onclick="document.getElementById('seccion-categorias').scrollIntoView({ behavior: 'smooth' });">
+    <div class="relative z-10 flex flex-col items-center gap-1.5 cursor-pointer pb-2 text-slate-400 hover:text-white transition-colors select-none mt-3" onclick="document.getElementById('seccion-categorias').scrollIntoView({ behavior: 'smooth' });">
       <span class="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-slate-400">Ver categorías detalladas</span>
       <div class="w-8 h-8 rounded-full border border-white/20 bg-white/5 backdrop-blur-md flex items-center justify-center shadow-lg hover:border-white/50 transition-colors">
         <svg class="w-4 h-4 animate-bounce text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -377,6 +479,80 @@
     </div>
 
   </section>
+
+
+  <!-- ========================================================= -->
+  <!-- MODAL INTERACTIVO DE MARCADOR (HOTEL / DESTINO TURÍSTICO) -->
+  <!-- ========================================================= -->
+  <div id="modal-lugar-mapa" class="fixed inset-0 z-[1000] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden transition-all select-none">
+    <div class="modal-card-anim relative w-full max-w-lg bg-[#0F1422] border border-white/20 rounded-3xl shadow-2xl overflow-hidden text-white">
+      
+      <!-- Imagen de portada con gradiente -->
+      <div class="relative h-48 sm:h-56 w-full overflow-hidden bg-slate-800">
+        <img id="modal-lugar-img" src="" alt="Portada" class="w-full h-full object-cover">
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0F1422] via-[#0F1422]/40 to-transparent"></div>
+        
+        <!-- Botón cerrar (X) -->
+        <button type="button" onclick="ocultarModalLugar()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-black/60 hover:bg-black/90 text-white border border-white/20 flex items-center justify-center transition-colors cursor-pointer">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+
+        <!-- Badges categoría y departamento sobre la imagen -->
+        <div class="absolute bottom-4 left-5 flex items-center gap-2 flex-wrap">
+          <span id="modal-lugar-categoria" class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-red-600/90 text-white backdrop-blur-sm shadow-md"></span>
+          <span id="modal-lugar-departamento" class="px-3 py-1 rounded-full text-xs font-semibold bg-white/20 text-white backdrop-blur-sm border border-white/20"></span>
+        </div>
+      </div>
+
+      <!-- Contenido del Modal -->
+      <div class="p-5 sm:p-6 space-y-4">
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <h3 id="modal-lugar-nombre" class="text-xl sm:text-2xl font-black text-white tracking-tight leading-snug"></h3>
+            <div class="flex items-center gap-1 text-amber-400 text-sm mt-1">
+              <span>★★★★★</span>
+              <span class="text-xs text-slate-400 font-mono ml-1.5">Recomendado</span>
+            </div>
+          </div>
+          <!-- Logo / Placeholder -->
+          <div class="w-12 h-12 rounded-xl bg-white/10 border border-white/15 p-1 flex items-center justify-center flex-shrink-0">
+            <img id="modal-lugar-logo" src="img/logo-placeholder.svg" alt="Logo" class="w-full h-full object-contain">
+          </div>
+        </div>
+
+        <!-- Resumen / Descripción -->
+        <p id="modal-lugar-descripcion" class="text-sm text-slate-300 font-light leading-relaxed"></p>
+
+        <!-- Servicios incluidos -->
+        <div>
+          <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-2">Comodidades y Servicios:</span>
+          <div id="modal-lugar-servicios" class="flex flex-wrap gap-1.5"></div>
+        </div>
+
+        <!-- Precio y Llamada a la Acción -->
+        <div class="pt-3 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div>
+            <span class="text-[10px] text-slate-400 uppercase font-mono block">Tarifa Referencial</span>
+            <span id="modal-lugar-precio" class="text-base font-bold text-amber-400"></span>
+          </div>
+          <div class="flex items-center gap-2">
+            <a id="modal-lugar-contacto" href="#" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-white/10 hover:bg-white/20 text-slate-200 border border-white/15 flex items-center gap-1.5 transition-colors">
+              <svg class="w-3.5 h-3.5 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 4V3z"/>
+              </svg>
+              Contactar
+            </a>
+            <a id="modal-lugar-enlace" href="hoteles.html" class="px-4 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-red-600 to-amber-600 hover:brightness-110 text-white shadow-lg shadow-red-600/30 flex items-center gap-1 transition-all">
+              <span>Ver Ficha</span>
+              <span>→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
   <!-- ========================================================= -->
@@ -954,11 +1130,15 @@
   </script>
 
   <!-- ========================================================= -->
-  <!-- GSAP Y ANIMACIONES                                       -->
+  <!-- GSAP, LEAFLET Y SCRIPTS                                   -->
   <!-- ========================================================= -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <!-- Leaflet JS (CDN cdnjs estable sin problemas CORS de protocolo local file://) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
   <script src="js/animaciones.js"></script>
+  <script src="data/mapa-datos.js"></script>
+  <script src="js/mapa-interactivo.js"></script>
 
 </body>
 </html>

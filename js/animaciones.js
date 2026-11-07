@@ -324,6 +324,31 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ==================================================================
+  // ANIMACIÓN ENTRADA: Sección Mapa Interactivo 2D
+  // ==================================================================
+  const seccionMapa = document.getElementById("seccion-mapa");
+  if (seccionMapa && typeof ScrollTrigger !== "undefined") {
+    const mapaCard = seccionMapa.querySelector(".rounded-3xl");
+    if (mapaCard) {
+      gsap.from(mapaCard, {
+        scrollTrigger: {
+          trigger: seccionMapa,
+          start: "top 85%",
+          toggleActions: "play none none none",
+          onEnter: () => {
+            setTimeout(() => { window.dispatchEvent(new Event('resize')); }, 150);
+          }
+        },
+        opacity: 0,
+        y: 25,
+        duration: 0.6,
+        ease: "power2.out",
+        clearProps: "transform,opacity"
+      });
+    }
+  }
+
+  // ==================================================================
   // ANIMACIÓN 2: Categorías de Servicio (Efecto Cascada / Stagger con Scroll)
   // ==================================================================
   const categoryCards = document.querySelectorAll(".grid-cols-1.sm\\:grid-cols-2.lg\\:grid-cols-3 > a");
