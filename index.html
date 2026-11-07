@@ -437,15 +437,10 @@
     <!-- Encabezado de la Sección (Título corto y limpio) -->
     <div class="relative z-10 w-full max-w-7xl mx-auto flex items-center justify-between gap-4 mb-3">
       <div>
-        <h2 class="text-xl sm:text-3xl font-black text-white tracking-tight flex items-center gap-2.5">
-          <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+        <h2 class="text-xl sm:text-3xl font-black text-white tracking-tight">
           Mapa Turístico
         </h2>
       </div>
-      <span class="text-xs font-mono text-slate-400 flex items-center gap-1.5">
-        <span class="inline-block w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
-        Selecciona Bolivia para explorar
-      </span>
     </div>
 
     <!-- Contenedor del Mapa Amplio (Ocupa casi toda la pantalla) -->
@@ -1096,23 +1091,54 @@
       modalBtnIr.href = urlDestino;
       modalBtnTexto.textContent = servicio ? `Abrir todo ${nombreCategoria}` : 'Abrir directorio completo';
 
-      // Mostrar modal suavemente
+      // Mostrar modal con suave animación de fade/escala
       modal.classList.remove('hidden');
-      setTimeout(() => {
-        modalCaja.classList.remove('scale-95', 'opacity-0');
-        modalCaja.classList.add('scale-100', 'opacity-100');
-      }, 10);
+      if (typeof gsap !== 'undefined') {
+        gsap.killTweensOf([modal, modalCaja]);
+        gsap.set(modal, { opacity: 0 });
+        gsap.set(modalCaja, { scale: 0.94, opacity: 0, y: 16 });
+        gsap.to(modal, { opacity: 1, duration: 0.28, ease: 'power2.out' });
+        gsap.to(modalCaja, { scale: 1, opacity: 1, y: 0, duration: 0.32, ease: 'back.out(1.15)' });
+      } else {
+        setTimeout(() => {
+          modalCaja.classList.remove('scale-95', 'opacity-0');
+          modalCaja.classList.add('scale-100', 'opacity-100');
+        }, 10);
+      }
     }
 
+    let modalBusquedaAnimando = false;
     function cerrarModal() {
       const modal = document.getElementById('modal-busqueda');
       const modalCaja = document.getElementById('modal-caja');
-      if (!modal || !modalCaja) return;
-      modalCaja.classList.remove('scale-100', 'opacity-100');
-      modalCaja.classList.add('scale-95', 'opacity-0');
-      setTimeout(() => {
-        modal.classList.add('hidden');
-      }, 200);
+      if (!modal || !modalCaja || modal.classList.contains('hidden') || modalBusquedaAnimando) return;
+
+      if (typeof gsap !== 'undefined') {
+        modalBusquedaAnimando = true;
+        gsap.killTweensOf([modal, modalCaja]);
+        gsap.to(modalCaja, {
+          scale: 0.95,
+          opacity: 0,
+          y: 12,
+          duration: 0.22,
+          ease: 'power2.in'
+        });
+        gsap.to(modal, {
+          opacity: 0,
+          duration: 0.22,
+          ease: 'power2.in',
+          onComplete: () => {
+            modal.classList.add('hidden');
+            modalBusquedaAnimando = false;
+          }
+        });
+      } else {
+        modalCaja.classList.remove('scale-100', 'opacity-100');
+        modalCaja.classList.add('scale-95', 'opacity-0');
+        setTimeout(() => {
+          modal.classList.add('hidden');
+        }, 200);
+      }
     }
 
     // Cerrar al hacer clic en el backdrop o con tecla ESC
