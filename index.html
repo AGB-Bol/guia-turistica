@@ -64,6 +64,36 @@
     .tooltip-pais-custom::before {
       border-top-color: rgba(15, 20, 34, 0.95) !important;
     }
+
+    /* Estilos 3D Flip Card para Socios y Aliados */
+    .flip-card {
+      perspective: 1000px;
+    }
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-style: preserve-3d;
+    }
+    .flip-card:hover .flip-card-inner,
+    .flip-card.flipped .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+    .flip-card-front,
+    .flip-card-back {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      border-radius: 1rem;
+    }
+    .flip-card-back {
+      transform: rotateY(180deg);
+    }
   </style>
 </head>
 <body class="bg-[#FBFBFA] text-slate-800 antialiased">
@@ -463,9 +493,9 @@
       <div id="mapa-leaflet" class="w-full h-full" style="width: 100%; height: 100%; min-height: 520px; z-index: 1;"></div>
     </div>
 
-    <!-- Indicador de Scroll hacia las categorías -->
-    <div class="relative z-10 flex flex-col items-center gap-1.5 cursor-pointer pb-2 text-slate-400 hover:text-white transition-colors select-none mt-3" onclick="document.getElementById('seccion-categorias').scrollIntoView({ behavior: 'smooth' });">
-      <span class="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-slate-400">Ver categorías detalladas</span>
+    <!-- Indicador de Scroll hacia Registrar Empresa -->
+    <div class="relative z-10 flex flex-col items-center gap-1.5 cursor-pointer pb-2 text-slate-400 hover:text-white transition-colors select-none mt-3" onclick="document.getElementById('seccion-registro').scrollIntoView({ behavior: 'smooth' });">
+      <span class="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-slate-400">Registrar Empresa en la Guía</span>
       <div class="w-8 h-8 rounded-full border border-white/20 bg-white/5 backdrop-blur-md flex items-center justify-center shadow-lg hover:border-white/50 transition-colors">
         <svg class="w-4 h-4 animate-bounce text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
@@ -551,215 +581,414 @@
 
 
   <!-- ========================================================= -->
-  <!-- LAS 6 CATEGORÍAS (ENLACES A CADA ARCHIVO)                 -->
+  <!-- SECCIÓN 1 DE 3: REGISTRO DE EMPRESA                       -->
   <!-- ========================================================= -->
-  <section id="seccion-categorias" class="max-w-6xl mx-auto px-4 py-16 scroll-mt-16">
-    <div class="flex items-center justify-between mb-6">
-      <h2 class="text-sm font-bold uppercase tracking-wider text-slate-500">Categorías de Servicio</h2>
-      <span class="text-xs text-slate-400">6 secciones</span>
-    </div>
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+  <section id="seccion-registro" class="relative max-w-6xl mx-auto px-4 py-16 sm:py-20 scroll-mt-20">
+    <div class="bg-gradient-to-br from-white via-slate-50 to-amber-50/30 border border-slate-200/90 rounded-3xl p-6 sm:p-10 lg:p-12 shadow-xl shadow-slate-200/50 relative overflow-hidden">
       
-      <a href="agencias.html" class="p-4 bg-white border border-slate-200 rounded-xl hover:border-slate-400 transition-colors flex items-center justify-between">
-        <div>
-          <h3 class="font-bold text-slate-900 text-sm">Agencias de Viaje</h3>
-          <span class="text-xs text-slate-400">28 operadores</span>
-        </div>
-        <span class="text-xs text-slate-400 font-bold">→</span>
-      </a>
+      <!-- Detalle decorativo de fondo -->
+      <div class="absolute -right-20 -top-20 w-80 h-80 bg-gradient-to-br from-red-600/10 via-amber-500/10 to-transparent rounded-full blur-3xl pointer-events-none"></div>
 
-      <a href="instituciones.html" class="p-4 bg-white border border-slate-200 rounded-xl hover:border-slate-400 transition-colors flex items-center justify-between">
-        <div>
-          <h3 class="font-bold text-slate-900 text-sm">Instituciones y Municipios</h3>
-          <span class="text-xs text-slate-400">12 entidades</span>
-        </div>
-        <span class="text-xs text-slate-400 font-bold">→</span>
-      </a>
+      <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        
+        <!-- Columna Izquierda: QR Code Referencial & Escaneo -->
+        <div class="lg:col-span-5 flex flex-col items-center text-center">
+          
+          <div class="relative group">
+            <!-- Glow detrás del QR -->
+            <div class="absolute -inset-2 bg-gradient-to-r from-red-600 via-amber-500 to-emerald-500 rounded-3xl blur-lg opacity-25 group-hover:opacity-40 transition-opacity"></div>
+            
+            <!-- Marco del Código QR -->
+            <div class="relative bg-white p-5 rounded-2xl border border-slate-200 shadow-xl flex flex-col items-center">
+              
+              <!-- Badge sobre el QR -->
+              <div class="mb-3 px-3 py-1 rounded-full bg-slate-900 text-white text-[10px] font-mono font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-sm">
+                <svg class="w-3 h-3 text-emerald-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                Escanear con celular
+              </div>
 
-      <a href="hoteles.html" class="p-4 bg-white border border-slate-200 rounded-xl hover:border-slate-400 transition-colors flex items-center justify-between">
-        <div>
-          <h3 class="font-bold text-slate-900 text-sm">Hoteles y Hospedajes</h3>
-          <span class="text-xs text-slate-400">10 alojamientos</span>
-        </div>
-        <span class="text-xs text-slate-400 font-bold">→</span>
-      </a>
+              <!-- QR Vectorial SVG estilizado y referencial -->
+              <div class="w-48 h-48 sm:w-56 sm:h-56 bg-white p-2 rounded-xl flex items-center justify-center border border-slate-100">
+                <svg viewBox="0 0 200 200" class="w-full h-full text-slate-900" fill="currentColor">
+                  <!-- QR Finder Pattern Top-Left -->
+                  <rect x="10" y="10" width="50" height="50" rx="6" fill="#0F172A"/>
+                  <rect x="20" y="20" width="30" height="30" rx="3" fill="#FFFFFF"/>
+                  <rect x="27" y="27" width="16" height="16" rx="2" fill="#DC2626"/>
 
-      <a href="transporte.html" class="p-4 bg-white border border-slate-200 rounded-xl hover:border-slate-400 transition-colors flex items-center justify-between">
-        <div>
-          <h3 class="font-bold text-slate-900 text-sm">Transporte Turístico</h3>
-          <span class="text-xs text-slate-400">6 empresas</span>
-        </div>
-        <span class="text-xs text-slate-400 font-bold">→</span>
-      </a>
+                  <!-- QR Finder Pattern Top-Right -->
+                  <rect x="140" y="10" width="50" height="50" rx="6" fill="#0F172A"/>
+                  <rect x="150" y="20" width="30" height="30" rx="3" fill="#FFFFFF"/>
+                  <rect x="157" y="27" width="16" height="16" rx="2" fill="#D97706"/>
 
-      <a href="embajadas.html" class="p-4 bg-white border border-slate-200 rounded-xl hover:border-slate-400 transition-colors flex items-center justify-between">
-        <div>
-          <h3 class="font-bold text-slate-900 text-sm">Embajadas y Consulados</h3>
-          <span class="text-xs text-slate-400">3 sedes</span>
-        </div>
-        <span class="text-xs text-slate-400 font-bold">→</span>
-      </a>
+                  <!-- QR Finder Pattern Bottom-Left -->
+                  <rect x="10" y="140" width="50" height="50" rx="6" fill="#0F172A"/>
+                  <rect x="20" y="150" width="30" height="30" rx="3" fill="#FFFFFF"/>
+                  <rect x="27" y="157" width="16" height="16" rx="2" fill="#059669"/>
 
-      <a href="servicios-especiales.html" class="p-4 bg-white border border-slate-200 rounded-xl hover:border-slate-400 transition-colors flex items-center justify-between">
-        <div>
-          <h3 class="font-bold text-slate-900 text-sm">Otros Servicios</h3>
-          <span class="text-xs text-slate-400">Vinos, café y artesanía</span>
-        </div>
-        <span class="text-xs text-slate-400 font-bold">→</span>
-      </a>
+                  <!-- Líneas y módulos de datos estilizados -->
+                  <rect x="70" y="15" width="10" height="10" rx="2" fill="#0F172A"/>
+                  <rect x="90" y="15" width="18" height="10" rx="2" fill="#0F172A"/>
+                  <rect x="115" y="15" width="10" height="10" rx="2" fill="#0F172A"/>
+                  <rect x="70" y="35" width="20" height="10" rx="2" fill="#0F172A"/>
+                  <rect x="100" y="35" width="25" height="10" rx="2" fill="#0F172A"/>
 
+                  <rect x="15" y="70" width="10" height="10" rx="2" fill="#0F172A"/>
+                  <rect x="35" y="70" width="25" height="10" rx="2" fill="#0F172A"/>
+                  <rect x="15" y="90" width="15" height="10" rx="2" fill="#0F172A"/>
+                  <rect x="40" y="90" width="20" height="10" rx="2" fill="#0F172A"/>
+                  <rect x="15" y="110" width="10" height="18" rx="2" fill="#0F172A"/>
+                  <rect x="35" y="115" width="25" height="10" rx="2" fill="#0F172A"/>
+
+                  <!-- Centro: Isotipo de la Guía Turística -->
+                  <circle cx="100" cy="100" r="22" fill="#0F172A"/>
+                  <path d="M100 86 L108 97 L116 100 L108 103 L100 114 L92 103 L84 100 L92 97 Z" fill="#F59E0B"/>
+                  <circle cx="100" cy="100" r="4" fill="#FFFFFF"/>
+
+                  <!-- Más datos y sincronización -->
+                  <rect x="70" y="70" width="10" height="10" rx="2" fill="#0F172A"/>
+                  <rect x="120" y="70" width="12" height="10" rx="2" fill="#0F172A"/>
+                  <rect x="70" y="120" width="12" height="10" rx="2" fill="#0F172A"/>
+                  <rect x="120" y="120" width="10" height="10" rx="2" fill="#0F172A"/>
+
+                  <rect x="140" y="70" width="18" height="10" rx="2" fill="#0F172A"/>
+                  <rect x="170" y="70" width="15" height="10" rx="2" fill="#0F172A"/>
+                  <rect x="145" y="90" width="25" height="10" rx="2" fill="#0F172A"/>
+                  <rect x="180" y="90" width="10" height="10" rx="2" fill="#0F172A"/>
+                  <rect x="140" y="115" width="10" height="15" rx="2" fill="#0F172A"/>
+                  <rect x="160" y="115" width="28" height="10" rx="2" fill="#0F172A"/>
+
+                  <rect x="70" y="145" width="15" height="10" rx="2" fill="#0F172A"/>
+                  <rect x="95" y="145" width="25" height="10" rx="2" fill="#0F172A"/>
+                  <rect x="130" y="145" width="12" height="10" rx="2" fill="#0F172A"/>
+                  <rect x="150" y="145" width="18" height="10" rx="2" fill="#0F172A"/>
+                  <rect x="70" y="165" width="20" height="10" rx="2" fill="#0F172A"/>
+                  <rect x="100" y="165" width="30" height="10" rx="2" fill="#0F172A"/>
+                  <rect x="140" y="165" width="20" height="10" rx="2" fill="#0F172A"/>
+                  <rect x="170" y="165" width="15" height="10" rx="2" fill="#0F172A"/>
+                  <rect x="150" y="180" width="35" height="10" rx="2" fill="#0F172A"/>
+                  <rect x="75" y="180" width="30" height="10" rx="2" fill="#0F172A"/>
+                </svg>
+              </div>
+
+              <!-- Pie referencial del QR -->
+              <span class="text-[11px] text-slate-500 font-medium mt-2">
+                Apunta tu cámara para abrir el formulario
+              </span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Columna Derecha: Información, Hipervínculo y Botón -->
+        <div class="lg:col-span-7 space-y-5 text-left">
+          
+          <div class="space-y-2">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-red-100 text-red-700">
+              <span class="w-1.5 h-1.5 rounded-full bg-red-600"></span>
+              Convocatoria Abierta para Prestadores
+            </span>
+            <h2 class="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight leading-tight">
+              Registra tu Empresa Turística
+            </h2>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
+              ¿Administras un hotel, una agencia de viajes, transporte turístico o un atractivo en Bolivia? Únete al directorio oficial. Miles de viajeros buscan opciones verificadas para planear su viaje.
+            </p>
+          </div>
+
+          <!-- Pasos de registro simplificados -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
+            <div class="p-3 bg-white/80 border border-slate-200/80 rounded-xl space-y-1">
+              <span class="text-xs font-bold text-red-700 font-mono">Paso 1</span>
+              <h4 class="text-xs font-bold text-slate-900">Abre el formulario</h4>
+              <p class="text-[11px] text-slate-500 leading-snug">Escanea el QR o usa el botón directo.</p>
+            </div>
+            <div class="p-3 bg-white/80 border border-slate-200/80 rounded-xl space-y-1">
+              <span class="text-xs font-bold text-amber-600 font-mono">Paso 2</span>
+              <h4 class="text-xs font-bold text-slate-900">Ingresa tus datos</h4>
+              <p class="text-[11px] text-slate-500 leading-snug">Nombre, fotos, tarifas y tu WhatsApp directo.</p>
+            </div>
+            <div class="p-3 bg-white/80 border border-slate-200/80 rounded-xl space-y-1">
+              <span class="text-xs font-bold text-emerald-600 font-mono">Paso 3</span>
+              <h4 class="text-xs font-bold text-slate-900">Publicación</h4>
+              <p class="text-[11px] text-slate-500 leading-snug">Tu ficha se activa en el catálogo y mapa 2D.</p>
+            </div>
+          </div>
+
+          <!-- Ventajas destacadas -->
+          <div class="flex flex-wrap gap-2 text-xs font-medium text-slate-700 pt-1">
+            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-200/60">
+              ✓ 0% Comisión por reservas
+            </span>
+            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-blue-50 text-blue-800 border border-blue-200/60">
+              ✓ Contacto directo al cliente
+            </span>
+            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-amber-50 text-amber-800 border border-amber-200/60">
+              ✓ Presencia en los 9 departamentos
+            </span>
+          </div>
+
+          <!-- Botones de Acción: Hipervínculo a Google Forms / Microsoft Forms + Copiar Enlace -->
+          <div class="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            
+            <!-- Hipervínculo principal (Editable a Google Forms / Microsoft Forms) -->
+            <!-- CONFIGURACIÓN: Cambia href="..." por la URL de tu formulario real -->
+            <a
+              id="enlace-formulario-registro"
+              href="https://forms.google.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="px-5 py-3 rounded-xl text-xs sm:text-sm font-bold bg-slate-900 hover:bg-slate-800 text-white shadow-xl flex items-center justify-center gap-2 transition-all cursor-pointer group active:scale-95"
+            >
+              <span>Abrir Formulario de Registro</span>
+              <svg class="w-4 h-4 text-amber-400 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+              </svg>
+            </a>
+
+            <!-- Botón secundario: Copiar enlace al portapapeles -->
+            <button
+              type="button"
+              onclick="window.copiarEnlaceRegistro(this)"
+              class="px-4 py-3 rounded-xl text-xs font-semibold bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 flex items-center justify-center gap-1.5 transition-all cursor-pointer shadow-sm active:scale-95"
+            >
+              <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg>
+              <span id="btn-copiar-texto">Copiar enlace del formulario</span>
+            </button>
+
+          </div>
+
+          <p class="text-[11px] text-slate-400 font-light">
+            * El enlace del formulario es compatible con Google Forms, Microsoft Forms o cualquier sistema de encuestas.
+          </p>
+
+        </div>
+
+      </div>
     </div>
   </section>
 
 
   <!-- ========================================================= -->
-  <!-- SELECTOR POR DEPARTAMENTO                                 -->
+  <!-- SECCIÓN 2 DE 3: SOCIOS Y ALIADOS (3D FLIP CARDS)         -->
   <!-- ========================================================= -->
-  <section id="departamentos" class="max-w-6xl mx-auto px-4 py-8 border-t border-slate-200">
-    <div class="mb-4">
-      <h2 class="text-sm font-bold uppercase tracking-wider text-slate-500">Filtrar por Departamento</h2>
+  <section id="socios" class="max-w-6xl mx-auto px-4 py-16 scroll-mt-20 border-t border-slate-200">
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-8">
+      <div>
+        <span class="text-xs font-bold uppercase tracking-wider text-red-700 font-mono block mb-1">
+          Red Institucional y Colaboradores
+        </span>
+        <h2 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+          Socios y Aliados
+        </h2>
+      </div>
+      <p class="text-xs text-slate-500 max-w-sm font-light">
+        Entidades estratégicas que fortalecen la promoción turística de Bolivia. Pasa el cursor sobre cada tarjeta para conocer sus detalles.
+      </p>
     </div>
 
-    <div class="grid grid-cols-3 sm:grid-cols-5 lg:grid-cols-9 gap-2">
-      <a href="agencias.html?dept=lapaz" class="py-2.5 px-2 bg-white border border-slate-200 rounded-lg text-center text-xs font-semibold text-slate-700 hover:border-slate-900 hover:text-slate-900 transition-colors">La Paz</a>
-      <a href="agencias.html?dept=santacruz" class="py-2.5 px-2 bg-white border border-slate-200 rounded-lg text-center text-xs font-semibold text-slate-700 hover:border-slate-900 hover:text-slate-900 transition-colors">Santa Cruz</a>
-      <a href="agencias.html?dept=cochabamba" class="py-2.5 px-2 bg-white border border-slate-200 rounded-lg text-center text-xs font-semibold text-slate-700 hover:border-slate-900 hover:text-slate-900 transition-colors">Cochabamba</a>
-      <a href="agencias.html?dept=potosi" class="py-2.5 px-2 bg-white border border-slate-200 rounded-lg text-center text-xs font-semibold text-slate-700 hover:border-slate-900 hover:text-slate-900 transition-colors">Potosí</a>
-      <a href="agencias.html?dept=chuquisaca" class="py-2.5 px-2 bg-white border border-slate-200 rounded-lg text-center text-xs font-semibold text-slate-700 hover:border-slate-900 hover:text-slate-900 transition-colors">Chuquisaca</a>
-      <a href="agencias.html?dept=tarija" class="py-2.5 px-2 bg-white border border-slate-200 rounded-lg text-center text-xs font-semibold text-slate-700 hover:border-slate-900 hover:text-slate-900 transition-colors">Tarija</a>
-      <a href="agencias.html?dept=oruro" class="py-2.5 px-2 bg-white border border-slate-200 rounded-lg text-center text-xs font-semibold text-slate-700 hover:border-slate-900 hover:text-slate-900 transition-colors">Oruro</a>
-      <a href="agencias.html?dept=beni" class="py-2.5 px-2 bg-white border border-slate-200 rounded-lg text-center text-xs font-semibold text-slate-700 hover:border-slate-900 hover:text-slate-900 transition-colors">Beni</a>
-      <a href="agencias.html?dept=pando" class="py-2.5 px-2 bg-white border border-slate-200 rounded-lg text-center text-xs font-semibold text-slate-700 hover:border-slate-900 hover:text-slate-900 transition-colors">Pando</a>
-    </div>
-  </section>
-
-
-  <!-- ========================================================= -->
-  <!-- DESTINOS PRINCIPALES                                      -->
-  <!-- ========================================================= -->
-  <section id="destinos" class="max-w-6xl mx-auto px-4 py-12 border-t border-slate-200">
-    <div class="mb-6">
-      <h2 class="text-sm font-bold uppercase tracking-wider text-slate-500">Destinos Principales</h2>
-    </div>
-
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+    <!-- Grid de las 4 empresas con tarjetas 3D que giran al pasar el mouse -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
       
-      <a href="agencias.html?q=uyuni" class="block bg-white border border-slate-200 rounded-xl overflow-hidden hover:border-slate-400 transition-colors">
-        <img src="https://images.unsplash.com/photo-1589556264800-08ae9e129a8c?auto=format&fit=crop&w=600&q=80" alt="Salar de Uyuni" class="h-40 w-full object-cover">
-        <div class="p-4">
-          <span class="text-[10px] font-bold text-slate-400 uppercase">Potosí</span>
-          <h3 class="font-bold text-slate-900 text-sm mt-0.5">Salar de Uyuni</h3>
-        </div>
-      </a>
+      <!-- Empresa 1: SCATUR -->
+      <div class="flip-card h-60 cursor-pointer select-none group" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card-inner">
+          
+          <!-- Frente: Logo y Nombre de la Empresa -->
+          <div class="flip-card-front bg-white border border-slate-200/90 rounded-2xl p-6 flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-all">
+            <!-- Espacio para Logo oficial (Placeholder preparado para reemplazo) -->
+            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-slate-50 to-slate-100 border border-slate-200 flex items-center justify-center mb-3 group-hover:scale-105 transition-transform shadow-inner">
+              <span class="text-xl font-black text-red-700 tracking-wider">SC</span>
+            </div>
+            <h3 class="text-base font-black text-slate-900 tracking-wider">SCATUR</h3>
+            <span class="text-xs text-slate-400 font-medium mt-0.5">Cámara de Turismo</span>
+            
+            <div class="mt-4 flex items-center gap-1.5 text-[10px] font-semibold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-full group-hover:bg-red-50 group-hover:text-red-700 transition-colors">
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+              <span>Girar tarjeta</span>
+            </div>
+          </div>
 
-      <a href="hoteles.html?q=titicaca" class="block bg-white border border-slate-200 rounded-xl overflow-hidden hover:border-slate-400 transition-colors">
-        <img src="https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=600&q=80" alt="Lago Titicaca" class="h-40 w-full object-cover">
-        <div class="p-4">
-          <span class="text-[10px] font-bold text-slate-400 uppercase">La Paz</span>
-          <h3 class="font-bold text-slate-900 text-sm mt-0.5">Lago Titicaca</h3>
-        </div>
-      </a>
+          <!-- Reverso: Información y Descripción -->
+          <div class="flip-card-back bg-[#0F1422] text-white border border-slate-700/60 rounded-2xl p-5 flex flex-col justify-between text-left shadow-xl">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-bold text-amber-400 uppercase tracking-widest">Socio Oficial</span>
+                <span class="text-[10px] px-2 py-0.5 rounded bg-white/10 text-slate-300">Gremio</span>
+              </div>
+              <h4 class="font-bold text-sm text-white">SCATUR</h4>
+              <p class="text-xs text-slate-300 leading-relaxed mt-2 font-light">
+                Cámara representativa de operadores y prestadores turísticos. Impulsa la competitividad, formalización y calidad de servicios turísticos a nivel nacional.
+              </p>
+            </div>
+            <div class="pt-2 border-t border-white/10 flex items-center justify-between text-[11px] text-slate-400">
+              <span>Red Bolivia</span>
+              <span class="text-emerald-400 font-semibold flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                Aliado Activo
+              </span>
+            </div>
+          </div>
 
-      <a href="agencias.html?q=madidi" class="block bg-white border border-slate-200 rounded-xl overflow-hidden hover:border-slate-400 transition-colors">
-        <img src="https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=600&q=80" alt="Parque Madidi" class="h-40 w-full object-cover">
-        <div class="p-4">
-          <span class="text-[10px] font-bold text-slate-400 uppercase">Beni</span>
-          <h3 class="font-bold text-slate-900 text-sm mt-0.5">Parque Nacional Madidi</h3>
         </div>
-      </a>
+      </div>
+
+      <!-- Empresa 2: AGB -->
+      <div class="flip-card h-60 cursor-pointer select-none group" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card-inner">
+          
+          <!-- Frente -->
+          <div class="flip-card-front bg-white border border-slate-200/90 rounded-2xl p-6 flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-all">
+            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-slate-50 to-slate-100 border border-slate-200 flex items-center justify-center mb-3 group-hover:scale-105 transition-transform shadow-inner">
+              <span class="text-xl font-black text-amber-600 tracking-wider">AGB</span>
+            </div>
+            <h3 class="text-base font-black text-slate-900 tracking-wider">AGB</h3>
+            <span class="text-xs text-slate-400 font-medium mt-0.5">Asoc. Guías de Bolivia</span>
+
+            <div class="mt-4 flex items-center gap-1.5 text-[10px] font-semibold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-full group-hover:bg-amber-50 group-hover:text-amber-700 transition-colors">
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+              <span>Girar tarjeta</span>
+            </div>
+          </div>
+
+          <!-- Reverso -->
+          <div class="flip-card-back bg-[#0F1422] text-white border border-slate-700/60 rounded-2xl p-5 flex flex-col justify-between text-left shadow-xl">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-bold text-amber-400 uppercase tracking-widest">Socio Oficial</span>
+                <span class="text-[10px] px-2 py-0.5 rounded bg-white/10 text-slate-300">Guías</span>
+              </div>
+              <h4 class="font-bold text-sm text-white">AGB</h4>
+              <p class="text-xs text-slate-300 leading-relaxed mt-2 font-light">
+                Asociación de Guías de Bolivia. Profesionales acreditados especialistas en alta montaña, trekking, historia y circuitos culturales en los 9 departamentos.
+              </p>
+            </div>
+            <div class="pt-2 border-t border-white/10 flex items-center justify-between text-[11px] text-slate-400">
+              <span>9 Departamentos</span>
+              <span class="text-emerald-400 font-semibold flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                Certificados
+              </span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Empresa 3: BLACK BULLS -->
+      <div class="flip-card h-60 cursor-pointer select-none group" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card-inner">
+          
+          <!-- Frente -->
+          <div class="flip-card-front bg-white border border-slate-200/90 rounded-2xl p-6 flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-all">
+            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-slate-50 to-slate-100 border border-slate-200 flex items-center justify-center mb-3 group-hover:scale-105 transition-transform shadow-inner">
+              <span class="text-xl font-black text-slate-900 tracking-wider">BB</span>
+            </div>
+            <h3 class="text-base font-black text-slate-900 tracking-wider">BLACK BULLS</h3>
+            <span class="text-xs text-slate-400 font-medium mt-0.5">Expediciones & 4x4</span>
+
+            <div class="mt-4 flex items-center gap-1.5 text-[10px] font-semibold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-full group-hover:bg-slate-200 group-hover:text-slate-900 transition-colors">
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+              <span>Girar tarjeta</span>
+            </div>
+          </div>
+
+          <!-- Reverso -->
+          <div class="flip-card-back bg-[#0F1422] text-white border border-slate-700/60 rounded-2xl p-5 flex flex-col justify-between text-left shadow-xl">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-bold text-amber-400 uppercase tracking-widest">Socio Oficial</span>
+                <span class="text-[10px] px-2 py-0.5 rounded bg-white/10 text-slate-300">Logística</span>
+              </div>
+              <h4 class="font-bold text-sm text-white">BLACK BULLS</h4>
+              <p class="text-xs text-slate-300 leading-relaxed mt-2 font-light">
+                Compañía de logística todoterreno y soporte para travesías extremas en el Altiplano, Lagunas de Colores, Chiquitanía y Yungas. Seguridad y equipamiento 4x4.
+              </p>
+            </div>
+            <div class="pt-2 border-t border-white/10 flex items-center justify-between text-[11px] text-slate-400">
+              <span>Flota Propia</span>
+              <span class="text-emerald-400 font-semibold flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                Operador 4x4
+              </span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Empresa 4: DOMOS -->
+      <div class="flip-card h-60 cursor-pointer select-none group" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card-inner">
+          
+          <!-- Frente -->
+          <div class="flip-card-front bg-white border border-slate-200/90 rounded-2xl p-6 flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-all">
+            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-slate-50 to-slate-100 border border-slate-200 flex items-center justify-center mb-3 group-hover:scale-105 transition-transform shadow-inner">
+              <span class="text-xl font-black text-emerald-700 tracking-wider">DO</span>
+            </div>
+            <h3 class="text-base font-black text-slate-900 tracking-wider">DOMOS</h3>
+            <span class="text-xs text-slate-400 font-medium mt-0.5">Ecolodges & Glamping</span>
+
+            <div class="mt-4 flex items-center gap-1.5 text-[10px] font-semibold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-full group-hover:bg-emerald-50 group-hover:text-emerald-700 transition-colors">
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+              <span>Girar tarjeta</span>
+            </div>
+          </div>
+
+          <!-- Reverso -->
+          <div class="flip-card-back bg-[#0F1422] text-white border border-slate-700/60 rounded-2xl p-5 flex flex-col justify-between text-left shadow-xl">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-bold text-amber-400 uppercase tracking-widest">Socio Oficial</span>
+                <span class="text-[10px] px-2 py-0.5 rounded bg-white/10 text-slate-300">Hospedaje</span>
+              </div>
+              <h4 class="font-bold text-sm text-white">DOMOS</h4>
+              <p class="text-xs text-slate-300 leading-relaxed mt-2 font-light">
+                Red pionera de domos geodésicos y glamping sostenible en los paisajes más emblemáticos de Bolivia, brindando confort de alta gama bajo el cielo estrellado.
+              </p>
+            </div>
+            <div class="pt-2 border-t border-white/10 flex items-center justify-between text-[11px] text-slate-400">
+              <span>Turismo Sostenible</span>
+              <span class="text-emerald-400 font-semibold flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                Glamping Premium
+              </span>
+            </div>
+          </div>
+
+        </div>
+      </div>
 
     </div>
   </section>
 
 
   <!-- ========================================================= -->
-  <!-- EMPRESAS DESTACADAS                                       -->
+  <!-- SECCIÓN 3 DE 3: FOOTER DINÁMICO & COMPLETO                -->
   <!-- ========================================================= -->
-  <section id="empresas" class="max-w-6xl mx-auto px-4 py-12 border-t border-slate-200">
-    <div class="flex items-center justify-between mb-6">
-      <h2 class="text-sm font-bold uppercase tracking-wider text-slate-500">Empresas Registradas</h2>
-      <a href="agencias.html" class="text-xs font-semibold text-slate-700 hover:underline">Ver todas →</a>
-    </div>
+  <div id="main-footer"></div>
+  <script src="js/footer.js"></script>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-      
-      <div class="p-4 bg-white border border-slate-200 rounded-xl">
-        <span class="text-[10px] font-bold text-slate-400 uppercase">Agencia · Potosí</span>
-        <h3 class="font-bold text-slate-900 text-sm mt-1">Futurismo Group</h3>
-        <a href="agencias.html" class="text-xs text-red-700 font-semibold mt-3 block hover:underline">Ver ficha</a>
-      </div>
-
-      <div class="p-4 bg-white border border-slate-200 rounded-xl">
-        <span class="text-[10px] font-bold text-slate-400 uppercase">Institución · La Paz</span>
-        <h3 class="font-bold text-slate-900 text-sm mt-1">Dirección de Turismo GAMLP</h3>
-        <a href="instituciones.html" class="text-xs text-red-700 font-semibold mt-3 block hover:underline">Ver ficha</a>
-      </div>
-
-      <div class="p-4 bg-white border border-slate-200 rounded-xl">
-        <span class="text-[10px] font-bold text-slate-400 uppercase">Hospedaje · Copacabana</span>
-        <h3 class="font-bold text-slate-900 text-sm mt-1">Kalluchi Ecolodge</h3>
-        <a href="hoteles.html" class="text-xs text-red-700 font-semibold mt-3 block hover:underline">Ver ficha</a>
-      </div>
-
-      <div class="p-4 bg-white border border-slate-200 rounded-xl">
-        <span class="text-[10px] font-bold text-slate-400 uppercase">Transporte · La Paz</span>
-        <h3 class="font-bold text-slate-900 text-sm mt-1">Todo Turismo</h3>
-        <a href="transporte.html" class="text-xs text-red-700 font-semibold mt-3 block hover:underline">Ver ficha</a>
-      </div>
-
-    </div>
-  </section>
-
-
-  <!-- ========================================================= -->
-  <!-- SOCIOS & ALIADOS (SOLO LOGOS)                             -->
-  <!-- ========================================================= -->
-  <section id="socios" class="max-w-6xl mx-auto px-4 py-12 border-t border-slate-200">
-    <div class="mb-6">
-      <h2 class="text-sm font-bold uppercase tracking-wider text-slate-500">Socios y Aliados</h2>
-    </div>
-
-    <!-- Espacio exclusivo para logos sin texto inventado -->
-    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-      
-      <div class="h-24 bg-white border border-slate-200 rounded-xl flex items-center justify-center p-4">
-        <!-- Reemplazar src con el logo oficial -->
-        <span class="text-sm font-bold text-slate-700 tracking-wider">SCATUR</span>
-      </div>
-
-      <div class="h-24 bg-white border border-slate-200 rounded-xl flex items-center justify-center p-4">
-        <span class="text-sm font-bold text-slate-700 tracking-wider">AGB</span>
-      </div>
-
-      <div class="h-24 bg-white border border-slate-200 rounded-xl flex items-center justify-center p-4">
-        <span class="text-sm font-bold text-slate-700 tracking-wider">BLACK BULLS</span>
-      </div>
-
-      <div class="h-24 bg-white border border-slate-200 rounded-xl flex items-center justify-center p-4">
-        <span class="text-sm font-bold text-slate-700 tracking-wider">DOMOS</span>
-      </div>
-
-    </div>
-  </section>
-
-
-  <!-- ========================================================= -->
-  <!-- FOOTER                                                    -->
-  <!-- ========================================================= -->
-  <footer class="bg-white border-t border-slate-200 py-8 text-xs text-slate-500">
-    <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-      <span>Guía Turística · Directorio Turístico</span>
-      <div class="flex gap-4">
-        <a href="agencias.html" class="hover:text-slate-900">Agencias</a>
-        <a href="instituciones.html" class="hover:text-slate-900">Instituciones</a>
-        <a href="hoteles.html" class="hover:text-slate-900">Hoteles</a>
-        <a href="transporte.html" class="hover:text-slate-900">Transporte</a>
-        <a href="embajadas.html" class="hover:text-slate-900">Embajadas</a>
-        <a href="servicios-especiales.html" class="hover:text-slate-900">Otros Servicios</a>
-      </div>
-    </div>
-  </footer>
+  <!-- Script utilitario para copiar enlace de registro -->
+  <script>
+    window.copiarEnlaceRegistro = function(btn) {
+      const enlace = document.getElementById("enlace-formulario-registro");
+      const url = enlace ? enlace.href : "https://forms.google.com";
+      navigator.clipboard.writeText(url).then(() => {
+        const texto = document.getElementById("btn-copiar-texto");
+        if (texto) {
+          const original = texto.textContent;
+          texto.textContent = "¡Enlace copiado!";
+          btn.classList.add("bg-emerald-50", "text-emerald-700", "border-emerald-300");
+          setTimeout(() => {
+            texto.textContent = original;
+            btn.classList.remove("bg-emerald-50", "text-emerald-700", "border-emerald-300");
+          }, 2500);
+        }
+      }).catch(() => {
+        alert("Enlace: " + url);
+      });
+    };
+  </script>
 
   <!-- ========================================================= -->
   <!-- MODAL DE BÚSQUEDA INTERACTIVO (SPA)                      -->

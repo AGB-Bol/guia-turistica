@@ -23,7 +23,8 @@
 
   const isServicioActive = serviciosLinks.some((s) => s.href === currentPath);
 
-  function generateHeaderHTML(ctaText = "Registrar Empresa", ctaHref = "#") {
+  function generateHeaderHTML(ctaText = "Registrar Empresa", ctaHref = null) {
+    const targetCtaHref = ctaHref || `${homePrefix}#seccion-registro`;
     return `
   <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
     <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
@@ -77,15 +78,15 @@
           </div>
         </div>
 
-        <a href="${homePrefix}#departamentos" class="hover:text-slate-900 transition-colors">Departamentos</a>
-        <a href="${homePrefix}#destinos" class="hover:text-slate-900 transition-colors">Destinos</a>
-        <a href="${homePrefix}#empresas" class="hover:text-slate-900 transition-colors">Empresas</a>
+        <a href="${homePrefix}#seccion-proposito" class="hover:text-slate-900 transition-colors">¿Qué somos?</a>
+        <a href="${homePrefix}#seccion-mapa" class="hover:text-slate-900 transition-colors">Mapa</a>
+        <a href="${homePrefix}#seccion-registro" class="hover:text-slate-900 transition-colors">Registro</a>
         <a href="${homePrefix}#socios" class="hover:text-slate-900 transition-colors">Socios</a>
       </nav>
 
       <!-- Acción & Botón Mobile -->
       <div class="flex items-center gap-3">
-        <a href="${ctaHref}" class="hidden sm:inline-flex bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs px-3.5 py-2 rounded-lg transition-colors">
+        <a href="${targetCtaHref}" class="hidden sm:inline-flex bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs px-3.5 py-2 rounded-lg transition-colors">
           ${ctaText}
         </a>
 
@@ -128,13 +129,13 @@
         </div>
       </div>
       <div class="pt-2 border-t border-slate-100 space-y-2">
-        <a href="${homePrefix}#departamentos" class="block text-sm font-semibold text-slate-700">Departamentos</a>
-        <a href="${homePrefix}#destinos" class="block text-sm font-semibold text-slate-700">Destinos</a>
-        <a href="${homePrefix}#empresas" class="block text-sm font-semibold text-slate-700">Empresas</a>
-        <a href="${homePrefix}#socios" class="block text-sm font-semibold text-slate-700">Socios</a>
+        <a href="${homePrefix}#seccion-proposito" class="block text-sm font-semibold text-slate-700">¿Qué somos?</a>
+        <a href="${homePrefix}#seccion-mapa" class="block text-sm font-semibold text-slate-700">Mapa Turístico</a>
+        <a href="${homePrefix}#seccion-registro" class="block text-sm font-semibold text-slate-700">Registro de Empresa</a>
+        <a href="${homePrefix}#socios" class="block text-sm font-semibold text-slate-700">Socios y Aliados</a>
       </div>
       <div class="pt-2">
-        <a href="${ctaHref}" class="block text-center w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-2.5 rounded-lg transition-colors">
+        <a href="${targetCtaHref}" class="block text-center w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-2.5 rounded-lg transition-colors">
           ${ctaText}
         </a>
       </div>
@@ -151,7 +152,7 @@
 
     if (container) {
       const ctaText = container.getAttribute("data-cta-text") || "Registrar Empresa";
-      const ctaHref = container.getAttribute("data-cta-href") || "#";
+      const ctaHref = container.getAttribute("data-cta-href") || `${homePrefix}#seccion-registro`;
 
       const tempDiv = document.createElement("div");
       tempDiv.innerHTML = generateHeaderHTML(ctaText, ctaHref).trim();
