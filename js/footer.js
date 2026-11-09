@@ -32,12 +32,8 @@
       <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10 border-b border-slate-800/80">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
           
-          <!-- Estado en vivo del directorio -->
+          <!-- Presentación del directorio -->
           <div class="lg:col-span-5 space-y-2">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold">
-              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              Directorio en Línea · 9 Departamentos Conectados
-            </div>
             <h3 class="text-lg sm:text-xl font-bold text-white tracking-tight">
               Directorio Abierto del Turismo en Bolivia
             </h3>
@@ -244,15 +240,6 @@
           <span>&copy; <span id="footer-anio">${currentYear}</span> Guía Turística de Bolivia.</span>
           <span class="hidden sm:inline text-slate-700">|</span>
           <span class="hidden sm:inline">Todos los derechos reservados.</span>
-        </div>
-
-        <div class="flex items-center gap-4 text-slate-400">
-          <span class="flex items-center gap-1.5 text-slate-300">
-            <span>Hecho con orgullo en Bolivia</span>
-            <span class="inline-block text-sm" role="img" aria-label="Bandera de Bolivia">🇧🇴</span>
-          </span>
-          <span class="text-slate-700">·</span>
-          <span class="text-emerald-400 font-medium">0% Comisiones</span>
         </div>
       </div>
 
