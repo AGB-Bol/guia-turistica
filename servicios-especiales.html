@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Servicios Especiales - Guía Turística</title>
+  <title>Otros Servicios y Productos Locales - Guía Turística de Bolivia</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,117 +20,96 @@
   <div id="main-header" data-cta-text="Registrar Producto"></div>
   <script src="js/header.js"></script>
 
-  <!-- CABECERA -->
+  <!-- CABECERA DE SECCIÓN -->
   <section class="bg-white border-b border-slate-200 py-10 px-4">
     <div class="max-w-6xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-4">
       <div>
-        <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Categoría 6 de 6</span>
+        <span class="text-xs font-bold uppercase tracking-wider text-emerald-700">Categoría 6 de 6</span>
         <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">Otros Servicios (Productos Locales)</h1>
         <p class="text-xs sm:text-sm text-slate-500 mt-1 max-w-xl">
-          Proveedores complementarios de la cadena de valor turística: confección textil de autor, enoturismo de altura y cafés de origen en Bolivia.
+          Proveedores complementarios de la cadena de valor turística: enoturismo de altura, cafés de origen, textiles ancestrales, equipo outdoor y fotografía en Bolivia.
         </p>
       </div>
-      <div class="text-xs font-semibold text-slate-500 bg-slate-50 px-3 py-2 rounded-lg border border-slate-200 shrink-0">
-        Total: <span class="font-bold text-slate-900">3 productores destacados</span>
+      <div id="total-registros-badge" class="text-xs font-semibold text-slate-500 bg-slate-50 px-3 py-2 rounded-lg border border-slate-200 shrink-0">
+        Cargando servicios y productos...
       </div>
     </div>
   </section>
 
-  <!-- CONTENIDO: PRODUCTOS Y EXPERIENCIAS COMPLEMENTARIAS -->
+  <!-- CONTENIDO Y FILTROS -->
   <main class="max-w-6xl mx-auto px-4 py-8">
     
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-      
-      <!-- Producto 1: Textil -->
-      <article class="bg-white border border-slate-200 rounded-xl overflow-hidden flex flex-col justify-between hover:border-slate-400 transition-colors">
-        <div>
-          <div class="h-44 bg-stone-100 flex items-center justify-center border-b border-slate-100">
-            <span class="text-xs font-bold tracking-widest text-slate-400 uppercase">Textil & Diseño</span>
-          </div>
-          <div class="p-5">
-            <div class="flex items-center justify-between mb-2">
-              <span class="text-[10px] font-bold uppercase text-stone-700 bg-stone-100 px-2 py-0.5 rounded">Indumentaria</span>
-              <span class="text-xs font-semibold text-slate-400">La Paz</span>
-            </div>
-            <h2 class="text-base font-bold text-slate-900">Manta Outfit Textil</h2>
-            <p class="text-xs text-slate-500 mt-1">Confección y diseño textil inspirado en la indumentaria tradicional y la iconografía andina boliviana. Souvenirs y piezas de autor.</p>
-            
-            <div class="mt-4 pt-3 border-t border-slate-100 text-xs text-slate-600 space-y-1">
-              <div><span class="text-slate-400 font-medium">Producto:</span> Tejidos, capas y prendas de diseño</div>
-              <div><span class="text-slate-400 font-medium">Puntos de venta:</span> Zona Central y Sur de La Paz</div>
-            </div>
-          </div>
-        </div>
-        <div class="p-5 pt-0">
-          <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
-            <span class="text-slate-400">Origen Local</span>
-            <a href="#" class="font-bold text-red-700 hover:underline">Ver catálogo →</a>
-          </div>
-        </div>
-      </article>
+    <!-- Filtros de búsqueda y segmentación -->
+    <div class="bg-white p-3.5 border border-slate-200 rounded-xl mb-6 grid grid-cols-1 sm:grid-cols-3 gap-3 shadow-sm">
+      <div class="relative">
+        <input
+          id="filtro-busqueda"
+          type="text"
+          placeholder="Buscar por productor, representante, rubro o ciudad..."
+          class="w-full text-xs pl-8 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none focus:border-slate-400 focus:bg-white text-slate-800 transition-colors"
+        >
+        <svg class="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+      </div>
 
-      <!-- Producto 2: Enoturismo -->
-      <article class="bg-white border border-slate-200 rounded-xl overflow-hidden flex flex-col justify-between hover:border-slate-400 transition-colors">
-        <div>
-          <div class="h-44 bg-stone-100 flex items-center justify-center border-b border-slate-100">
-            <span class="text-xs font-bold tracking-widest text-slate-400 uppercase">Vinos de Altura</span>
-          </div>
-          <div class="p-5">
-            <div class="flex items-center justify-between mb-2">
-              <span class="text-[10px] font-bold uppercase text-stone-700 bg-stone-100 px-2 py-0.5 rounded">Enoturismo</span>
-              <span class="text-xs font-semibold text-slate-400">Luribay · La Paz</span>
-            </div>
-            <h2 class="text-base font-bold text-slate-900">7 Pecados Vinos Artesanales</h2>
-            <p class="text-xs text-slate-500 mt-1">Bodega artesanal de vinos de altura y singanis en el valle interandino de Luribay. Visitas guiadas a viñedos y catas.</p>
-            
-            <div class="mt-4 pt-3 border-t border-slate-100 text-xs text-slate-600 space-y-1">
-              <div><span class="text-slate-400 font-medium">Producto:</span> Vinos tintos, blancos y singani de altura</div>
-              <div><span class="text-slate-400 font-medium">Experiencia:</span> Tour a viñedo y cata en Luribay</div>
-            </div>
-          </div>
-        </div>
-        <div class="p-5 pt-0">
-          <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
-            <span class="text-slate-400">Valle de Altura</span>
-            <a href="#" class="font-bold text-red-700 hover:underline">Reservar cata →</a>
-          </div>
-        </div>
-      </article>
+      <select id="filtro-tipo" class="text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none focus:border-slate-400 focus:bg-white text-slate-700 transition-colors">
+        <option value="">Todos los sectores y rubros</option>
+        <option value="enoturismo">Enoturismo, Vinos y Destilerías</option>
+        <option value="gastronomia">Cafés de Especialidad y Cacao</option>
+        <option value="artesania">Textiles, Joyería y Artesanías</option>
+        <option value="aventura">Alquiler Outdoor y Guías de Montaña</option>
+        <option value="fotografia">Fotografía Turística y Drones</option>
+      </select>
 
-      <!-- Producto 3: Café -->
-      <article class="bg-white border border-slate-200 rounded-xl overflow-hidden flex flex-col justify-between hover:border-slate-400 transition-colors">
-        <div>
-          <div class="h-44 bg-stone-100 flex items-center justify-center border-b border-slate-100">
-            <span class="text-xs font-bold tracking-widest text-slate-400 uppercase">Café de Especialidad</span>
-          </div>
-          <div class="p-5">
-            <div class="flex items-center justify-between mb-2">
-              <span class="text-[10px] font-bold uppercase text-stone-700 bg-stone-100 px-2 py-0.5 rounded">Cafetería & Grano</span>
-              <span class="text-xs font-semibold text-slate-400">Yungas / La Paz</span>
-            </div>
-            <h2 class="text-base font-bold text-slate-900">Azahar Cafés de Origen</h2>
-            <p class="text-xs text-slate-500 mt-1">Tostaduría y cafetería de especialidad que trabaja con microlotes de Caranavi y Coroico. Catas de café para visitantes y venta de grano tostado.</p>
-            
-            <div class="mt-4 pt-3 border-t border-slate-100 text-xs text-slate-600 space-y-1">
-              <div><span class="text-slate-400 font-medium">Origen:</span> Caranavi y Nor Yungas (+1.600 msnm)</div>
-              <div><span class="text-slate-400 font-medium">Servicio:</span> Métodos filtrados, tueste fresco y catas</div>
-            </div>
-          </div>
-        </div>
-        <div class="p-5 pt-0">
-          <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
-            <span class="text-slate-400">Especialidad</span>
-            <a href="#" class="font-bold text-red-700 hover:underline">Ver ubicaciones →</a>
-          </div>
-        </div>
-      </article>
-
+      <select id="filtro-departamento" class="text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none focus:border-slate-400 focus:bg-white text-slate-700 transition-colors">
+        <option value="">Todos los departamentos</option>
+        <option value="tarija">Tarija / Valles del Sur</option>
+        <option value="lapaz">La Paz / Yungas</option>
+        <option value="chuquisaca">Chuquisaca / Sucre</option>
+        <option value="potosi">Potosí / Salar de Uyuni</option>
+        <option value="santacruz">Santa Cruz / Chiquitanía</option>
+        <option value="cochabamba">Cochabamba</option>
+        <option value="beni">Beni</option>
+        <option value="oruro">Oruro</option>
+        <option value="pando">Pando</option>
+      </select>
     </div>
+
+    <!-- Catálogo de Bloques Dinámicos (9 por página) -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="grid-catalogo">
+      <!-- Se inyecta dinámicamente mediante js/catalogo-seccion.js -->
+    </div>
+
+    <!-- Paginación Dinámica -->
+    <div id="paginacion-catalogo"></div>
+
   </main>
 
   <!-- FOOTER REUTILIZABLE -->
   <div id="main-footer"></div>
   <script src="js/footer.js"></script>
+
+  <!-- GSAP PARA TRANSICIONES SUAVES -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+  <!-- DATOS MOCK Y CONTROLADOR DINÁMICO -->
+  <script src="data/servicios.js"></script>
+  <script src="js/catalogo-seccion.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      CatalogoSeccion.init({
+        datos: window.DATOS_SERVICIOS || [],
+        contenedorGrid: 'grid-catalogo',
+        contenedorPaginacion: 'paginacion-catalogo',
+        filtroInputId: 'filtro-busqueda',
+        filtroTipoId: 'filtro-tipo',
+        filtroDeptId: 'filtro-departamento',
+        contadorId: 'total-registros-badge',
+        itemsPorPagina: 9,
+        colorBadge: 'text-emerald-800 bg-emerald-50 border-emerald-200',
+        colorBoton: 'text-emerald-700 hover:text-emerald-900'
+      });
+    });
+  </script>
 
 </body>
 </html>

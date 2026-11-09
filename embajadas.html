@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Embajadas y Consulados - Guía Turística</title>
+  <title>Embajadas y Consulados - Guía Turística de Bolivia</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,108 +17,90 @@
 <body class="bg-[#FBFBFA] text-slate-800 antialiased">
 
   <!-- NAVBAR REUTILIZABLE -->
-  <div id="main-header" data-cta-text="Asistencia" data-cta-href="index.html#contacto"></div>
+  <div id="main-header" data-cta-text="Asistencia" data-cta-href="index.html#seccion-registro"></div>
   <script src="js/header.js"></script>
 
-  <!-- CABECERA -->
+  <!-- CABECERA DE SECCIÓN -->
   <section class="bg-white border-b border-slate-200 py-10 px-4">
     <div class="max-w-6xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-4">
       <div>
-        <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Categoría 5 de 6</span>
+        <span class="text-xs font-bold uppercase tracking-wider text-blue-700">Categoría 5 de 6</span>
         <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">Embajadas y Consulados</h1>
         <p class="text-xs sm:text-sm text-slate-500 mt-1 max-w-xl">
-          Misiones diplomáticas y representaciones acreditadas en La Paz para asistencia al viajero, información de visados y cooperación cultural.
+          Misiones diplomáticas, oficinas consulares y representaciones acreditadas en Bolivia para asistencia al viajero, trámites de visado y cooperación.
         </p>
       </div>
-      <div class="text-xs font-semibold text-slate-500 bg-slate-50 px-3 py-2 rounded-lg border border-slate-200 shrink-0">
-        Total: <span class="font-bold text-slate-900">3 sedes principales</span>
+      <div id="total-registros-badge" class="text-xs font-semibold text-slate-500 bg-slate-50 px-3 py-2 rounded-lg border border-slate-200 shrink-0">
+        Cargando representaciones diplomáticas...
       </div>
     </div>
   </section>
 
-  <!-- CONTENIDO: FICHAS CONSULARES Y DIPLOMÁTICAS -->
+  <!-- CONTENIDO Y FILTROS -->
   <main class="max-w-6xl mx-auto px-4 py-8">
     
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-      
-      <!-- Sede 1 -->
-      <article class="bg-white border border-slate-200 rounded-xl p-6 flex flex-col justify-between">
-        <div>
-          <span class="text-[10px] font-bold uppercase text-slate-500 bg-slate-100 px-2 py-0.5 rounded">Misión Diplomática</span>
-          <h2 class="text-lg font-bold text-slate-900 mt-2">Embajada de México</h2>
-          <p class="text-xs text-slate-500 mt-1">Sección consular acreditada ante el Estado Plurinacional de Bolivia. Gestión de visados para residentes y asistencia consular.</p>
-          
-          <div class="mt-4 pt-4 border-t border-slate-100 space-y-2 text-xs text-slate-600">
-            <div>
-              <span class="block font-semibold text-slate-400 text-[11px] uppercase">Ubicación</span>
-              <span>Calacoto, Calle 18 #8002, La Paz</span>
-            </div>
-            <div>
-              <span class="block font-semibold text-slate-400 text-[11px] uppercase">Servicios</span>
-              <span>Visados turísticos, legalizaciones, protección ciudadana</span>
-            </div>
-          </div>
-        </div>
-        <div class="mt-6 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
-          <span class="text-slate-400">Atención con cita</span>
-          <a href="#" class="font-bold text-red-700 hover:underline">Portal Consular →</a>
-        </div>
-      </article>
+    <!-- Filtros de búsqueda y segmentación -->
+    <div class="bg-white p-3.5 border border-slate-200 rounded-xl mb-6 grid grid-cols-1 sm:grid-cols-3 gap-3 shadow-sm">
+      <div class="relative">
+        <input
+          id="filtro-busqueda"
+          type="text"
+          placeholder="Buscar por país, diplomático, trámite o zona..."
+          class="w-full text-xs pl-8 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none focus:border-slate-400 focus:bg-white text-slate-800 transition-colors"
+        >
+        <svg class="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+      </div>
 
-      <!-- Sede 2 -->
-      <article class="bg-white border border-slate-200 rounded-xl p-6 flex flex-col justify-between">
-        <div>
-          <span class="text-[10px] font-bold uppercase text-slate-500 bg-slate-100 px-2 py-0.5 rounded">Misión Diplomática</span>
-          <h2 class="text-lg font-bold text-slate-900 mt-2">Embajada de Costa Rica</h2>
-          <p class="text-xs text-slate-500 mt-1">Representación diplomática para el fomento de intercambios comerciales, ecoturismo y cooperación cultural centroamericana.</p>
-          
-          <div class="mt-4 pt-4 border-t border-slate-100 space-y-2 text-xs text-slate-600">
-            <div>
-              <span class="block font-semibold text-slate-400 text-[11px] uppercase">Ubicación</span>
-              <span>San Jorge, Av. Arce, La Paz</span>
-            </div>
-            <div>
-              <span class="block font-semibold text-slate-400 text-[11px] uppercase">Servicios</span>
-              <span>Consultas de ingreso, cooperación turística, trámites consulares</span>
-            </div>
-          </div>
-        </div>
-        <div class="mt-6 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
-          <span class="text-slate-400">Atención consular</span>
-          <a href="#" class="font-bold text-red-700 hover:underline">Portal Consular →</a>
-        </div>
-      </article>
+      <select id="filtro-tipo" class="text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none focus:border-slate-400 focus:bg-white text-slate-700 transition-colors">
+        <option value="">Todas las misiones</option>
+        <option value="embajada">Embajadas y Misiones Diplomáticas</option>
+        <option value="consulado">Consulados Generales y Agencias</option>
+      </select>
 
-      <!-- Sede 3 -->
-      <article class="bg-white border border-slate-200 rounded-xl p-6 flex flex-col justify-between">
-        <div>
-          <span class="text-[10px] font-bold uppercase text-slate-500 bg-slate-100 px-2 py-0.5 rounded">Misión Diplomática / HIS</span>
-          <h2 class="text-lg font-bold text-slate-900 mt-2">Embajada de Japón - HIS</h2>
-          <p class="text-xs text-slate-500 mt-1">Sección consular de Japón en La Paz y enlace con plataformas de promoción turística japonesa para viajeros y agencias receptoras.</p>
-          
-          <div class="mt-4 pt-4 border-t border-slate-100 space-y-2 text-xs text-slate-600">
-            <div>
-              <span class="block font-semibold text-slate-400 text-[11px] uppercase">Ubicación</span>
-              <span>Sopocachi, Calle Rosendo Gutiérrez, La Paz</span>
-            </div>
-            <div>
-              <span class="block font-semibold text-slate-400 text-[11px] uppercase">Servicios</span>
-              <span>Visados, programas culturales, asistencia a viajeros japoneses</span>
-            </div>
-          </div>
-        </div>
-        <div class="mt-6 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
-          <span class="text-slate-400">Atención oficial</span>
-          <a href="#" class="font-bold text-red-700 hover:underline">Portal Consular →</a>
-        </div>
-      </article>
-
+      <select id="filtro-departamento" class="text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none focus:border-slate-400 focus:bg-white text-slate-700 transition-colors">
+        <option value="">Todas las ubicaciones</option>
+        <option value="lapaz">La Paz (Sedes Centrales)</option>
+        <option value="santacruz">Santa Cruz (Oficinas Consulares)</option>
+        <option value="internacional">Internacional / Fronterizo</option>
+      </select>
     </div>
+
+    <!-- Catálogo de Bloques Dinámicos (9 por página) -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="grid-catalogo">
+      <!-- Se inyecta dinámicamente mediante js/catalogo-seccion.js -->
+    </div>
+
+    <!-- Paginación Dinámica -->
+    <div id="paginacion-catalogo"></div>
+
   </main>
 
   <!-- FOOTER REUTILIZABLE -->
   <div id="main-footer"></div>
   <script src="js/footer.js"></script>
+
+  <!-- GSAP PARA TRANSICIONES SUAVES -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+  <!-- DATOS MOCK Y CONTROLADOR DINÁMICO -->
+  <script src="data/embajadas.js"></script>
+  <script src="js/catalogo-seccion.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      CatalogoSeccion.init({
+        datos: window.DATOS_EMBAJADAS || [],
+        contenedorGrid: 'grid-catalogo',
+        contenedorPaginacion: 'paginacion-catalogo',
+        filtroInputId: 'filtro-busqueda',
+        filtroTipoId: 'filtro-tipo',
+        filtroDeptId: 'filtro-departamento',
+        contadorId: 'total-registros-badge',
+        itemsPorPagina: 9,
+        colorBadge: 'text-blue-800 bg-blue-50 border-blue-200',
+        colorBoton: 'text-blue-700 hover:text-blue-900'
+      });
+    });
+  </script>
 
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hoteles y Hospedajes - Guía Turística</title>
+  <title>Hoteles y Hospedajes - Guía Turística de Bolivia</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,199 +20,94 @@
   <div id="main-header" data-cta-text="Registrar Hospedaje"></div>
   <script src="js/header.js"></script>
 
-  <!-- CABECERA -->
+  <!-- CABECERA DE SECCIÓN -->
   <section class="bg-white border-b border-slate-200 py-10 px-4">
     <div class="max-w-6xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-4">
       <div>
-        <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Categoría 3 de 6</span>
+        <span class="text-xs font-bold uppercase tracking-wider text-amber-800">Categoría 3 de 6</span>
         <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">Hoteles y Hospedajes</h1>
         <p class="text-xs sm:text-sm text-slate-500 mt-1 max-w-xl">
-          Ecolodges rurales, zonas de camping, cabañas termales, hostales de altura y hoteles de ciudad en Bolivia.
+          Ecolodges rurales, hoteles de sal, cabañas en valles y selvas, hostales tradicionales y resorts termales en Bolivia.
         </p>
       </div>
-      <div class="text-xs font-semibold text-slate-500 bg-slate-50 px-3 py-2 rounded-lg border border-slate-200 shrink-0">
-        Total: <span class="font-bold text-slate-900">10 hospedajes</span>
+      <div id="total-registros-badge" class="text-xs font-semibold text-slate-500 bg-slate-50 px-3 py-2 rounded-lg border border-slate-200 shrink-0">
+        Cargando hospedajes...
       </div>
     </div>
   </section>
 
-  <!-- CONTENIDO -->
+  <!-- CONTENIDO Y FILTROS -->
   <main class="max-w-6xl mx-auto px-4 py-8">
     
-    <!-- Filtros por tipo de experiencia -->
-    <div class="flex flex-wrap gap-2 mb-6">
-      <button type="button" class="filtro-btn px-3 py-1.5 text-xs font-bold rounded-lg bg-slate-900 text-white border border-slate-900" onclick="filtrarHospedajes('todos', this)">
-        Todos
-      </button>
-      <button type="button" class="filtro-btn px-3 py-1.5 text-xs font-medium rounded-lg bg-white text-slate-700 border border-slate-200 hover:border-slate-400" onclick="filtrarHospedajes('ecolodge', this)">
-        Ecolodge & Rural
-      </button>
-      <button type="button" class="filtro-btn px-3 py-1.5 text-xs font-medium rounded-lg bg-white text-slate-700 border border-slate-200 hover:border-slate-400" onclick="filtrarHospedajes('camping', this)">
-        Camping & Cabañas
-      </button>
-      <button type="button" class="filtro-btn px-3 py-1.5 text-xs font-medium rounded-lg bg-white text-slate-700 border border-slate-200 hover:border-slate-400" onclick="filtrarHospedajes('hotel', this)">
-        Hotel Urbano
-      </button>
-      <button type="button" class="filtro-btn px-3 py-1.5 text-xs font-medium rounded-lg bg-white text-slate-700 border border-slate-200 hover:border-slate-400" onclick="filtrarHospedajes('hostal', this)">
-        Hostal de Altura
-      </button>
+    <!-- Filtros de búsqueda y segmentación -->
+    <div class="bg-white p-3.5 border border-slate-200 rounded-xl mb-6 grid grid-cols-1 sm:grid-cols-3 gap-3 shadow-sm">
+      <div class="relative">
+        <input
+          id="filtro-busqueda"
+          type="text"
+          placeholder="Buscar por hotel, representante, destino o servicio..."
+          class="w-full text-xs pl-8 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none focus:border-slate-400 focus:bg-white text-slate-800 transition-colors"
+        >
+        <svg class="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+      </div>
+
+      <select id="filtro-tipo" class="text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none focus:border-slate-400 focus:bg-white text-slate-700 transition-colors">
+        <option value="">Todas las tipologías</option>
+        <option value="hotel">Hoteles Urbanos y Casonas Históricas</option>
+        <option value="ecolodge">Ecolodges y Cabañas Rurales</option>
+        <option value="hostal">Hostales Tradicionales</option>
+        <option value="camping">Camping, Glamping y Refugios Termales</option>
+      </select>
+
+      <select id="filtro-departamento" class="text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none focus:border-slate-400 focus:bg-white text-slate-700 transition-colors">
+        <option value="">Todos los departamentos</option>
+        <option value="potosi">Potosí / Salar de Uyuni</option>
+        <option value="lapaz">La Paz / Titicaca / Yungas</option>
+        <option value="santacruz">Santa Cruz / Samaipata</option>
+        <option value="chuquisaca">Chuquisaca / Sucre</option>
+        <option value="cochabamba">Cochabamba</option>
+        <option value="tarija">Tarija / Viñedos</option>
+        <option value="beni">Beni / Amazonía</option>
+        <option value="oruro">Oruro</option>
+        <option value="pando">Pando</option>
+      </select>
     </div>
 
-    <!-- Catálogo de Hospedajes -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="grid-hoteles">
-      
-      <!-- Hospedaje 1 -->
-      <article class="hotel-card bg-white border border-slate-200 rounded-xl overflow-hidden flex flex-col justify-between hover:border-slate-400 transition-colors" data-exp="ecolodge">
-        <div>
-          <img src="https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=600&q=80" alt="Isla del Sol" class="h-44 w-full object-cover">
-          <div class="p-5">
-            <div class="flex items-center justify-between mb-2">
-              <span class="text-[10px] font-bold uppercase text-slate-700 bg-slate-100 px-2 py-0.5 rounded">Ecolodge</span>
-              <span class="text-xs font-semibold text-slate-400">Isla del Sol · La Paz</span>
-            </div>
-            <h2 class="text-base font-bold text-slate-900">Kalluchi Ecolodge</h2>
-            <p class="text-xs text-slate-500 mt-1">Hospedaje ecológico en la parte alta de la Isla del Sol con vista abierta al lago navegable y terrazas ancestrales.</p>
-            <div class="mt-3 flex flex-wrap gap-1 text-[10px] text-slate-600">
-              <span class="bg-slate-50 border border-slate-100 px-2 py-0.5 rounded">Vista al Lago</span>
-              <span class="bg-slate-50 border border-slate-100 px-2 py-0.5 rounded">Energía Solar</span>
-              <span class="bg-slate-50 border border-slate-100 px-2 py-0.5 rounded">Comida Andina</span>
-            </div>
-          </div>
-        </div>
-        <div class="p-5 pt-0">
-          <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
-            <span class="text-slate-400">Comunitario</span>
-            <a href="#" class="font-bold text-red-700 hover:underline">Ver tarifas</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- Hospedaje 2 -->
-      <article class="hotel-card bg-white border border-slate-200 rounded-xl overflow-hidden flex flex-col justify-between hover:border-slate-400 transition-colors" data-exp="camping">
-        <div>
-          <img src="https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=600&q=80" alt="Coroico Yungas" class="h-44 w-full object-cover">
-          <div class="p-5">
-            <div class="flex items-center justify-between mb-2">
-              <span class="text-[10px] font-bold uppercase text-slate-700 bg-slate-100 px-2 py-0.5 rounded">Camping & Cabañas</span>
-              <span class="text-xs font-semibold text-slate-400">Coroico · Yungas</span>
-            </div>
-            <h2 class="text-base font-bold text-slate-900">Dos Ríos Camping & Lodge</h2>
-            <p class="text-xs text-slate-500 mt-1">Área de acampada organizada y cabañas rústicas en la confluencia de dos ríos en el piso subtropical de los Yungas.</p>
-            <div class="mt-3 flex flex-wrap gap-1 text-[10px] text-slate-600">
-              <span class="bg-slate-50 border border-slate-100 px-2 py-0.5 rounded">Fogatas</span>
-              <span class="bg-slate-50 border border-slate-100 px-2 py-0.5 rounded">Acceso al Río</span>
-              <span class="bg-slate-50 border border-slate-100 px-2 py-0.5 rounded">Parrillas</span>
-            </div>
-          </div>
-        </div>
-        <div class="p-5 pt-0">
-          <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
-            <span class="text-slate-400">Naturaleza</span>
-            <a href="#" class="font-bold text-red-700 hover:underline">Ver tarifas</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- Hospedaje 3 -->
-      <article class="hotel-card bg-white border border-slate-200 rounded-xl overflow-hidden flex flex-col justify-between hover:border-slate-400 transition-colors" data-exp="camping">
-        <div>
-          <img src="https://images.unsplash.com/photo-1589556264800-08ae9e129a8c?auto=format&fit=crop&w=600&q=80" alt="Tarapaya Potosi" class="h-44 w-full object-cover">
-          <div class="p-5">
-            <div class="flex items-center justify-between mb-2">
-              <span class="text-[10px] font-bold uppercase text-slate-700 bg-slate-100 px-2 py-0.5 rounded">Cabañas Termales</span>
-              <span class="text-xs font-semibold text-slate-400">Tarapaya · Potosí</span>
-            </div>
-            <h2 class="text-base font-bold text-slate-900">Cabañitas Tarapaya</h2>
-            <p class="text-xs text-slate-500 mt-1">Alojamiento en el valle termal de Tarapaya, en cercanías del Ojo del Inca. Aguas volcánicas y descanso de altura.</p>
-            <div class="mt-3 flex flex-wrap gap-1 text-[10px] text-slate-600">
-              <span class="bg-slate-50 border border-slate-100 px-2 py-0.5 rounded">Aguas Termales</span>
-              <span class="bg-slate-50 border border-slate-100 px-2 py-0.5 rounded">Descanso</span>
-            </div>
-          </div>
-        </div>
-        <div class="p-5 pt-0">
-          <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
-            <span class="text-slate-400">Termalismo</span>
-            <a href="#" class="font-bold text-red-700 hover:underline">Ver tarifas</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- Hospedaje 4 -->
-      <article class="hotel-card bg-white border border-slate-200 rounded-xl overflow-hidden flex flex-col justify-between hover:border-slate-400 transition-colors" data-exp="hotel">
-        <div>
-          <img src="https://images.unsplash.com/photo-1584646098378-0874589d76b1?auto=format&fit=crop&w=600&q=80" alt="Hotel Urbano La Paz" class="h-44 w-full object-cover">
-          <div class="p-5">
-            <div class="flex items-center justify-between mb-2">
-              <span class="text-[10px] font-bold uppercase text-slate-700 bg-slate-100 px-2 py-0.5 rounded">Hotel Urbano</span>
-              <span class="text-xs font-semibold text-slate-400">Zona Sur · La Paz</span>
-            </div>
-            <h2 class="text-base font-bold text-slate-900">Brisas Sur Hotel</h2>
-            <p class="text-xs text-slate-500 mt-1">Confort ejecutivo y turístico a menor altitud en Calacoto, con acceso inmediato a estaciones del teleférico verde.</p>
-            <div class="mt-3 flex flex-wrap gap-1 text-[10px] text-slate-600">
-              <span class="bg-slate-50 border border-slate-100 px-2 py-0.5 rounded">WiFi Alta Velocidad</span>
-              <span class="bg-slate-50 border border-slate-100 px-2 py-0.5 rounded">Desayuno Buffet</span>
-            </div>
-          </div>
-        </div>
-        <div class="p-5 pt-0">
-          <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
-            <span class="text-slate-400">Ejecutivo</span>
-            <a href="#" class="font-bold text-red-700 hover:underline">Ver tarifas</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- Hospedaje 5 -->
-      <article class="hotel-card bg-white border border-slate-200 rounded-xl overflow-hidden flex flex-col justify-between hover:border-slate-400 transition-colors" data-exp="hostal">
-        <div>
-          <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80" alt="Hostal Sajama Oruro" class="h-44 w-full object-cover">
-          <div class="p-5">
-            <div class="flex items-center justify-between mb-2">
-              <span class="text-[10px] font-bold uppercase text-slate-700 bg-slate-100 px-2 py-0.5 rounded">Hostal de Altura</span>
-              <span class="text-xs font-semibold text-slate-400">Sajama · Oruro</span>
-            </div>
-            <h2 class="text-base font-bold text-slate-900">Hostal Sajama</h2>
-            <p class="text-xs text-slate-500 mt-1">Base operativa para expedicionarios al volcán Sajama y bosque de queñuas. Conexión de ruta hacia el paso fronterizo Chungará.</p>
-            <div class="mt-3 flex flex-wrap gap-1 text-[10px] text-slate-600">
-              <span class="bg-slate-50 border border-slate-100 px-2 py-0.5 rounded">Calefacción</span>
-              <span class="bg-slate-50 border border-slate-100 px-2 py-0.5 rounded">Cocina Compartida</span>
-            </div>
-          </div>
-        </div>
-        <div class="p-5 pt-0">
-          <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
-            <span class="text-slate-400">Montaña</span>
-            <a href="#" class="font-bold text-red-700 hover:underline">Ver tarifas</a>
-          </div>
-        </div>
-      </article>
-
+    <!-- Catálogo de Bloques Dinámicos (9 por página) -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="grid-catalogo">
+      <!-- Se inyecta dinámicamente mediante js/catalogo-seccion.js -->
     </div>
+
+    <!-- Paginación Dinámica -->
+    <div id="paginacion-catalogo"></div>
+
   </main>
 
   <!-- FOOTER REUTILIZABLE -->
   <div id="main-footer"></div>
   <script src="js/footer.js"></script>
 
-  <script>
-    function filtrarHospedajes(tipo, btn) {
-      document.querySelectorAll('.filtro-btn').forEach(b => {
-        b.classList.remove('bg-slate-900', 'text-white', 'border-slate-900');
-        b.classList.add('bg-white', 'text-slate-700', 'border-slate-200');
-      });
-      btn.classList.remove('bg-white', 'text-slate-700', 'border-slate-200');
-      btn.classList.add('bg-slate-900', 'text-white', 'border-slate-900');
+  <!-- GSAP PARA TRANSICIONES SUAVES -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 
-      const cards = document.querySelectorAll('.hotel-card');
-      cards.forEach(card => {
-        if (tipo === 'todos' || card.dataset.exp === tipo) {
-          card.style.display = 'flex';
-        } else {
-          card.style.display = 'none';
-        }
+  <!-- DATOS MOCK Y CONTROLADOR DINÁMICO -->
+  <script src="data/hoteles.js"></script>
+  <script src="js/catalogo-seccion.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      CatalogoSeccion.init({
+        datos: window.DATOS_HOTELES || [],
+        contenedorGrid: 'grid-catalogo',
+        contenedorPaginacion: 'paginacion-catalogo',
+        filtroInputId: 'filtro-busqueda',
+        filtroTipoId: 'filtro-tipo',
+        filtroDeptId: 'filtro-departamento',
+        contadorId: 'total-registros-badge',
+        itemsPorPagina: 9,
+        colorBadge: 'text-amber-800 bg-amber-50 border-amber-200',
+        colorBoton: 'text-amber-800 hover:text-amber-900'
       });
-    }
+    });
   </script>
 
 </body>
