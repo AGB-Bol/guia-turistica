@@ -43,7 +43,7 @@
   };
 
   function intentarInicializar() {
-    const mapaContenedor = document.getElementById("mapa-leaflet");
+    const mapaContenedor = document.getElementById("map");
     if (!mapaContenedor) return;
 
     // Si Leaflet aún no terminó de descargar de la CDN, reintentar en bucle breve
@@ -66,7 +66,7 @@
   }
 
   function crearMapa() {
-    const mapaContenedor = document.getElementById("mapa-leaflet");
+    const mapaContenedor = document.getElementById("map");
     const btnVolver = document.getElementById("btn-volver-mundo");
 
     if (!mapaContenedor || typeof L === "undefined") return;
@@ -86,7 +86,7 @@
     };
 
     // 1. Crear instancia de Leaflet (Con scrollWheelZoom bloqueado en vista mundial)
-    mapInstance = L.map("mapa-leaflet", {
+    mapInstance = L.map("map", {
       center: config.mundoCenter,
       zoom: config.mundoZoom,
       minZoom: config.minZoom,
@@ -96,6 +96,11 @@
       scrollWheelZoom: false, // Bloqueado para no interferir con el scroll de la página
       doubleClickZoom: false   // Desactivado para evitar zooms accidentales
     });
+
+    // Recalcular tamaño tras el render inicial (obligatorio para evitar fondo negro)
+    setTimeout(() => {
+      if (mapInstance) mapInstance.invalidateSize();
+    }, 200);
 
     // 2. Capa de mosaicos OpenStreetMap con shader oscuro CSS (100% libre, sin API key)
     L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -192,10 +197,15 @@
       ocultarModalLugar();
     };
 
-    // Auto-reajustes de tamaño en contenedor
+    // Auto-reajustes de tamaño en contenedor (evita corte y zona negra inferior)
+    mapInstance.whenReady(() => {
+      mapInstance.invalidateSize();
+    });
+    setTimeout(() => { if (mapInstance) mapInstance.invalidateSize(); }, 100);
     setTimeout(() => { if (mapInstance) mapInstance.invalidateSize(); }, 200);
     setTimeout(() => { if (mapInstance) mapInstance.invalidateSize(); }, 600);
     setTimeout(() => { if (mapInstance) mapInstance.invalidateSize(); }, 1400);
+    setTimeout(() => { if (mapInstance) mapInstance.invalidateSize(); }, 2500);
 
     const seccionMapa = document.getElementById("seccion-mapa");
     if (seccionMapa && "IntersectionObserver" in window) {

@@ -1,5 +1,5 @@
 /**
- * Header Reutilizable - Guía Turística
+ * Header Reutilizable - Guía Internacional de Turismo
  * Se puede incluir en cualquier archivo HTML agregando:
  *   <div id="main-header"></div>
  *   <script src="js/header.js"></script>
@@ -12,16 +12,17 @@
   // Enlaces que deben redirigir a index.html si estamos en una subpágina
   const homePrefix = isHome ? "" : "index.html";
 
-  const serviciosLinks = [
+  const rubrosLinks = [
+    { href: "operadores.html", text: "Operadores" },
     { href: "agencias.html", text: "Agencias de Viaje" },
-    { href: "instituciones.html", text: "Instituciones y Municipios" },
-    { href: "hoteles.html", text: "Hoteles y Hospedajes" },
-    { href: "transporte.html", text: "Transporte Turístico" },
+    { href: "hoteles.html", text: "Hoteles" },
+    { href: "transporte.html", text: "Transporte" },
     { href: "embajadas.html", text: "Embajadas y Consulados" },
+    { href: "instituciones.html", text: "Instituciones y Municipios" },
     { href: "servicios-especiales.html", text: "Otros Servicios" },
   ];
 
-  const isServicioActive = serviciosLinks.some((s) => s.href === currentPath);
+  const isRubroActive = rubrosLinks.some((s) => s.href === currentPath);
 
   function generateHeaderHTML(ctaText = "Registrar Empresa", ctaHref = null) {
     const targetCtaHref = ctaHref || `${homePrefix}#seccion-registro`;
@@ -31,7 +32,6 @@
       
       <!-- Brand & Logo -->
       <a href="${homePrefix || 'index.html'}" class="flex items-center gap-3 group">
-        <!-- Espacio para Logo (Placeholder con fallback automático) -->
         <div class="relative flex items-center">
           <img 
             id="site-logo"
@@ -42,27 +42,30 @@
           >
         </div>
         <span class="font-extrabold text-base tracking-tight text-slate-900">
-          Guía <span class="text-red-700">Turística</span>
+          Guía <span class="text-red-700">Internacional</span>
         </span>
       </a>
 
       <!-- Navegación Escritorio -->
-      <nav class="hidden md:flex items-center gap-6 text-xs font-semibold text-slate-600">
-        <a href="${homePrefix || 'index.html'}" class="${isHome ? 'text-slate-900 font-bold border-b-2 border-red-700 pb-0.5' : 'hover:text-slate-900 transition-colors'}">
+      <nav class="hidden md:flex items-center gap-5 text-xs font-semibold text-slate-600">
+        <a href="${homePrefix}#hero-section" class="hover:text-slate-900 transition-colors">
           Inicio
         </a>
+        <a href="${homePrefix}#nosotros" class="hover:text-slate-900 transition-colors">
+          Nosotros
+        </a>
         
-        <!-- Dropdown Servicios -->
+        <!-- Dropdown Rubros -->
         <div class="relative dropdown py-3">
-          <button type="button" class="flex items-center gap-1 ${isServicioActive ? 'text-red-700 font-bold' : 'text-slate-700 hover:text-slate-900'} py-1 transition-colors">
-            <span>Servicios</span>
+          <button type="button" class="flex items-center gap-1 ${isRubroActive ? 'text-red-700 font-bold' : 'text-slate-700 hover:text-slate-900'} py-1 transition-colors">
+            <span>Rubros</span>
             <svg class="w-3.5 h-3.5 text-slate-400 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
             </svg>
           </button>
 
           <div class="dropdown-menu hidden absolute left-0 top-full w-56 bg-white rounded-xl shadow-lg border border-slate-200 p-1.5 z-50">
-            ${serviciosLinks
+            ${rubrosLinks
               .map(
                 (item) => `
               <a href="${item.href}" class="block px-3 py-2 rounded-lg text-xs font-medium transition-colors ${
@@ -78,10 +81,9 @@
           </div>
         </div>
 
-        <a href="${homePrefix}#seccion-proposito" class="hover:text-slate-900 transition-colors">¿Qué somos?</a>
-        <a href="${homePrefix}#seccion-mapa" class="hover:text-slate-900 transition-colors">Mapa</a>
-        <a href="${homePrefix}#seccion-registro" class="hover:text-slate-900 transition-colors">Registro</a>
-        <a href="${homePrefix}#socios" class="hover:text-slate-900 transition-colors">Socios</a>
+        <a href="${homePrefix}#destinos" class="hover:text-slate-900 transition-colors">Destinos</a>
+        <a href="${homePrefix}#empresas" class="hover:text-slate-900 transition-colors">Empresas</a>
+        <a href="${homePrefix}#reconocimientos" class="hover:text-slate-900 transition-colors">Reconocimientos</a>
       </nav>
 
       <!-- Acción & Botón Mobile -->
@@ -107,13 +109,16 @@
 
     <!-- Menú Desplegable Móvil -->
     <div id="mobile-menu" class="hidden md:hidden border-t border-slate-200 bg-white px-4 py-4 space-y-3">
-      <a href="${homePrefix || 'index.html'}" class="block text-sm font-semibold ${isHome ? 'text-red-700 font-bold' : 'text-slate-700'}">
+      <a href="${homePrefix}#hero-section" class="block text-sm font-semibold text-slate-700">
         Inicio
       </a>
+      <a href="${homePrefix}#nosotros" class="block text-sm font-semibold text-slate-700">
+        Nosotros
+      </a>
       <div class="pt-2 border-t border-slate-100">
-        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1">Servicios</span>
+        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1">Rubros</span>
         <div class="grid grid-cols-1 gap-1 pl-2">
-          ${serviciosLinks
+          ${rubrosLinks
             .map(
               (item) => `
             <a href="${item.href}" class="text-xs py-1.5 font-medium ${
@@ -129,10 +134,9 @@
         </div>
       </div>
       <div class="pt-2 border-t border-slate-100 space-y-2">
-        <a href="${homePrefix}#seccion-proposito" class="block text-sm font-semibold text-slate-700">¿Qué somos?</a>
-        <a href="${homePrefix}#seccion-mapa" class="block text-sm font-semibold text-slate-700">Mapa Turístico</a>
-        <a href="${homePrefix}#seccion-registro" class="block text-sm font-semibold text-slate-700">Registro de Empresa</a>
-        <a href="${homePrefix}#socios" class="block text-sm font-semibold text-slate-700">Socios y Aliados</a>
+        <a href="${homePrefix}#destinos" class="block text-sm font-semibold text-slate-700">Destinos</a>
+        <a href="${homePrefix}#empresas" class="block text-sm font-semibold text-slate-700">Empresas</a>
+        <a href="${homePrefix}#reconocimientos" class="block text-sm font-semibold text-slate-700">Reconocimientos</a>
       </div>
       <div class="pt-2">
         <a href="${targetCtaHref}" class="block text-center w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-2.5 rounded-lg transition-colors">
