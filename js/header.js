@@ -56,15 +56,15 @@
         </a>
         
         <!-- Dropdown Rubros -->
-        <div class="relative dropdown py-3">
+        <div class="relative dropdown group py-3">
           <button type="button" class="flex items-center gap-1 ${isRubroActive ? 'text-red-700 font-bold' : 'text-slate-700 hover:text-slate-900'} py-1 transition-colors">
             <span>Rubros</span>
-            <svg class="w-3.5 h-3.5 text-slate-400 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-3.5 h-3.5 text-slate-400 transition-transform duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:rotate-180 group-focus-within:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
             </svg>
           </button>
 
-          <div class="dropdown-menu hidden absolute left-0 top-full w-56 bg-white rounded-xl shadow-lg border border-slate-200 p-1.5 z-50">
+          <div class="dropdown-menu invisible opacity-0 scale-[0.97] origin-top-left transition-[opacity,transform,visibility] duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:visible group-hover:opacity-100 group-hover:scale-100 group-focus-within:visible group-focus-within:opacity-100 group-focus-within:scale-100 motion-reduce:scale-100 absolute left-0 top-full w-56 bg-white rounded-xl shadow-lg border border-slate-200 p-1.5 z-50">
             ${rubrosLinks
               .map(
                 (item) => `
