@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // ==================================================================
   const seccionMapa = document.getElementById("seccion-mapa");
   if (seccionMapa && typeof ScrollTrigger !== "undefined") {
-    const mapaCard = document.getElementById("map")?.parentElement;
+    const mapaCard = document.getElementById("mapa-escena")?.parentElement;
     if (mapaCard) {
       gsap.from(mapaCard, {
         scrollTrigger: {
