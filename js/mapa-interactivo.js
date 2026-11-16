@@ -43,7 +43,7 @@
   };
 
   function intentarInicializar() {
-    const mapaContenedor = document.getElementById("mapa-leaflet");
+    const mapaContenedor = document.getElementById("map");
     if (!mapaContenedor) return;
 
     // Si Leaflet aún no terminó de descargar de la CDN, reintentar en bucle breve
@@ -66,7 +66,7 @@
   }
 
   function crearMapa() {
-    const mapaContenedor = document.getElementById("mapa-leaflet");
+    const mapaContenedor = document.getElementById("map");
     const btnVolver = document.getElementById("btn-volver-mundo");
 
     if (!mapaContenedor || typeof L === "undefined") return;
@@ -86,7 +86,7 @@
     };
 
     // 1. Crear instancia de Leaflet (Con scrollWheelZoom bloqueado en vista mundial)
-    mapInstance = L.map("mapa-leaflet", {
+    mapInstance = L.map("map", {
       center: config.mundoCenter,
       zoom: config.mundoZoom,
       minZoom: config.minZoom,
@@ -96,6 +96,11 @@
       scrollWheelZoom: false, // Bloqueado para no interferir con el scroll de la página
       doubleClickZoom: false   // Desactivado para evitar zooms accidentales
     });
+
+    // Recalcular tamaño tras el render inicial (obligatorio para evitar fondo negro)
+    setTimeout(() => {
+      if (mapInstance) mapInstance.invalidateSize();
+    }, 200);
 
     // 2. Capa de mosaicos OpenStreetMap con shader oscuro CSS (100% libre, sin API key)
     L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -192,10 +197,15 @@
       ocultarModalLugar();
     };
 
-    // Auto-reajustes de tamaño en contenedor
+    // Auto-reajustes de tamaño en contenedor (evita corte y zona negra inferior)
+    mapInstance.whenReady(() => {
+      mapInstance.invalidateSize();
+    });
+    setTimeout(() => { if (mapInstance) mapInstance.invalidateSize(); }, 100);
     setTimeout(() => { if (mapInstance) mapInstance.invalidateSize(); }, 200);
     setTimeout(() => { if (mapInstance) mapInstance.invalidateSize(); }, 600);
     setTimeout(() => { if (mapInstance) mapInstance.invalidateSize(); }, 1400);
+    setTimeout(() => { if (mapInstance) mapInstance.invalidateSize(); }, 2500);
 
     const seccionMapa = document.getElementById("seccion-mapa");
     if (seccionMapa && "IntersectionObserver" in window) {
@@ -229,8 +239,6 @@
         className: "marcador-leaflet-custom",
         html: `
           <div class="relative cursor-pointer group flex flex-col items-center select-none" data-id="${lugar.id}" style="width: 32px; height: 48px;">
-            <!-- Radar ping exterior -->
-            <div class="w-8 h-8 rounded-full bg-amber-400/35 animate-ping absolute top-0 left-0"></div>
             <!-- Pin central brillante -->
             <div class="w-6 h-6 rounded-full bg-gradient-to-tr from-red-600 to-amber-500 border-2 border-white shadow-xl flex items-center justify-center transform group-hover:scale-125 transition-transform relative z-10">
               <div class="w-1.5 h-1.5 rounded-full bg-white"></div>
@@ -310,57 +318,14 @@
     modal.classList.remove("hidden");
     const dialog = modal.querySelector(".modal-card-anim");
 
-    if (typeof gsap !== "undefined" && dialog) {
-      gsap.killTweensOf([modal, dialog]);
-      gsap.set(modal, { opacity: 0 });
-      gsap.set(dialog, { scale: 0.93, opacity: 0, y: 16 });
-
-      gsap.to(modal, {
-        opacity: 1,
-        duration: 0.28,
-        ease: "power2.out"
-      });
-      gsap.to(dialog, {
-        scale: 1,
-        opacity: 1,
-        y: 0,
-        duration: 0.32,
-        ease: "back.out(1.15)"
-      });
-    } else {
-      modal.style.opacity = "1";
-    }
+    Motion.abrirModal(modal, dialog);
   };
 
-  let modalLugarAnimando = false;
   window.ocultarModalLugar = function () {
     const modal = document.getElementById("modal-lugar-mapa");
-    if (!modal || modal.classList.contains("hidden") || modalLugarAnimando) return;
+    if (!modal || modal.classList.contains("hidden")) return;
     const dialog = modal.querySelector(".modal-card-anim");
-
-    if (typeof gsap !== "undefined" && dialog) {
-      modalLugarAnimando = true;
-      gsap.killTweensOf([modal, dialog]);
-
-      gsap.to(dialog, {
-        scale: 0.94,
-        opacity: 0,
-        y: 12,
-        duration: 0.22,
-        ease: "power2.in"
-      });
-      gsap.to(modal, {
-        opacity: 0,
-        duration: 0.22,
-        ease: "power2.in",
-        onComplete: () => {
-          modal.classList.add("hidden");
-          modalLugarAnimando = false;
-        }
-      });
-    } else {
-      modal.classList.add("hidden");
-    }
+    Motion.cerrarModal(modal, dialog, () => { modal.classList.add("hidden"); });
   };
 
   // Cerrar modal al hacer clic en el fondo oscuro

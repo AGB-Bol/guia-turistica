@@ -22,7 +22,8 @@
 
   function generateFooterHTML() {
     return `
-    <footer class="relative bg-[#090D16] text-slate-300 border-t border-slate-800/80 pt-12 pb-8 overflow-hidden select-none">
+    <footer class="relative bg-slate-900 text-slate-300 pt-14 pb-8 overflow-hidden select-none">
+      <div class="absolute top-0 inset-x-0 flex h-2" aria-hidden="true"><span class="flex-1 bg-red-600"></span><span class="flex-1 bg-amber-400"></span><span class="flex-1 bg-emerald-600"></span></div>
       
       <!-- Resplandores ambientales de fondo -->
       <div class="absolute top-0 left-1/4 w-96 h-96 bg-red-600/5 rounded-full blur-3xl pointer-events-none"></div>
@@ -60,7 +61,7 @@
                 </div>
                 <button
                   type="submit"
-                  class="px-4 py-2.5 rounded-xl text-xs font-bold bg-gradient-to-r from-red-600 to-amber-600 hover:brightness-110 text-white shadow-lg shadow-red-900/20 flex items-center gap-1.5 transition-all cursor-pointer shrink-0 active:scale-95"
+                  class="px-4 py-2.5 rounded-xl text-xs font-bold bg-gradient-to-r from-red-600 to-amber-600 hover:brightness-110 text-white shadow-lg shadow-red-900/20 flex items-center gap-1.5 transition cursor-pointer shrink-0 active:scale-95"
                 >
                   <span>Suscribirme</span>
                   <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
@@ -85,13 +86,13 @@
             <a href="${homePrefix || 'index.html'}" class="inline-flex items-center gap-3 group">
               <img
                 src="img/logo.png"
-                alt="Logo Guía Turística"
+                alt="Logo Guía Internacional de Turismo"
                 onerror="this.onerror=null; this.src='img/logo-placeholder.svg';"
                 class="h-9 w-auto max-w-[140px] object-contain transition-transform group-hover:scale-105"
               >
               <div class="flex flex-col">
-                <span class="font-black text-base tracking-tight text-white">
-                  Guía <span class="text-red-500">Turística</span>
+                <span class="font-display font-extrabold text-lg tracking-tight text-white uppercase">
+                  Guía <span class="text-amber-400">Internacional</span>
                 </span>
                 <span class="text-[10px] text-slate-400 font-mono uppercase tracking-widest">Bolivia · Edición Digital</span>
               </div>
@@ -115,23 +116,23 @@
               </span>
               <div class="flex items-center gap-2 flex-wrap">
                 <!-- Facebook -->
-                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-xl bg-slate-900 border border-slate-800 hover:border-blue-500 hover:bg-blue-600/20 text-slate-400 hover:text-blue-400 flex items-center justify-center transition-all" title="Facebook">
+                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-xl bg-slate-900 border border-slate-800 hover:border-blue-500 hover:bg-blue-600/20 text-slate-400 hover:text-blue-400 flex items-center justify-center active:scale-[0.97] transition duration-150" title="Facebook">
                   <svg class="w-4 h-4 fill-currentColor" viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
                 </a>
                 <!-- Instagram -->
-                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-xl bg-slate-900 border border-slate-800 hover:border-pink-500 hover:bg-pink-600/20 text-slate-400 hover:text-pink-400 flex items-center justify-center transition-all" title="Instagram">
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-xl bg-slate-900 border border-slate-800 hover:border-pink-500 hover:bg-pink-600/20 text-slate-400 hover:text-pink-400 flex items-center justify-center active:scale-[0.97] transition duration-150" title="Instagram">
                   <svg class="w-4 h-4 fill-currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
                 </a>
                 <!-- TikTok -->
-                <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-xl bg-slate-900 border border-slate-800 hover:border-cyan-400 hover:bg-cyan-500/20 text-slate-400 hover:text-cyan-300 flex items-center justify-center transition-all" title="TikTok">
+                <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-xl bg-slate-900 border border-slate-800 hover:border-cyan-400 hover:bg-cyan-500/20 text-slate-400 hover:text-cyan-300 flex items-center justify-center active:scale-[0.97] transition duration-150" title="TikTok">
                   <svg class="w-4 h-4 fill-currentColor" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-1.01-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.24 1.07-.14 1.61.24 1.64 1.82 2.89 3.5 2.77 1.81-.02 3.25-1.51 3.32-3.32.06-2.85.02-5.71.04-8.56 0-3.32 0-6.63-.01-9.95z"/></svg>
                 </a>
                 <!-- WhatsApp -->
-                <a href="https://wa.me/59170000000" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-xl bg-slate-900 border border-slate-800 hover:border-emerald-500 hover:bg-emerald-600/20 text-slate-400 hover:text-emerald-400 flex items-center justify-center transition-all" title="WhatsApp Oficial">
+                <a href="https://wa.me/59170000000" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-xl bg-slate-900 border border-slate-800 hover:border-emerald-500 hover:bg-emerald-600/20 text-slate-400 hover:text-emerald-400 flex items-center justify-center active:scale-[0.97] transition duration-150" title="WhatsApp Oficial">
                   <svg class="w-4 h-4 fill-currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
                 </a>
                 <!-- YouTube -->
-                <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-xl bg-slate-900 border border-slate-800 hover:border-red-500 hover:bg-red-600/20 text-slate-400 hover:text-red-400 flex items-center justify-center transition-all" title="YouTube">
+                <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-xl bg-slate-900 border border-slate-800 hover:border-red-500 hover:bg-red-600/20 text-slate-400 hover:text-red-400 flex items-center justify-center active:scale-[0.97] transition duration-150" title="YouTube">
                   <svg class="w-4 h-4 fill-currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
                 </a>
               </div>
@@ -181,7 +182,7 @@
                 </a>
               </li>
               <li><a href="${homePrefix}#socios" class="hover:text-slate-200 transition-colors">Socios y Aliados</a></li>
-              <li><a href="${homePrefix}#seccion-proposito" class="hover:text-slate-200 transition-colors">¿Qué somos?</a></li>
+              <li><a href="${homePrefix}#nosotros" class="hover:text-slate-200 transition-colors">¿Qué somos?</a></li>
               <li><a href="https://wa.me/59170000000" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-400 transition-colors">Soporte Anfitriones</a></li>
               <li><a href="#" onclick="event.preventDefault(); window.abrirModalLegal('faq');" class="hover:text-slate-200 transition-colors">Preguntas Frecuentes</a></li>
             </ul>
@@ -222,7 +223,7 @@
       <!-- Barra Inferior de Derechos y Créditos -->
       <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 border-t border-slate-800/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
         <div class="flex items-center gap-2">
-          <span>&copy; <span id="footer-anio">${currentYear}</span> Guía Turística de Bolivia.</span>
+          <span>&copy; <span id="footer-anio">${currentYear}</span> Guía Internacional de Turismo.</span>
           <span class="hidden sm:inline text-slate-700">|</span>
           <span class="hidden sm:inline">Todos los derechos reservados.</span>
         </div>
@@ -233,33 +234,33 @@
     <!-- ========================================================= -->
     <!-- MODAL INTERACTIVO DE POLÍTICAS Y TÉRMINOS LEGALES          -->
     <!-- ========================================================= -->
-    <div id="modal-legal-footer" class="fixed inset-0 z-[1200] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden transition-all select-none">
-      <div id="modal-legal-caja" class="relative w-full max-w-2xl bg-[#0F1422] border border-white/20 rounded-3xl shadow-2xl overflow-hidden text-white flex flex-col max-h-[85vh] transform scale-95 opacity-0 transition-all duration-200">
+    <div id="modal-legal-footer" class="fixed inset-0 z-[1200] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden select-none">
+      <div id="modal-legal-caja" class="relative w-full max-w-2xl bg-slate-900 border-2 border-amber-400 rounded-2xl shadow-2xl overflow-hidden text-white flex flex-col max-h-[85vh]">
         
         <!-- Cabecera del modal -->
-        <div class="p-6 bg-gradient-to-r from-slate-900 to-[#1A2234] border-b border-white/10 flex items-center justify-between">
+        <div class="p-6 bg-slate-900 border-b-2 border-amber-400 flex items-center justify-between">
           <div>
-            <span class="text-[10px] font-mono font-bold tracking-widest text-red-500 uppercase block mb-1">
-              Guía Turística de Bolivia · Transparencia
+            <span class="text-xs font-bold tracking-widest text-amber-400 uppercase block mb-1">
+              Guía Internacional de Turismo · Transparencia
             </span>
-            <h3 id="modal-legal-titulo" class="text-xl font-black text-white tracking-tight">
+            <h3 id="modal-legal-titulo" class="text-2xl font-extrabold text-white tracking-tight">
               Términos Legales
             </h3>
           </div>
-          <button type="button" onclick="window.cerrarModalLegal()" class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors cursor-pointer" aria-label="Cerrar modal">
+          <button type="button" onclick="window.cerrarModalLegal()" class="w-9 h-9 rounded-full bg-amber-400 hover:bg-amber-300 text-slate-900 flex items-center justify-center active:scale-[0.97] transition duration-150 cursor-pointer" aria-label="Cerrar modal">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
           </button>
         </div>
 
         <!-- Contenido escroleable -->
-        <div id="modal-legal-cuerpo" class="p-6 overflow-y-auto space-y-4 text-xs sm:text-sm text-slate-300 leading-relaxed font-light">
+        <div id="modal-legal-cuerpo" class="p-6 overflow-y-auto space-y-4 text-sm text-slate-200 leading-relaxed">
           <!-- Inyectado dinámicamente -->
         </div>
 
         <!-- Pie del modal -->
         <div class="p-4 bg-slate-900/90 border-t border-white/10 flex items-center justify-between text-xs text-slate-400">
           <span>Actualizado al año ${currentYear}</span>
-          <button type="button" onclick="window.cerrarModalLegal()" class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white font-semibold transition-colors cursor-pointer">
+          <button type="button" onclick="window.cerrarModalLegal()" class="px-4 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-900 font-extrabold active:scale-[0.97] transition duration-150 cursor-pointer">
             Entendido y cerrar
           </button>
         </div>
@@ -277,8 +278,8 @@
       <button
         id="btn-flotante-subir"
         type="button"
-        onclick="window.scrollTo({ top: 0, behavior: 'smooth' });"
-        class="opacity-0 pointer-events-none translate-y-3 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-slate-900/95 text-white border border-white/20 shadow-xl backdrop-blur-md flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer hover:bg-red-600 group"
+        onclick="window.scrollTo({ top: 0, behavior: (window.Motion && Motion.reducido()) ? 'auto' : 'smooth' });"
+        class="opacity-0 pointer-events-none translate-y-3 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-slate-900/95 text-white border border-white/20 shadow-xl backdrop-blur-md flex items-center justify-center transition duration-300 hover:scale-110 active:scale-95 cursor-pointer hover:bg-red-600 group"
         title="Subir al inicio"
         aria-label="Volver arriba"
       >
@@ -293,7 +294,7 @@
         href="https://instagram.com"
         target="_blank"
         rel="noopener noreferrer"
-        class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-gradient-to-tr from-amber-500 via-rose-500 to-purple-600 text-white shadow-lg flex items-center justify-center transition-all hover:scale-110 active:scale-95 relative group"
+        class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-gradient-to-tr from-amber-500 via-rose-500 to-purple-600 text-white shadow-lg flex items-center justify-center transition-transform hover:scale-110 active:scale-95 relative group"
         title="Síguenos en Instagram"
         aria-label="Instagram"
       >
@@ -310,11 +311,10 @@
         href="https://wa.me/59170000000?text=Hola,%20quisiera%20información%20sobre%20la%20Guía%20Turística%20de%20Bolivia"
         target="_blank"
         rel="noopener noreferrer"
-        class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white shadow-[0_4px_20px_rgba(37,211,102,0.5)] hover:shadow-[0_6px_25px_rgba(37,211,102,0.7)] flex items-center justify-center transition-all hover:scale-110 active:scale-95 relative group cursor-pointer"
+        class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white shadow-[0_4px_20px_rgba(37,211,102,0.5)] hover:shadow-[0_6px_25px_rgba(37,211,102,0.7)] flex items-center justify-center transition hover:scale-110 active:scale-95 relative group cursor-pointer"
         title="Chat directo WhatsApp"
         aria-label="WhatsApp directo"
       >
-        <span class="absolute -inset-1 rounded-full bg-[#25D366] opacity-30 animate-ping pointer-events-none"></span>
         <svg class="w-6 h-6 sm:w-7 sm:h-7 fill-current relative z-10" viewBox="0 0 24 24">
           <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
         </svg>
@@ -332,7 +332,7 @@
     privacidad: {
       titulo: "Política de Privacidad y Manejo de Datos",
       html: `
-        <p><strong>1. Compromiso de Transparencia:</strong> En la <em>Guía Turística de Bolivia</em> valoramos y protegemos la privacidad de cada usuario y prestador turístico. No vendemos, comercializamos ni compartimos información privada con terceros sin consentimiento expreso.</p>
+        <p><strong>1. Compromiso de Transparencia:</strong> En la <em>Guía Internacional de Turismo</em> valoramos y protegemos la privacidad de cada usuario y prestador turístico. No vendemos, comercializamos ni compartimos información privada con terceros sin consentimiento expreso.</p>
         <p><strong>2. Datos del Registro de Empresas:</strong> La información provista en los formularios de registro (nombre de empresa, contacto público de WhatsApp, teléfono, tarifas referenciales y fotografías) se utiliza exclusivamente para la creación y exhibición de su ficha pública en el catálogo y mapa interactivo.</p>
         <p><strong>3. Enlaces Directos:</strong> Facilitamos el contacto directo e inmediato entre el viajero y el prestador mediante botones de llamada o WhatsApp. La plataforma no intermedia pagos bancarios ni retiene comisiones.</p>
         <p><strong>4. Derechos ARCO:</strong> Cualquier empresa o usuario puede solicitar la actualización o remoción inmediata de su ficha escribiendo a nuestro correo oficial de soporte.</p>
@@ -358,7 +358,7 @@
     faq: {
       titulo: "Preguntas Frecuentes (FAQ)",
       html: `
-        <p><strong>¿Tiene algún costo registrar mi empresa en el directorio?</strong><br>No, el registro básico en la Guía Turística de Bolivia es gratuito para operadores, hoteles y servicios debidamente constituidos.</p>
+        <p><strong>¿Tiene algún costo registrar mi empresa en el directorio?</strong><br>No, el registro básico en la Guía Internacional de Turismo es gratuito para operadores, hoteles y servicios debidamente constituidos.</p>
         <p><strong>¿Cómo se verifican los datos?</strong><br>Nuestro equipo revisa las solicitudes recibidas mediante el formulario de registro, confirmando número de contacto, fotografías y vigencia del servicio antes de su publicación en el mapa.</p>
         <p><strong>¿Cómo contactan los clientes a mi empresa?</strong><br>Directamente a través de tu número de WhatsApp, llamada telefónica o enlace web registrado en tu ficha, sin intermediarios.</p>
       `
@@ -380,46 +380,14 @@
 
     modal.classList.remove("hidden");
 
-    if (typeof gsap !== "undefined") {
-      gsap.killTweensOf([modal, caja]);
-      gsap.set(modal, { opacity: 0 });
-      gsap.set(caja, { scale: 0.94, opacity: 0, y: 16 });
-      gsap.to(modal, { opacity: 1, duration: 0.28, ease: "power2.out" });
-      gsap.to(caja, { scale: 1, opacity: 1, y: 0, duration: 0.32, ease: "back.out(1.15)" });
-    } else {
-      setTimeout(() => {
-        caja.classList.remove("scale-95", "opacity-0");
-        caja.classList.add("scale-100", "opacity-100");
-      }, 10);
-    }
+    Motion.abrirModal(modal, caja);
   };
 
-  let modalLegalAnimando = false;
   window.cerrarModalLegal = function () {
     const modal = document.getElementById("modal-legal-footer");
     const caja = document.getElementById("modal-legal-caja");
-    if (!modal || !caja || modal.classList.contains("hidden") || modalLegalAnimando) return;
-
-    if (typeof gsap !== "undefined") {
-      modalLegalAnimando = true;
-      gsap.killTweensOf([modal, caja]);
-      gsap.to(caja, { scale: 0.95, opacity: 0, y: 12, duration: 0.22, ease: "power2.in" });
-      gsap.to(modal, {
-        opacity: 0,
-        duration: 0.22,
-        ease: "power2.in",
-        onComplete: () => {
-          modal.classList.add("hidden");
-          modalLegalAnimando = false;
-        }
-      });
-    } else {
-      caja.classList.remove("scale-100", "opacity-100");
-      caja.classList.add("scale-95", "opacity-0");
-      setTimeout(() => {
-        modal.classList.add("hidden");
-      }, 200);
-    }
+    if (!modal || !caja || modal.classList.contains("hidden")) return;
+    Motion.cerrarModal(modal, caja, () => { modal.classList.add("hidden"); });
   };
 
   // Suscripción al newsletter interactiva sin recargar página
@@ -488,13 +456,13 @@
           btn.classList.remove("opacity-100", "pointer-events-auto", "translate-y-0");
         }
 
-        // Cuando se llega al final del todo, animar con rebote continuo llamativo ("toquenme")
+        // Al llegar al final, resaltar el botón en rojo (sin rebote)
         const distanciaAlFondo = docH - (scrollY + windowH);
         if (distanciaAlFondo <= 350) {
-          btn.classList.add("animate-bounce", "bg-red-600", "ring-4", "ring-red-500/35");
+          btn.classList.add("bg-red-600", "ring-4", "ring-red-500/35");
           btn.classList.remove("bg-slate-900/95");
         } else {
-          btn.classList.remove("animate-bounce", "bg-red-600", "ring-4", "ring-red-500/35");
+          btn.classList.remove("bg-red-600", "ring-4", "ring-red-500/35");
           btn.classList.add("bg-slate-900/95");
         }
       }
