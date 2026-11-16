@@ -138,9 +138,16 @@ document.addEventListener("DOMContentLoaded", () => {
   // ENTRADAS DE SECCIÓN: una entrada por contenedor, una sola vez
   // ==================================================================
   if (typeof ScrollTrigger !== "undefined") {
+    // GSAP anima transform en cada fotograma; se apaga la transición CSS del elemento mientras dura
+    const sinTransicion = (elementos) => ({
+      onStart: () => elementos.forEach((el) => { el.style.transition = "none"; }),
+      onComplete: () => elementos.forEach((el) => { el.style.transition = ""; }),
+    });
+
     const entradaGrupo = (disparador, elementos) => {
       if (!disparador || !elementos || elementos.length === 0) return;
       gsap.from(elementos, {
+        ...sinTransicion(elementos),
         scrollTrigger: {
           trigger: disparador,
           start: "top 85%",
@@ -154,6 +161,23 @@ document.addEventListener("DOMContentLoaded", () => {
         clearProps: "transform,opacity",
       });
     };
+
+    // Rubros: las tarjetas "saltan" al entrar, con un pequeño giro
+    const rejillaRubros = document.querySelector("#rubros .grid");
+    if (rejillaRubros) {
+      const tarjetas = Array.from(rejillaRubros.children);
+      gsap.from(tarjetas, {
+        ...sinTransicion(tarjetas),
+        scrollTrigger: { trigger: rejillaRubros, start: "top 85%", once: true },
+        opacity: 0,
+        y: mov(32),
+        rotate: reducido ? 0 : -3,
+        duration: 0.6,
+        ease: "back.out(1.5)",
+        stagger: 0.07,
+        clearProps: "transform,opacity",
+      });
+    }
 
     // Destinos: solo las tres primeras tarjetas (las visibles en escritorio)
     const carruselDestinos = document.getElementById("carrusel-destinos");

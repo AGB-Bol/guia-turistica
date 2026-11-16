@@ -1,10 +1,10 @@
 /**
  * Tema visual - Guía Internacional de Turismo
- * Paleta cálida (terracota + neutros piedra) y tipografía de títulos.
+ * Colores de la bandera de Bolivia (rojo, amarillo, verde) y tipografía con carácter.
  * Incluir justo después del script de Tailwind CDN:
  *   <script src="js/tema.js"></script>
- * Sobrescribe las escalas "red" y "slate" de Tailwind: así todas las
- * clases red-* y slate-* del proyecto usan esta paleta sin tocarlas.
+ * Sobrescribe las escalas "red", "amber" y "emerald" de Tailwind: todas las
+ * clases red-*, amber-* y emerald-* del proyecto usan esta paleta.
  */
 (function () {
   if (typeof tailwind === "undefined") return;
@@ -13,19 +13,24 @@
     theme: {
       extend: {
         colors: {
-          // Terracota (acento principal)
+          // Rojo
           red: {
-            50: "#FBF2EC", 100: "#F6E0D3", 200: "#EDC1A8", 300: "#E19C78", 400: "#D4764D",
-            500: "#C2582F", 600: "#AE4824", 700: "#92391B", 800: "#742D17", 900: "#5A2414", 950: "#3A160B"
+            50: "#FFF0EE", 100: "#FFDAD5", 200: "#FFB5AB", 300: "#FF8777", 400: "#F45B48",
+            500: "#E8402C", 600: "#D52B1E", 700: "#B71F14", 800: "#921A12", 900: "#70170F", 950: "#3F0B07"
           },
-          // Neutros cálidos (piedra)
-          slate: {
-            50: "#FAFAF9", 100: "#F5F5F4", 200: "#E7E5E4", 300: "#D6D3D1", 400: "#A8A29E",
-            500: "#78716C", 600: "#57534E", 700: "#44403C", 800: "#292524", 900: "#1C1917", 950: "#0C0A09"
+          // Amarillo
+          amber: {
+            50: "#FFFBEB", 100: "#FFF3C4", 200: "#FFE58A", 300: "#FFD54D", 400: "#FFC21A",
+            500: "#F5A800", 600: "#D98A00", 700: "#B36A00", 800: "#8F5200", 900: "#6B3E00", 950: "#3D2200"
+          },
+          // Verde
+          emerald: {
+            50: "#ECFDF3", 100: "#D1FADF", 200: "#A6F4C5", 300: "#6CE9A6", 400: "#32D583",
+            500: "#14A44D", 600: "#0B8A3E", 700: "#086F33", 800: "#07582B", 900: "#064824", 950: "#022B15"
           }
         },
         fontFamily: {
-          display: ["Fraunces", "Georgia", "serif"]
+          display: ["Bricolage Grotesque", "system-ui", "sans-serif"]
         }
       }
     }
@@ -34,6 +39,7 @@
   var estilo = document.createElement("style");
   estilo.id = "tema-tipografia";
   estilo.textContent =
-    "h1,h2{font-family:'Fraunces',Georgia,serif;letter-spacing:-0.01em}";
+    "body{font-family:'Nunito',system-ui,sans-serif}" +
+    "h1,h2,h3{font-family:'Bricolage Grotesque',system-ui,sans-serif;letter-spacing:-0.015em}";
   document.head.appendChild(estilo);
 })();

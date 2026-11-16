@@ -28,6 +28,7 @@
     const targetCtaHref = ctaHref || `${homePrefix}#seccion-registro`;
     return `
   <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+    <div class="flex h-1.5" aria-hidden="true"><span class="flex-1 bg-red-600"></span><span class="flex-1 bg-amber-400"></span><span class="flex-1 bg-emerald-600"></span></div>
     <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
       
       <!-- Brand & Logo -->
