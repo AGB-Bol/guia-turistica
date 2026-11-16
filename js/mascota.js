@@ -1,34 +1,31 @@
 /**
  * Mascota Policía Turística - Guía Internacional de Turismo
  * Perro policía que se asoma por el borde izquierdo, centrado en vertical, en todas las páginas.
- * Alterna sprites (normal, guiño y letrero "¡Hazme clic!") y, al hacer clic, abre un modal informativo.
+ * Alterna poses (normal, guiño, letrero…), reacciona a lo que hace el visitante y, al hacer clic,
+ * abre un modal informativo.
  *
  * Incluir después de js/motion.js:
  *   <script src="js/mascota.js"></script>
  *
  * Para cambiar de PNG a WebP: edita solo las rutas de SPRITES.
+ * Para añadir una pose: una línea en SPRITES y usar su nombre en GUION, HOVER, CLIC, etc.
  */
 (function () {
   // ---- Configuración -------------------------------------------------------
-  // Qué archivo es cada pose (según el dibujo, no según el número del archivo)
-  // Se pueden añadir tantas poses como se quiera: basta una línea aquí (nombre: ruta)
-  // y usar ese nombre en GUION, HOVER o CLIC. Si una imagen no existe, esa pose se omite sola.
+  // Pose -> archivo (según el dibujo, no según el número del archivo).
+  // Si una imagen no existe, esa pose se omite sola.
   var SPRITES = {
     normal: "img/mascota/3.png",
     guino: "img/mascota/1.png",
-    letrero: "img/mascota/2.png"
-    // ejemplos para cuando haya más dibujos:
-    // saludo: "img/mascota/4.png",
-    // sorpresa: "img/mascota/5.png",
-    // senalando: "img/mascota/6.png"
+    letrero: "img/mascota/2.png",
+    sorpresa: "img/mascota/4.png",
+    saludo: "img/mascota/5.png",
+    pulgar: "img/mascota/6.png",
+    dormido: "img/mascota/7.png",
+    senalando: "img/mascota/8.png"
   };
 
-  // Pose mientras el ratón (o el teclado) está sobre la mascota
-  var HOVER = "letrero";
-  // Pose opcional al hacer clic, mientras se abre el modal (null = no usar)
-  var CLIC = null; // por ejemplo: "sorpresa"
-
-  // Guion de la animación: [pose, milisegundos]. Se repite en bucle.
+  // Guion de la animación base: [pose, milisegundos]. Se repite en bucle.
   // El letrero dura 3,5 s (mínimo pedido: 3 s); normal y guiño se alternan para dar fluidez.
   var GUION = [
     ["normal", 2400],
@@ -38,6 +35,18 @@
     ["normal", 1500],
     ["letrero", 3500]
   ];
+
+  var HOVER = "letrero";            // mientras el ratón o el teclado están sobre la mascota
+  var INTRO = ["saludo", 2200];     // al aparecer en la página
+  var CLIC = ["sorpresa", 4000];    // al hacer clic (mientras se abre el modal)
+  var AL_CERRAR = ["pulgar", 1800]; // al cerrar el modal
+  var DESPERTAR = ["saludo", 1600]; // cuando el visitante vuelve tras un rato sin actividad
+  var INACTIVIDAD_MS = 45000;       // tiempo sin actividad para que se duerma
+  // Al entrar una sección en pantalla (id -> [pose, ms]); solo una vez cada 25 s
+  var SECCIONES = {
+    "seccion-mapa": ["senalando", 2600],
+    "seccion-registro": ["pulgar", 2600]
+  };
 
   // Zona útil dentro del PNG (373 x 669 px): el resto es transparente y se recorta
   var IMG_W = 373, IMG_H = 669;
@@ -98,51 +107,112 @@
     function descartar(nombre) {
       if (poses[nombre]) { poses[nombre].remove(); delete poses[nombre]; }
     }
+
     var guion = GUION;
-
-    // Reproducción del guion; al pasar el ratón o enfocar se queda en el letrero
     var paso = 0;
-    var reloj = null;
-    var retenida = false;
+    var reloj = null;       // temporizador del guion base
+    var relojReac = null;   // temporizador de una reacción puntual
+    var retenida = false;   // el ratón/teclado está sobre la mascota
+    var reaccionando = false;
+    var dormida = false;
+    var activa = false;     // ya empezó la animación
+    var ultimaActividad = Date.now();
 
+    // Guion base: se detiene si hay hover, reacción o sueño
     function siguiente() {
       clearTimeout(reloj);
-      if (retenida) return;
+      if (!activa || retenida || reaccionando || dormida) return;
       var actual = guion[paso % guion.length];
       mostrar(actual[0]);
       reloj = setTimeout(function () { paso++; siguiente(); }, actual[1]);
     }
 
+    function retomar() {
+      paso = guion.length; // vuelve al inicio del guion (pose normal)
+      if (retenida) mostrar(HOVER);
+      else if (dormida) mostrar("dormido");
+      else siguiente();
+    }
+
+    // Reacción puntual: muestra una pose un rato y luego retoma lo que tocaba
+    function reaccion(par) {
+      if (!activa || !par || !poses[par[0]] || reducido()) return;
+      clearTimeout(reloj);
+      clearTimeout(relojReac);
+      reaccionando = true;
+      mostrar(par[0]);
+      relojReac = setTimeout(function () {
+        reaccionando = false;
+        retomar();
+      }, par[1]);
+    }
+
+    // Hover / teclado: el ratón manda sobre cualquier reacción
     function retener() {
       retenida = true;
       clearTimeout(reloj);
+      clearTimeout(relojReac);
+      reaccionando = false;
       mostrar(HOVER);
     }
     function soltar() {
       if (!retenida) return;
       retenida = false;
-      paso = guion.length; // vuelve al inicio del guion (pose normal)
-      siguiente();
+      retomar();
     }
 
     btn.addEventListener("mouseenter", retener);
     btn.addEventListener("mouseleave", soltar);
     btn.addEventListener("focus", retener);
     btn.addEventListener("blur", soltar);
-    btn.addEventListener("click", function () {
-      if (CLIC && poses[CLIC]) {
-        retenida = true;
-        clearTimeout(reloj);
-        mostrar(CLIC);
-      }
-    });
 
-    // Precarga: no se empieza hasta tener las tres imágenes (evita parpadeos)
+    // ---- Dormirse tras un rato sin actividad ----
+    function hayActividad() {
+      ultimaActividad = Date.now();
+      if (dormida) {
+        dormida = false;
+        reaccion(DESPERTAR);
+        if (!reaccionando) retomar();
+      }
+    }
+    ["mousemove", "scroll", "keydown", "pointerdown", "touchstart"].forEach(function (ev) {
+      window.addEventListener(ev, hayActividad, { passive: true });
+    });
+    setInterval(function () {
+      if (!activa || document.hidden || dormida || retenida || reducido()) return;
+      if (Date.now() - ultimaActividad > INACTIVIDAD_MS) {
+        dormida = true;
+        clearTimeout(reloj);
+        clearTimeout(relojReac);
+        reaccionando = false;
+        mostrar("dormido");
+      }
+    }, 2000);
+
+    // ---- Reaccionar cuando una sección entra en pantalla ----
+    if ("IntersectionObserver" in window) {
+      var ultimoAviso = {};
+      var obs = new IntersectionObserver(function (entradas) {
+        entradas.forEach(function (en) {
+          if (!en.isIntersecting) return;
+          var id = en.target.id;
+          var ahora = Date.now();
+          if (ultimoAviso[id] && ahora - ultimoAviso[id] < 25000) return;
+          ultimoAviso[id] = ahora;
+          if (!dormida && !retenida) reaccion(SECCIONES[id]);
+        });
+      }, { threshold: 0.35 });
+      Object.keys(SECCIONES).forEach(function (id) {
+        var s = document.getElementById(id);
+        if (s) obs.observe(s);
+      });
+    }
+
+    // ---- Precarga: no se empieza hasta tener todas las imágenes (evita parpadeos) ----
     var pendientes = Object.keys(SPRITES).length;
     function listaUna() {
       pendientes--;
       if (pendientes > 0) return;
-      // El guion solo usa poses que existen
       guion = GUION.filter(function (p) { return poses[p[0]]; });
       if (!guion.length) { btn.remove(); return; }
       btn.classList.add("mascota-lista");
@@ -150,7 +220,9 @@
         // Sin animación: queda quieta con el letrero para que se entienda que se puede pulsar
         mostrar(HOVER);
       } else {
-        siguiente();
+        activa = true;
+        if (poses[INTRO[0]]) reaccion(INTRO);
+        else siguiente();
       }
     }
     Object.keys(poses).forEach(function (n) {
@@ -164,11 +236,19 @@
 
     // Se pausa si la pestaña no está visible
     document.addEventListener("visibilitychange", function () {
-      if (document.hidden) clearTimeout(reloj);
-      else if (!retenida && !reducido()) siguiente();
+      if (document.hidden) {
+        clearTimeout(reloj);
+      } else {
+        ultimaActividad = Date.now();
+        if (!reaccionando) siguiente();
+      }
     });
 
-    return btn;
+    return {
+      btn: btn,
+      alHacerClic: function () { reaccion(CLIC); },
+      alCerrarModal: function () { reaccion(AL_CERRAR); }
+    };
   }
 
   // ---- Modal ---------------------------------------------------------------
@@ -227,11 +307,16 @@
     estilo.textContent = CSS;
     document.head.appendChild(estilo);
 
-    var btn = crearMascota();
+    var mascota = crearMascota();
+    var btn = mascota.btn;
     var modal = crearModal();
     var caja = modal.querySelector("#modal-mascota-caja");
 
-    function abrir() {
+    var conTeclado = false; // si se abrió con teclado, al cerrar se devuelve el foco al botón
+
+    function abrir(e) {
+      conTeclado = !!e && e.detail === 0;
+      mascota.alHacerClic();
       modal.classList.remove("hidden");
       if (window.Motion) Motion.abrirModal(modal, caja);
       var cerrarBtn = modal.querySelector("[data-cerrar]");
@@ -242,7 +327,8 @@
       if (modal.classList.contains("hidden")) return;
       var terminar = function () {
         modal.classList.add("hidden");
-        btn.focus({ preventScroll: true });
+        if (conTeclado) btn.focus({ preventScroll: true });
+        mascota.alCerrarModal();
       };
       if (window.Motion) Motion.cerrarModal(modal, caja, terminar);
       else terminar();
