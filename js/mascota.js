@@ -30,7 +30,7 @@
 
   // Zona útil dentro del PNG (373 x 669 px): el resto es transparente y se recorta
   var IMG_W = 373, IMG_H = 669;
-  var CAJA = { x: 46, y: 110, w: 289, h: 359 };
+  var CAJA = { x: 67, y: 110, w: 268, h: 359 }; // x=67: el borde plano del cuerpo queda pegado al borde de la pantalla
 
   // ---- Estilos -------------------------------------------------------------
   var pctW = (IMG_W / CAJA.w) * 100;
@@ -38,11 +38,11 @@
   var pctTop = -(CAJA.y / CAJA.h) * 100;
   var CSS =
     "#mascota-btn{position:fixed;left:0;top:50%;z-index:900;width:104px;aspect-ratio:" + CAJA.w + "/" + CAJA.h + ";" +
-    "padding:0;border:0;background:transparent;cursor:pointer;overflow:hidden;transform:translate(-110%,-50%);" +
+    "padding:0;border:0;background:transparent;cursor:pointer;overflow:hidden;transform:translate(-110%,-50%);transform-origin:left center;" +
     "transition:transform .5s cubic-bezier(.23,1,.32,1);-webkit-tap-highlight-color:transparent;filter:drop-shadow(3px 3px 0 rgba(15,23,42,.35))}" +
     "@media (min-width:768px){#mascota-btn{width:150px}}" +
     "#mascota-btn.mascota-lista{transform:translate(0,-50%)}" +
-    "#mascota-btn.mascota-lista:hover,#mascota-btn.mascota-lista:focus-visible{transform:translate(8px,-50%)}" +
+    "#mascota-btn.mascota-lista:hover,#mascota-btn.mascota-lista:focus-visible{transform:translate(0,-50%) scale(1.06)}" +
     "#mascota-btn:active{transition-duration:.12s}" +
     "#mascota-btn:focus-visible{outline:3px solid #FFC21A;outline-offset:2px;border-radius:12px}" +
     "#mascota-btn .mascota-pose{position:absolute;display:block;max-width:none;height:auto;pointer-events:none;user-select:none;" +
