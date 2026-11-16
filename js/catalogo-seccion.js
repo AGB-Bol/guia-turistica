@@ -294,8 +294,8 @@
       if (document.getElementById('modal-catalogo-overlay')) return;
 
       var modalHtml = [
-        '<div id="modal-catalogo-overlay" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300" role="dialog" aria-modal="true" onclick="CatalogoSeccion.clickBackdrop(event)">',
-        '  <div id="modal-catalogo-card" class="bg-white border border-slate-200 rounded-2xl max-w-xl w-full shadow-2xl p-6 sm:p-7 transform scale-95 transition-all duration-300 max-h-[90vh] overflow-y-auto">',
+        '<div id="modal-catalogo-overlay" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-200" role="dialog" aria-modal="true" onclick="CatalogoSeccion.clickBackdrop(event)">',
+        '  <div id="modal-catalogo-card" class="bg-white border border-slate-200 rounded-2xl max-w-xl w-full shadow-2xl p-6 sm:p-7 max-h-[90vh] overflow-y-auto">',
         '    <!-- Cabecera del modal -->',
         '    <div class="flex items-start justify-between gap-4 pb-4 border-b border-slate-100">',
         '      <div class="flex items-center gap-2 flex-wrap">',
@@ -427,15 +427,7 @@
       overlay.classList.remove('opacity-0');
       overlay.classList.add('opacity-100');
 
-      if (window.gsap) {
-        window.gsap.fromTo(card,
-          { opacity: 0, scale: 0.92, y: 15 },
-          { opacity: 1, scale: 1, y: 0, duration: 0.3, ease: 'power2.out' }
-        );
-      } else {
-        card.classList.remove('scale-95');
-        card.classList.add('scale-100');
-      }
+      window.Motion.entrar(card);
 
       this.modalActivo = true;
       document.body.style.overflow = 'hidden';
@@ -447,30 +439,13 @@
       if (!overlay || !card) return;
 
       var self = this;
-      if (window.gsap) {
-        window.gsap.to(card, {
-          opacity: 0,
-          scale: 0.94,
-          y: 10,
-          duration: 0.2,
-          ease: 'power2.in',
-          onComplete: function () {
-            overlay.classList.add('opacity-0');
-            overlay.classList.add('pointer-events-none');
-            overlay.classList.remove('opacity-100');
-            self.modalActivo = false;
-            document.body.style.overflow = '';
-          }
-        });
-      } else {
-        card.classList.remove('scale-100');
-        card.classList.add('scale-95');
+      window.Motion.salir(card, function () {
         overlay.classList.add('opacity-0');
         overlay.classList.add('pointer-events-none');
         overlay.classList.remove('opacity-100');
-        this.modalActivo = false;
+        self.modalActivo = false;
         document.body.style.overflow = '';
-      }
+      });
     }
   };
 

@@ -233,8 +233,8 @@
     <!-- ========================================================= -->
     <!-- MODAL INTERACTIVO DE POLÍTICAS Y TÉRMINOS LEGALES          -->
     <!-- ========================================================= -->
-    <div id="modal-legal-footer" class="fixed inset-0 z-[1200] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden transition-all select-none">
-      <div id="modal-legal-caja" class="relative w-full max-w-2xl bg-[#0F1422] border border-white/20 rounded-3xl shadow-2xl overflow-hidden text-white flex flex-col max-h-[85vh] transform scale-95 opacity-0 transition-all duration-200">
+    <div id="modal-legal-footer" class="fixed inset-0 z-[1200] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden select-none">
+      <div id="modal-legal-caja" class="relative w-full max-w-2xl bg-[#0F1422] border border-white/20 rounded-3xl shadow-2xl overflow-hidden text-white flex flex-col max-h-[85vh]">
         
         <!-- Cabecera del modal -->
         <div class="p-6 bg-gradient-to-r from-slate-900 to-[#1A2234] border-b border-white/10 flex items-center justify-between">
@@ -379,46 +379,14 @@
 
     modal.classList.remove("hidden");
 
-    if (typeof gsap !== "undefined") {
-      gsap.killTweensOf([modal, caja]);
-      gsap.set(modal, { opacity: 0 });
-      gsap.set(caja, { scale: 0.94, opacity: 0, y: 16 });
-      gsap.to(modal, { opacity: 1, duration: 0.28, ease: "power2.out" });
-      gsap.to(caja, { scale: 1, opacity: 1, y: 0, duration: 0.32, ease: "back.out(1.15)" });
-    } else {
-      setTimeout(() => {
-        caja.classList.remove("scale-95", "opacity-0");
-        caja.classList.add("scale-100", "opacity-100");
-      }, 10);
-    }
+    Motion.abrirModal(modal, caja);
   };
 
-  let modalLegalAnimando = false;
   window.cerrarModalLegal = function () {
     const modal = document.getElementById("modal-legal-footer");
     const caja = document.getElementById("modal-legal-caja");
-    if (!modal || !caja || modal.classList.contains("hidden") || modalLegalAnimando) return;
-
-    if (typeof gsap !== "undefined") {
-      modalLegalAnimando = true;
-      gsap.killTweensOf([modal, caja]);
-      gsap.to(caja, { scale: 0.95, opacity: 0, y: 12, duration: 0.22, ease: "power2.in" });
-      gsap.to(modal, {
-        opacity: 0,
-        duration: 0.22,
-        ease: "power2.in",
-        onComplete: () => {
-          modal.classList.add("hidden");
-          modalLegalAnimando = false;
-        }
-      });
-    } else {
-      caja.classList.remove("scale-100", "opacity-100");
-      caja.classList.add("scale-95", "opacity-0");
-      setTimeout(() => {
-        modal.classList.add("hidden");
-      }, 200);
-    }
+    if (!modal || !caja || modal.classList.contains("hidden")) return;
+    Motion.cerrarModal(modal, caja, () => { modal.classList.add("hidden"); });
   };
 
   // Suscripción al newsletter interactiva sin recargar página

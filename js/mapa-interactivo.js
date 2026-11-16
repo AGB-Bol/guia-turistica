@@ -318,57 +318,14 @@
     modal.classList.remove("hidden");
     const dialog = modal.querySelector(".modal-card-anim");
 
-    if (typeof gsap !== "undefined" && dialog) {
-      gsap.killTweensOf([modal, dialog]);
-      gsap.set(modal, { opacity: 0 });
-      gsap.set(dialog, { scale: 0.93, opacity: 0, y: 16 });
-
-      gsap.to(modal, {
-        opacity: 1,
-        duration: 0.28,
-        ease: "power2.out"
-      });
-      gsap.to(dialog, {
-        scale: 1,
-        opacity: 1,
-        y: 0,
-        duration: 0.32,
-        ease: "back.out(1.15)"
-      });
-    } else {
-      modal.style.opacity = "1";
-    }
+    Motion.abrirModal(modal, dialog);
   };
 
-  let modalLugarAnimando = false;
   window.ocultarModalLugar = function () {
     const modal = document.getElementById("modal-lugar-mapa");
-    if (!modal || modal.classList.contains("hidden") || modalLugarAnimando) return;
+    if (!modal || modal.classList.contains("hidden")) return;
     const dialog = modal.querySelector(".modal-card-anim");
-
-    if (typeof gsap !== "undefined" && dialog) {
-      modalLugarAnimando = true;
-      gsap.killTweensOf([modal, dialog]);
-
-      gsap.to(dialog, {
-        scale: 0.94,
-        opacity: 0,
-        y: 12,
-        duration: 0.22,
-        ease: "power2.in"
-      });
-      gsap.to(modal, {
-        opacity: 0,
-        duration: 0.22,
-        ease: "power2.in",
-        onComplete: () => {
-          modal.classList.add("hidden");
-          modalLugarAnimando = false;
-        }
-      });
-    } else {
-      modal.classList.add("hidden");
-    }
+    Motion.cerrarModal(modal, dialog, () => { modal.classList.add("hidden"); });
   };
 
   // Cerrar modal al hacer clic en el fondo oscuro

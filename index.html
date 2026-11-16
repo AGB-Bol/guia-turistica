@@ -683,7 +683,7 @@
   <!-- ========================================================= -->
   <!-- MODAL INTERACTIVO DE MARCADOR (MAPA)                      -->
   <!-- ========================================================= -->
-  <div id="modal-lugar-mapa" class="fixed inset-0 z-[1000] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden transition-all select-none">
+  <div id="modal-lugar-mapa" class="fixed inset-0 z-[1000] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden select-none">
     <div class="modal-card-anim relative w-full max-w-lg bg-[#0F1422] border border-white/20 rounded-3xl shadow-2xl overflow-hidden text-white">
       
       <div class="relative h-48 sm:h-56 w-full overflow-hidden bg-slate-800">
@@ -902,14 +902,15 @@
   <!-- FOOTER REUTILIZABLE                                       -->
   <!-- ========================================================= -->
   <div id="main-footer"></div>
+  <script src="js/motion.js"></script>
   <script src="js/footer.js"></script>
 
 
   <!-- ========================================================= -->
   <!-- MODAL DE BÚSQUEDA INTERACTIVO (SPA)                       -->
   <!-- ========================================================= -->
-  <div id="modal-busqueda" class="fixed inset-0 z-50 hidden flex items-center justify-center p-3 sm:p-4 bg-slate-950/70 backdrop-blur-md transition-opacity duration-200">
-    <div id="modal-caja" class="bg-white rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl border border-slate-200 transform scale-95 opacity-0 transition-all duration-200 flex flex-col max-h-[90vh]">
+  <div id="modal-busqueda" class="fixed inset-0 z-50 hidden flex items-center justify-center p-3 sm:p-4 bg-slate-950/70 backdrop-blur-md">
+    <div id="modal-caja" class="bg-white rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl border border-slate-200 flex flex-col max-h-[90vh]">
       
       <div class="relative bg-gradient-to-r from-slate-900 via-slate-800 to-red-950 text-white p-5 sm:p-6 shrink-0">
         <div class="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.08)_1px,transparent_1px)] [background-size:20px_20px] pointer-events-none"></div>
@@ -1287,44 +1288,14 @@
       modalBtnTexto.textContent = servicio ? `Abrir todo ${nombreCategoria}` : 'Abrir directorio completo';
 
       modal.classList.remove('hidden');
-      if (typeof gsap !== 'undefined') {
-        gsap.killTweensOf([modal, modalCaja]);
-        gsap.set(modal, { opacity: 0 });
-        gsap.set(modalCaja, { scale: 0.94, opacity: 0, y: 16 });
-        gsap.to(modal, { opacity: 1, duration: 0.28, ease: 'power2.out' });
-        gsap.to(modalCaja, { scale: 1, opacity: 1, y: 0, duration: 0.32, ease: 'back.out(1.15)' });
-      } else {
-        setTimeout(() => {
-          modalCaja.classList.remove('scale-95', 'opacity-0');
-          modalCaja.classList.add('scale-100', 'opacity-100');
-        }, 10);
-      }
+      Motion.abrirModal(modal, modalCaja);
     }
 
-    let modalBusquedaAnimando = false;
     function cerrarModal() {
       const modal = document.getElementById('modal-busqueda');
       const modalCaja = document.getElementById('modal-caja');
-      if (!modal || !modalCaja || modal.classList.contains('hidden') || modalBusquedaAnimando) return;
-
-      if (typeof gsap !== 'undefined') {
-        modalBusquedaAnimando = true;
-        gsap.killTweensOf([modal, modalCaja]);
-        gsap.to(modalCaja, { scale: 0.95, opacity: 0, y: 12, duration: 0.22, ease: 'power2.in' });
-        gsap.to(modal, {
-          opacity: 0,
-          duration: 0.22,
-          ease: 'power2.in',
-          onComplete: () => {
-            modal.classList.add('hidden');
-            modalBusquedaAnimando = false;
-          }
-        });
-      } else {
-        modalCaja.classList.remove('scale-100', 'opacity-100');
-        modalCaja.classList.add('scale-95', 'opacity-0');
-        setTimeout(() => { modal.classList.add('hidden'); }, 200);
-      }
+      if (!modal || !modalCaja || modal.classList.contains('hidden')) return;
+      Motion.cerrarModal(modal, modalCaja, () => { modal.classList.add('hidden'); });
     }
 
     document.getElementById('modal-busqueda')?.addEventListener('click', (e) => {
