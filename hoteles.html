@@ -25,7 +25,7 @@
   <section class="bg-white border-b border-slate-200 py-10 px-4">
     <div class="max-w-6xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-4">
       <div>
-        <span class="text-xs font-bold uppercase tracking-wider text-amber-800">Categoría 3 de 6</span>
+        <a href="index.html#rubros" class="text-sm font-semibold text-red-700 hover:text-red-800 transition-colors">← Todas las categorías</a>
         <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">Hoteles y Hospedajes</h1>
         <p class="text-xs sm:text-sm text-slate-500 mt-1 max-w-xl">
           Ecolodges rurales, hoteles de sal, cabañas en valles y selvas, hostales tradicionales y resorts termales en Bolivia.
@@ -44,7 +44,7 @@
     <div class="bg-white p-3.5 border border-slate-200 rounded-xl mb-6 grid grid-cols-1 sm:grid-cols-3 gap-3 shadow-sm">
       <div class="relative">
         <input
-          id="filtro-busqueda"
+          id="filtro-busqueda" aria-label="Buscar en el directorio"
           type="text"
           placeholder="Buscar por hotel, representante, destino o servicio..."
           class="w-full text-xs pl-8 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none focus:border-slate-400 focus:bg-white text-slate-800 transition-colors"
@@ -52,7 +52,7 @@
         <svg class="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
       </div>
 
-      <select id="filtro-tipo" class="text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none focus:border-slate-400 focus:bg-white text-slate-700 transition-colors">
+      <select id="filtro-tipo" aria-label="Filtrar por tipo" class="text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none focus:border-slate-400 focus:bg-white text-slate-700 transition-colors">
         <option value="">Todas las tipologías</option>
         <option value="hotel">Hoteles Urbanos y Casonas Históricas</option>
         <option value="ecolodge">Ecolodges y Cabañas Rurales</option>
@@ -60,7 +60,7 @@
         <option value="camping">Camping, Glamping y Refugios Termales</option>
       </select>
 
-      <select id="filtro-departamento" class="text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none focus:border-slate-400 focus:bg-white text-slate-700 transition-colors">
+      <select id="filtro-departamento" aria-label="Filtrar por departamento" class="text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none focus:border-slate-400 focus:bg-white text-slate-700 transition-colors">
         <option value="">Todos los departamentos</option>
         <option value="potosi">Potosí / Salar de Uyuni</option>
         <option value="lapaz">La Paz / Titicaca / Yungas</option>
@@ -106,8 +106,8 @@
         filtroDeptId: 'filtro-departamento',
         contadorId: 'total-registros-badge',
         itemsPorPagina: 9,
-        colorBadge: 'text-amber-800 bg-amber-50 border-amber-200',
-        colorBoton: 'text-amber-800 hover:text-amber-900'
+        colorBadge: 'text-red-700 bg-red-50 border-red-100',
+        colorBoton: 'text-red-700 hover:text-red-800'
       });
     });
   </script>
