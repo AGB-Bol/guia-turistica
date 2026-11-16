@@ -11,11 +11,22 @@
 (function () {
   // ---- Configuración -------------------------------------------------------
   // Qué archivo es cada pose (según el dibujo, no según el número del archivo)
+  // Se pueden añadir tantas poses como se quiera: basta una línea aquí (nombre: ruta)
+  // y usar ese nombre en GUION, HOVER o CLIC. Si una imagen no existe, esa pose se omite sola.
   var SPRITES = {
     normal: "img/mascota/3.png",
     guino: "img/mascota/1.png",
     letrero: "img/mascota/2.png"
+    // ejemplos para cuando haya más dibujos:
+    // saludo: "img/mascota/4.png",
+    // sorpresa: "img/mascota/5.png",
+    // senalando: "img/mascota/6.png"
   };
+
+  // Pose mientras el ratón (o el teclado) está sobre la mascota
+  var HOVER = "letrero";
+  // Pose opcional al hacer clic, mientras se abre el modal (null = no usar)
+  var CLIC = null; // por ejemplo: "sorpresa"
 
   // Guion de la animación: [pose, milisegundos]. Se repite en bucle.
   // El letrero dura 3,5 s (mínimo pedido: 3 s); normal y guiño se alternan para dar fluidez.
@@ -79,8 +90,15 @@
     document.body.appendChild(btn);
 
     function mostrar(nombre) {
+      if (!poses[nombre]) nombre = poses.normal ? "normal" : Object.keys(poses)[0];
       Object.keys(poses).forEach(function (n) { poses[n].classList.toggle("activa", n === nombre); });
     }
+
+    // Poses cuyo archivo no cargó: se quitan para no mostrar huecos
+    function descartar(nombre) {
+      if (poses[nombre]) { poses[nombre].remove(); delete poses[nombre]; }
+    }
+    var guion = GUION;
 
     // Reproducción del guion; al pasar el ratón o enfocar se queda en el letrero
     var paso = 0;
@@ -90,7 +108,7 @@
     function siguiente() {
       clearTimeout(reloj);
       if (retenida) return;
-      var actual = GUION[paso % GUION.length];
+      var actual = guion[paso % guion.length];
       mostrar(actual[0]);
       reloj = setTimeout(function () { paso++; siguiente(); }, actual[1]);
     }
@@ -98,12 +116,12 @@
     function retener() {
       retenida = true;
       clearTimeout(reloj);
-      mostrar("letrero");
+      mostrar(HOVER);
     }
     function soltar() {
       if (!retenida) return;
       retenida = false;
-      paso = GUION.length; // vuelve al inicio del guion (pose normal)
+      paso = guion.length; // vuelve al inicio del guion (pose normal)
       siguiente();
     }
 
@@ -111,16 +129,26 @@
     btn.addEventListener("mouseleave", soltar);
     btn.addEventListener("focus", retener);
     btn.addEventListener("blur", soltar);
+    btn.addEventListener("click", function () {
+      if (CLIC && poses[CLIC]) {
+        retenida = true;
+        clearTimeout(reloj);
+        mostrar(CLIC);
+      }
+    });
 
     // Precarga: no se empieza hasta tener las tres imágenes (evita parpadeos)
     var pendientes = Object.keys(SPRITES).length;
     function listaUna() {
       pendientes--;
       if (pendientes > 0) return;
+      // El guion solo usa poses que existen
+      guion = GUION.filter(function (p) { return poses[p[0]]; });
+      if (!guion.length) { btn.remove(); return; }
       btn.classList.add("mascota-lista");
       if (reducido()) {
         // Sin animación: queda quieta con el letrero para que se entienda que se puede pulsar
-        mostrar("letrero");
+        mostrar(HOVER);
       } else {
         siguiente();
       }
@@ -130,7 +158,7 @@
       if (img.complete && img.naturalWidth) listaUna();
       else {
         img.addEventListener("load", listaUna);
-        img.addEventListener("error", listaUna);
+        img.addEventListener("error", function () { descartar(n); listaUna(); });
       }
     });
 
