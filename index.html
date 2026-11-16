@@ -11,8 +11,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
 
-  <!-- Leaflet CSS (CDN estable sin bloqueos CORS de origen local) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" />
+  <!-- Mapa interactivo de América (estilos propios) -->
+  <link rel="stylesheet" href="css/mapa-interactivo.css" />
 
   <style>
     body { font-family: 'Plus Jakarta Sans', sans-serif; }
@@ -20,58 +20,6 @@
     .dropdown:hover .dropdown-menu,
     .dropdown:focus-within .dropdown-menu {
       display: block;
-    }
-
-    /* Estilo limpio para Leaflet en tema oscuro */
-    .leaflet-container {
-      background-color: #090D17 !important;
-      font-family: inherit;
-    }
-
-    /* Altura explícita y fija del contenedor del mapa (evita colapso a 0px / pantalla negra) */
-    #map {
-      width: 100%;
-      height: 500px;
-    }
-    @media (min-width: 640px) {
-      #map {
-        height: 600px;
-      }
-    }
-    .leaflet-div-icon {
-      background: transparent !important;
-      border: none !important;
-    }
-
-    /* Filtro nocturno estilo Mapbox Dark sobre OpenStreetMap (100% libre, sin API key) */
-    .osm-dark-tiles {
-      filter: invert(100%) hue-rotate(190deg) brightness(80%) contrast(125%) saturate(35%) !important;
-    }
-
-    /* Quitar borde blanco/cuadrado de foco al hacer clic en elementos SVG de Leaflet */
-    .leaflet-container :focus,
-    .leaflet-container path:focus,
-    .leaflet-interactive:focus,
-    .leaflet-marker-icon:focus,
-    path.leaflet-interactive:focus,
-    path.leaflet-interactive {
-      outline: none !important;
-      -webkit-tap-highlight-color: transparent !important;
-      box-shadow: none !important;
-    }
-
-    /* Tooltip personalizado para el contorno de Bolivia */
-    .tooltip-pais-custom {
-      background-color: rgba(15, 20, 34, 0.95) !important;
-      border: 1px solid rgba(255, 255, 255, 0.2) !important;
-      color: white !important;
-      border-radius: 12px !important;
-      padding: 6px 12px !important;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6) !important;
-      font-family: inherit !important;
-    }
-    .tooltip-pais-custom::before {
-      border-top-color: rgba(15, 20, 34, 0.95) !important;
     }
 
     /* Estilos 3D Flip Card para Fundadores */
@@ -625,7 +573,10 @@
 
 
   <!-- ========================================================= -->
-  <!-- 6. SECCIÓN MAPA INTERACTIVO 2D (Restaurado 100%)          -->
+  <!-- 6. SECCIÓN MAPA INTERACTIVO (América · SVG)                -->
+  <!--    Estilos: css/mapa-interactivo.css                       -->
+  <!--    Lógica:  js/mapa-interactivo.js                         -->
+  <!--    Datos:   data/mapa-datos.js · data/mapa-geo.js          -->
   <!-- ========================================================= -->
   <section id="seccion-mapa" class="relative min-h-[calc(100vh-4rem)] flex flex-col justify-between items-center px-4 py-8 sm:py-10 bg-[#07090E] text-white overflow-hidden scroll-mt-16 border-t border-slate-800">
     
@@ -643,28 +594,43 @@
       </div>
       <span class="text-xs font-mono text-slate-400 flex items-center gap-1.5">
         <span class="inline-block w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
-        Selecciona Bolivia para explorar
+        Haz clic en un país · Bolivia ya disponible
       </span>
     </div>
 
-    <!-- Contenedor del Mapa Amplio (altura explícita para Leaflet) -->
+    <!-- Contenedor del Mapa Amplio -->
     <div class="relative z-10 w-full max-w-7xl mx-auto rounded-3xl bg-[#090D17] border border-white/10 shadow-2xl overflow-hidden my-auto">
-      
-      <!-- Botón flotante para Volver al Mundo -->
-      <button 
-        id="btn-volver-mundo" 
-        type="button" 
-        class="hidden absolute top-4 left-4 z-[500] px-4 py-2.5 rounded-2xl text-xs font-bold bg-[#0B0F19]/90 hover:bg-white text-white hover:text-slate-900 border border-white/20 shadow-2xl backdrop-blur-md flex items-center gap-2 transition-all cursor-pointer select-none active:scale-95"
-        title="Regresar a vista global"
-      >
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
-        </svg>
-        <span>Volver al mundo</span>
-      </button>
+      <div id="mapa-escena" class="gm-escena">
 
-      <!-- Lienzo de Leaflet (ID único #map con altura explícita) -->
-      <div id="map" class="w-full h-[500px] sm:h-[600px]" style="z-index: 1;"></div>
+        <!-- Lista de países -->
+        <nav id="mapa-lista" class="gm-lista" aria-label="Países del mapa"></nav>
+
+        <!-- Lienzo: mapa SVG + puntos de servicios -->
+        <div id="mapa-lienzo" class="gm-lienzo">
+          <button id="btn-volver-mundo" type="button" class="gm-volver" title="Regresar a la vista de América" hidden>
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+            </svg>
+            <span>Volver al mapa</span>
+          </button>
+
+          <svg id="mapa-svg" class="gm-svg" role="group" aria-label="Mapa interactivo de América. Bolivia tiene servicios turísticos; los demás países estarán disponibles próximamente."></svg>
+
+          <div id="mapa-puntos" class="gm-puntos"></div>
+
+          <div id="mapa-aviso" class="gm-aviso" role="status" hidden>
+            <span class="gm-aviso-ico" aria-hidden="true">🚧</span>
+            <div>
+              <strong id="mapa-aviso-titulo"></strong>
+              <p id="mapa-aviso-texto"></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel de información del país -->
+        <aside id="mapa-panel" class="gm-panel" aria-live="polite"></aside>
+
+      </div>
     </div>
 
     <!-- Indicador de Scroll -->
@@ -1336,13 +1302,12 @@
   </script>
 
   <!-- ========================================================= -->
-  <!-- GSAP, LEAFLET Y SCRIPTS                                   -->
+  <!-- GSAP Y SCRIPTS                                              -->
   <!-- ========================================================= -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <!-- Leaflet JS (CDN cdnjs estable sin problemas CORS de protocolo local file://) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
   <script src="js/animaciones.js"></script>
+  <script src="data/mapa-geo.js"></script>
   <script src="data/mapa-datos.js"></script>
   <script src="js/mapa-interactivo.js"></script>
 
