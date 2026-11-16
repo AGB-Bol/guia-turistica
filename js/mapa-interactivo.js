@@ -239,8 +239,6 @@
         className: "marcador-leaflet-custom",
         html: `
           <div class="relative cursor-pointer group flex flex-col items-center select-none" data-id="${lugar.id}" style="width: 32px; height: 48px;">
-            <!-- Radar ping exterior -->
-            <div class="w-8 h-8 rounded-full bg-amber-400/35 animate-ping absolute top-0 left-0"></div>
             <!-- Pin central brillante -->
             <div class="w-6 h-6 rounded-full bg-gradient-to-tr from-red-600 to-amber-500 border-2 border-white shadow-xl flex items-center justify-center transform group-hover:scale-125 transition-transform relative z-10">
               <div class="w-1.5 h-1.5 rounded-full bg-white"></div>
