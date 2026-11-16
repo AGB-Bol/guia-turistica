@@ -98,6 +98,8 @@
           type="button" 
           class="md:hidden p-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors"
           aria-label="Abrir menú"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
         >
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
@@ -108,7 +110,9 @@
     </div>
 
     <!-- Menú Desplegable Móvil -->
-    <div id="mobile-menu" class="hidden md:hidden border-t border-slate-200 bg-white px-4 py-4 space-y-3">
+    <div id="mobile-menu" class="md:hidden grid grid-rows-[0fr] opacity-0 transition-[grid-template-rows,opacity] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] motion-reduce:transition-none" inert>
+      <div class="overflow-hidden min-h-0">
+        <div class="border-t border-slate-200 bg-white px-4 py-4 space-y-3">
       <a href="${homePrefix}#hero-section" class="block text-sm font-semibold text-slate-700">
         Inicio
       </a>
@@ -143,6 +147,8 @@
           ${ctaText}
         </a>
       </div>
+        </div>
+      </div>
     </div>
   </header>
     `;
@@ -168,7 +174,14 @@
       const mobileMenu = newHeader.querySelector("#mobile-menu");
       if (mobileBtn && mobileMenu) {
         mobileBtn.addEventListener("click", () => {
-          mobileMenu.classList.toggle("hidden");
+          const abierto = !mobileMenu.classList.contains("grid-rows-[1fr]");
+          mobileMenu.classList.toggle("grid-rows-[1fr]", abierto);
+          mobileMenu.classList.toggle("grid-rows-[0fr]", !abierto);
+          mobileMenu.classList.toggle("opacity-100", abierto);
+          mobileMenu.classList.toggle("opacity-0", !abierto);
+          mobileMenu.toggleAttribute("inert", !abierto);
+          mobileBtn.setAttribute("aria-expanded", String(abierto));
+          mobileBtn.setAttribute("aria-label", abierto ? "Cerrar menú" : "Abrir menú");
         });
       }
     }
