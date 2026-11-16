@@ -118,6 +118,12 @@
       animation-play-state: paused;
     }
 
+    /* Movimiento reducido: sin marquee ni giro 3D animado */
+    @media (prefers-reduced-motion: reduce) {
+      .animate-marquee { animation: none; }
+      .flip-card-inner { transition: none; }
+    }
+
     /* Ocultar barra de scroll del carrusel de destinos */
     .no-scrollbar {
       -ms-overflow-style: none;
@@ -231,7 +237,7 @@
     <div id="hero-scroll" class="relative z-10 flex flex-col items-center gap-1.5 cursor-pointer pb-2 text-slate-300 hover:text-white transition-colors select-none" onclick="document.getElementById('rubros').scrollIntoView({ behavior: 'smooth' });">
       <span class="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-slate-300 drop-shadow">Explorar Rubros</span>
       <div class="w-8 h-8 rounded-full border border-white/30 bg-black/30 backdrop-blur-md flex items-center justify-center shadow-lg hover:border-white transition-colors">
-        <svg class="w-4 h-4 animate-bounce text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-4 h-4 motion-safe:animate-bounce text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
         </svg>
       </div>

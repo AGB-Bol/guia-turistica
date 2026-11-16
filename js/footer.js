@@ -277,7 +277,7 @@
       <button
         id="btn-flotante-subir"
         type="button"
-        onclick="window.scrollTo({ top: 0, behavior: 'smooth' });"
+        onclick="window.scrollTo({ top: 0, behavior: (window.Motion && Motion.reducido()) ? 'auto' : 'smooth' });"
         class="opacity-0 pointer-events-none translate-y-3 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-slate-900/95 text-white border border-white/20 shadow-xl backdrop-blur-md flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer hover:bg-red-600 group"
         title="Subir al inicio"
         aria-label="Volver arriba"

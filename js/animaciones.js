@@ -5,12 +5,9 @@
  */
 
 document.addEventListener("DOMContentLoaded", () => {
-  // 1. Respetar accesibilidad: Si el usuario prefiere movimiento reducido, no animar
-  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (prefersReducedMotion) {
-    console.log("Animaciones desactivadas por preferencia de accesibilidad (prefers-reduced-motion).");
-    return;
-  }
+  // 1. Accesibilidad: con movimiento reducido se conservan los fundidos, sin desplazamientos
+  const reducido = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const mov = (valor) => (reducido ? 0 : valor);
 
   // 2. Verificar que GSAP y ScrollTrigger estén cargados
   if (typeof gsap === "undefined") {
@@ -35,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const heroBgImage = heroSection.querySelector("#hero-bg-image");
 
     // Efecto Parallax en la imagen turística de fondo
-    if (heroBgImage && typeof ScrollTrigger !== "undefined") {
+    if (heroBgImage && typeof ScrollTrigger !== "undefined" && !reducido) {
       gsap.to(heroBgImage, {
         scrollTrigger: {
           trigger: heroSection,
@@ -56,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
         heroTitle,
         {
           opacity: 0,
-          y: 25,
+          y: mov(25),
           duration: 0.8,
         }
       );
@@ -67,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
         heroSubtitle,
         {
           opacity: 0,
-          y: 15,
+          y: mov(15),
           duration: 0.6,
         },
         "-=0.5"
@@ -79,8 +76,8 @@ document.addEventListener("DOMContentLoaded", () => {
         heroForm,
         {
           opacity: 0,
-          y: 20,
-          scale: 0.98,
+          y: mov(20),
+          scale: reducido ? 1 : 0.98,
           duration: 0.7,
         },
         "-=0.4"
@@ -92,7 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
         heroPills,
         {
           opacity: 0,
-          y: 10,
+          y: mov(10),
           duration: 0.5,
         },
         "-=0.3"
@@ -104,7 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
         heroScroll,
         {
           opacity: 0,
-          y: -10,
+          y: mov(-10),
           duration: 0.6,
         },
         "-=0.2"
@@ -129,7 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
           }
         },
         opacity: 0,
-        y: 25,
+        y: mov(25),
         duration: 0.6,
         ease: "power2.out",
         clearProps: "transform,opacity"
