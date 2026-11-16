@@ -126,11 +126,57 @@ document.addEventListener("DOMContentLoaded", () => {
           }
         },
         opacity: 0,
-        y: mov(25),
-        duration: 0.6,
-        ease: "power2.out",
+        y: mov(16),
+        duration: 0.5,
+        ease: "power4.out",
         clearProps: "transform,opacity"
       });
+    }
+  }
+
+  // ==================================================================
+  // ENTRADAS DE SECCIÓN: una entrada por contenedor, una sola vez
+  // ==================================================================
+  if (typeof ScrollTrigger !== "undefined") {
+    const entradaGrupo = (disparador, elementos) => {
+      if (!disparador || !elementos || elementos.length === 0) return;
+      gsap.from(elementos, {
+        scrollTrigger: {
+          trigger: disparador,
+          start: "top 85%",
+          once: true,
+        },
+        opacity: 0,
+        y: mov(16),
+        duration: 0.5,
+        ease: "power4.out",
+        stagger: 0.06,
+        clearProps: "transform,opacity",
+      });
+    };
+
+    // Destinos: solo las tres primeras tarjetas (las visibles en escritorio)
+    const carruselDestinos = document.getElementById("carrusel-destinos");
+    if (carruselDestinos) {
+      entradaGrupo(carruselDestinos, Array.from(carruselDestinos.querySelectorAll(".destino-card")).slice(0, 3));
+    }
+
+    // Sobre Nosotros: las tarjetas de la primera rejilla
+    const rejillaNosotros = document.querySelector("#nosotros .grid");
+    if (rejillaNosotros) {
+      entradaGrupo(rejillaNosotros, Array.from(rejillaNosotros.children));
+    }
+
+    // Reconocimientos: las tarjetas de la rejilla
+    const rejillaReconocimientos = document.querySelector("#reconocimientos .grid");
+    if (rejillaReconocimientos) {
+      entradaGrupo(rejillaReconocimientos, Array.from(rejillaReconocimientos.children));
+    }
+
+    // Registro: el bloque completo como una sola pieza
+    const bloqueRegistro = document.querySelector("#seccion-registro > div");
+    if (bloqueRegistro) {
+      entradaGrupo(bloqueRegistro, [bloqueRegistro]);
     }
   }
 });
