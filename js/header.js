@@ -27,7 +27,7 @@
   function generateHeaderHTML(ctaText = "Registrar Empresa", ctaHref = null) {
     const targetCtaHref = ctaHref || `${homePrefix}#seccion-registro`;
     return `
-  <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+  <header class="bg-white border-b-2 border-slate-900 sticky top-0 z-50">
     <div class="flex h-1.5" aria-hidden="true"><span class="flex-1 bg-red-600"></span><span class="flex-1 bg-amber-400"></span><span class="flex-1 bg-emerald-600"></span></div>
     <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
       
@@ -42,7 +42,7 @@
             class="h-9 w-auto max-w-[150px] object-contain transition-transform group-hover:scale-105"
           >
         </div>
-        <span class="font-extrabold text-base tracking-tight text-slate-900">
+        <span class="font-display font-extrabold text-lg tracking-tight text-slate-900 uppercase">
           Guía <span class="text-red-700">Internacional</span>
         </span>
       </a>
@@ -65,14 +65,14 @@
             </svg>
           </button>
 
-          <div class="dropdown-menu invisible opacity-0 scale-[0.97] origin-top-left transition-[opacity,transform,visibility] duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:visible group-hover:opacity-100 group-hover:scale-100 group-focus-within:visible group-focus-within:opacity-100 group-focus-within:scale-100 motion-reduce:scale-100 absolute left-0 top-full w-56 bg-white rounded-xl shadow-lg border border-slate-200 p-1.5 z-50">
+          <div class="dropdown-menu invisible opacity-0 scale-[0.97] origin-top-left transition-[opacity,transform,visibility] duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:visible group-hover:opacity-100 group-hover:scale-100 group-focus-within:visible group-focus-within:opacity-100 group-focus-within:scale-100 motion-reduce:scale-100 absolute left-0 top-full w-56 bg-white rounded-xl border-2 border-slate-900 shadow-[4px_4px_0_0_#0f172a] p-1.5 z-50">
             ${rubrosLinks
               .map(
                 (item) => `
               <a href="${item.href}" class="block px-3 py-2 rounded-lg text-xs font-medium transition-colors ${
                   currentPath === item.href
                     ? 'text-red-700 font-bold bg-red-50'
-                    : 'text-slate-700 hover:bg-slate-50 hover:text-slate-900'
+                    : 'text-slate-700 hover:bg-amber-100 hover:text-slate-900'
                 }">
                 ${item.text}
               </a>
@@ -89,7 +89,7 @@
 
       <!-- Acción & Botón Mobile -->
       <div class="flex items-center gap-3">
-        <a href="${targetCtaHref}" class="hidden sm:inline-flex bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs px-3.5 py-2 rounded-lg active:scale-[0.97] transition duration-150">
+        <a href="${targetCtaHref}" class="hidden sm:inline-flex bg-red-600 hover:bg-red-700 text-white font-extrabold text-xs px-4 py-2 rounded-lg border-2 border-slate-900 active:scale-[0.97] transition duration-150">
           ${ctaText}
         </a>
 
@@ -144,7 +144,7 @@
         <a href="${homePrefix}#reconocimientos" class="block text-sm font-semibold text-slate-700">Reconocimientos</a>
       </div>
       <div class="pt-2">
-        <a href="${targetCtaHref}" class="block text-center w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-2.5 rounded-lg active:scale-[0.97] transition duration-150">
+        <a href="${targetCtaHref}" class="block text-center w-full bg-red-600 hover:bg-red-700 text-white font-extrabold text-sm py-2.5 rounded-lg border-2 border-slate-900 active:scale-[0.97] transition duration-150">
           ${ctaText}
         </a>
       </div>
