@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // ==================================================================
   const seccionMapa = document.getElementById("seccion-mapa");
   if (seccionMapa && typeof ScrollTrigger !== "undefined") {
-    const mapaCard = seccionMapa.querySelector(".rounded-3xl");
+    const mapaCard = document.getElementById("map")?.parentElement;
     if (mapaCard) {
       gsap.from(mapaCard, {
         scrollTrigger: {
@@ -161,14 +161,14 @@ document.addEventListener("DOMContentLoaded", () => {
       entradaGrupo(carruselDestinos, Array.from(carruselDestinos.querySelectorAll(".destino-card")).slice(0, 3));
     }
 
-    // Sobre Nosotros: las tarjetas de la primera rejilla
-    const rejillaNosotros = document.querySelector("#nosotros .grid");
+    // Fundadores: las tarjetas de la lista
+    const rejillaNosotros = document.querySelector("#fundadores ul");
     if (rejillaNosotros) {
       entradaGrupo(rejillaNosotros, Array.from(rejillaNosotros.children));
     }
 
-    // Reconocimientos: las tarjetas de la rejilla
-    const rejillaReconocimientos = document.querySelector("#reconocimientos .grid");
+    // Reconocimientos: los elementos de la lista
+    const rejillaReconocimientos = document.querySelector("#reconocimientos ul");
     if (rejillaReconocimientos) {
       entradaGrupo(rejillaReconocimientos, Array.from(rejillaReconocimientos.children));
     }

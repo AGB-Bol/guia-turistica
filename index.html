@@ -75,41 +75,6 @@
       border-top-color: rgba(15, 20, 34, 0.95) !important;
     }
 
-    /* Estilos 3D Flip Card para Fundadores */
-    .flip-card {
-      perspective: 1000px;
-    }
-    .flip-card-inner {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      text-align: center;
-      transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
-      transform-style: preserve-3d;
-    }
-    .flip-card.flipped .flip-card-inner {
-      transform: rotateY(180deg);
-    }
-    /* El hover solo gira con ratón; en táctil se gira con el toque (.flipped) */
-    @media (hover: hover) and (pointer: fine) {
-      .flip-card:hover .flip-card-inner {
-        transform: rotateY(180deg);
-      }
-    }
-    .flip-card-front,
-    .flip-card-back {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      -webkit-backface-visibility: hidden;
-      backface-visibility: hidden;
-      border-radius: 1rem;
-    }
-    .flip-card-back {
-      transform: rotateY(180deg);
-    }
-
     /* Marquee infinito para Empresas y Aliados */
     @keyframes marquee {
       0% { transform: translateX(0%); }
@@ -124,10 +89,9 @@
       animation-play-state: paused;
     }
 
-    /* Movimiento reducido: sin marquee ni giro 3D animado */
+    /* Movimiento reducido: sin marquee */
     @media (prefers-reduced-motion: reduce) {
       .animate-marquee { animation: none; }
-      .flip-card-inner { transition: none; }
     }
 
     /* Ocultar barra de scroll del carrusel de destinos */
@@ -356,7 +320,7 @@
       <a href="instituciones.html" class="bg-white border border-slate-200/90 rounded-2xl p-6 hover:shadow-xl hover:border-red-600/40 transition group flex flex-col justify-between">
         <div>
           <div class="w-12 h-12 rounded-xl bg-red-50 text-red-700 flex items-center justify-center font-bold text-lg mb-4 group-hover:scale-110 transition-transform">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
           </div>
           <h3 class="text-lg font-bold text-slate-900 group-hover:text-red-700 transition-colors">Instituciones y Municipios</h3>
           <p class="text-xs text-slate-500 mt-2 leading-relaxed">Municipios, direcciones de turismo y cámaras que cuidan cada destino.</p>
@@ -387,264 +351,7 @@
 
 
   <!-- ========================================================= -->
-  <!-- 3. SECCIÓN DESTINOS (Carrusel Interactivo con Autoplay)    -->
-  <!-- ========================================================= -->
-  <section id="destinos" class="py-16 sm:py-24 bg-slate-900 text-white overflow-hidden scroll-mt-20">
-    <div class="max-w-6xl mx-auto px-4">
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
-        <div class="text-center md:text-left max-w-2xl">
-          <h2 class="text-3xl sm:text-4xl font-black text-white tracking-tight">
-            Destinos para empezar
-          </h2>
-          <p class="text-sm sm:text-base text-slate-300 mt-3">
-            Del altiplano a la selva y los valles: lugares que muestran lo diverso que es Bolivia.
-          </p>
-        </div>
-        <!-- Controles del Carrusel -->
-        <div class="flex items-center justify-center gap-2 shrink-0">
-          <button type="button" onclick="moverCarruselDestinos(-1)" class="w-10 h-10 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 flex items-center justify-center active:scale-[0.97] transition duration-150 cursor-pointer" aria-label="Destino anterior">
-            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
-          </button>
-          <button type="button" onclick="moverCarruselDestinos(1)" class="w-10 h-10 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 flex items-center justify-center active:scale-[0.97] transition duration-150 cursor-pointer" aria-label="Destino siguiente">
-            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-          </button>
-        </div>
-      </div>
-
-      <!-- Track del Carrusel (scroll-snap fluido, sin desbordes) -->
-      <div id="carrusel-destinos" class="flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar py-2">
-        
-        <!-- Destino 1 -->
-        <div class="destino-card snap-start shrink-0 w-[85%] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] bg-slate-800/80 border border-slate-700/80 rounded-3xl overflow-hidden shadow-2xl group flex flex-col">
-          <div class="relative h-48 overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1589556264800-08ae9e129a8c?auto=format&fit=crop&w=800&q=80" alt="Salar de Uyuni" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-            <span class="absolute top-3 left-3 bg-red-600 text-white text-[10px] font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider shadow">Bolivia</span>
-          </div>
-          <div class="p-6 flex flex-col grow justify-between">
-            <div>
-              <h3 class="text-xl font-bold text-white group-hover:text-red-400 transition-colors">Salar de Uyuni</h3>
-              <p class="text-xs text-slate-400 mt-2 leading-relaxed">El desierto de sal más grande del mundo: espejos de agua, hoteles de sal y travesías en 4x4.</p>
-            </div>
-            <div class="mt-6 pt-4 border-t border-slate-700/60 flex items-center justify-between">
-              <span class="text-xs text-amber-400 font-bold">★ 4.9</span>
-              <button type="button" onclick="prepararBusqueda('Uyuni', 'agencias')" class="text-xs font-bold text-red-400 hover:text-red-300 inline-flex items-center gap-1 cursor-pointer">Ver operadores →</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Destino 2 -->
-        <div class="destino-card snap-start shrink-0 w-[85%] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] bg-slate-800/80 border border-slate-700/80 rounded-3xl overflow-hidden shadow-2xl group flex flex-col">
-          <div class="relative h-48 overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=800&q=80" alt="Lago Titicaca" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-            <span class="absolute top-3 left-3 bg-red-600 text-white text-[10px] font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider shadow">Bolivia / Perú</span>
-          </div>
-          <div class="p-6 flex flex-col grow justify-between">
-            <div>
-              <h3 class="text-xl font-bold text-white group-hover:text-red-400 transition-colors">Lago Titicaca & Copacabana</h3>
-              <p class="text-xs text-slate-400 mt-2 leading-relaxed">El lago navegable más alto del planeta. Isla del Sol, cultura viva y hospedajes comunitarios.</p>
-            </div>
-            <div class="mt-6 pt-4 border-t border-slate-700/60 flex items-center justify-between">
-              <span class="text-xs text-amber-400 font-bold">★ 4.8</span>
-              <button type="button" onclick="prepararBusqueda('Copacabana', 'hoteles')" class="text-xs font-bold text-red-400 hover:text-red-300 inline-flex items-center gap-1 cursor-pointer">Ver hoteles →</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Destino 3 -->
-        <div class="destino-card snap-start shrink-0 w-[85%] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] bg-slate-800/80 border border-slate-700/80 rounded-3xl overflow-hidden shadow-2xl group flex flex-col">
-          <div class="relative h-48 overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=800&q=80" alt="Parque Madidi" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-            <span class="absolute top-3 left-3 bg-red-600 text-white text-[10px] font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider shadow">Amazonía</span>
-          </div>
-          <div class="p-6 flex flex-col grow justify-between">
-            <div>
-              <h3 class="text-xl font-bold text-white group-hover:text-red-400 transition-colors">Parque Nacional Madidi</h3>
-              <p class="text-xs text-slate-400 mt-2 leading-relaxed">Una de las zonas con más biodiversidad del mundo. Ecolodges en plena selva y expediciones de fauna y flora.</p>
-            </div>
-            <div class="mt-6 pt-4 border-t border-slate-700/60 flex items-center justify-between">
-              <span class="text-xs text-amber-400 font-bold">★ 4.9</span>
-              <button type="button" onclick="prepararBusqueda('Madidi', 'agencias')" class="text-xs font-bold text-red-400 hover:text-red-300 inline-flex items-center gap-1 cursor-pointer">Ver operadores →</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Destino 4 -->
-        <div class="destino-card snap-start shrink-0 w-[85%] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] bg-slate-800/80 border border-slate-700/80 rounded-3xl overflow-hidden shadow-2xl group flex flex-col">
-          <div class="relative h-48 overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1526772662000-3f88f10405ff?auto=format&fit=crop&w=800&q=80" alt="Ruta del Vino Tarija" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-            <span class="absolute top-3 left-3 bg-red-600 text-white text-[10px] font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider shadow">Valles del Sur</span>
-          </div>
-          <div class="p-6 flex flex-col grow justify-between">
-            <div>
-              <h3 class="text-xl font-bold text-white group-hover:text-red-400 transition-colors">Ruta del Vino & Singani</h3>
-              <p class="text-xs text-slate-400 mt-2 leading-relaxed">Bodegas a más de 2.000 metros de altura, catas y un clima templado casi todo el año.</p>
-            </div>
-            <div class="mt-6 pt-4 border-t border-slate-700/60 flex items-center justify-between">
-              <span class="text-xs text-amber-400 font-bold">★ 5.0</span>
-              <button type="button" onclick="prepararBusqueda('Tarija', 'servicios-especiales')" class="text-xs font-bold text-red-400 hover:text-red-300 inline-flex items-center gap-1 cursor-pointer">Ver experiencias →</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Destino 5 -->
-        <div class="destino-card snap-start shrink-0 w-[85%] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] bg-slate-800/80 border border-slate-700/80 rounded-3xl overflow-hidden shadow-2xl group flex flex-col">
-          <div class="relative h-48 overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80" alt="Conexiones Internacionales" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-            <span class="absolute top-3 left-3 bg-red-600 text-white text-[10px] font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider shadow">Internacional</span>
-          </div>
-          <div class="p-6 flex flex-col grow justify-between">
-            <div>
-              <h3 class="text-xl font-bold text-white group-hover:text-red-400 transition-colors">Conexiones con Sudamérica</h3>
-              <p class="text-xs text-slate-400 mt-2 leading-relaxed">Rutas y alianzas que conectan Bolivia con los países vecinos y con agencias del exterior.</p>
-            </div>
-            <div class="mt-6 pt-4 border-t border-slate-700/60 flex items-center justify-between">
-              <span class="text-xs text-amber-400 font-bold">★ 4.8</span>
-              <button type="button" onclick="prepararBusqueda('Internacional', 'operadores')" class="text-xs font-bold text-red-400 hover:text-red-300 inline-flex items-center gap-1 cursor-pointer">Ver red internacional →</button>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ========================================================= -->
-  <!-- 4. SECCIÓN FUNDADORES (Evolución de Socios - 5 Tarjetas)  -->
-  <!-- ========================================================= -->
-  <section id="fundadores" class="max-w-6xl mx-auto px-4 py-16 sm:py-24 scroll-mt-20 border-t border-slate-200">
-    <div class="text-center max-w-2xl mx-auto mb-12">
-      <span class="text-xs font-bold uppercase tracking-widest text-red-700 bg-red-50 border border-red-200 px-3 py-1 rounded-full">Institucional</span>
-      <h2 class="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight mt-3">
-        Fundadores
-      </h2>
-      <p class="text-sm text-slate-500 mt-2">
-        Entidades y empresas impulsoras que respaldan y consolidan la Guía Internacional de Turismo.
-      </p>
-    </div>
-
-    <!-- Grid de 5 tarjetas 3D Flip Card -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-      
-      <!-- Fundador 1: SCATUR -->
-      <div class="flip-card h-48 cursor-pointer select-none group" onclick="this.classList.toggle('flipped')">
-        <div class="flip-card-inner">
-          <div class="flip-card-front bg-white border border-slate-200/90 rounded-2xl p-5 flex items-center justify-center shadow-sm hover:shadow-md transition-shadow">
-            <h3 class="text-lg font-black text-slate-900 tracking-wider">SCATUR</h3>
-          </div>
-          <div class="flip-card-back bg-[#0F1422] text-white border border-slate-700/60 rounded-2xl p-5 flex flex-col justify-center text-left shadow-xl">
-            <h4 class="font-bold text-sm text-white mb-1">SCATUR</h4>
-            <p class="text-[11px] text-slate-300 leading-relaxed font-light">Cámara y motor de desarrollo para el turismo receptivo y corporativo de la región.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Fundador 2: AGB -->
-      <div class="flip-card h-48 cursor-pointer select-none group" onclick="this.classList.toggle('flipped')">
-        <div class="flip-card-inner">
-          <div class="flip-card-front bg-white border border-slate-200/90 rounded-2xl p-5 flex items-center justify-center shadow-sm hover:shadow-md transition-shadow">
-            <h3 class="text-lg font-black text-slate-900 tracking-wider">AGB</h3>
-          </div>
-          <div class="flip-card-back bg-[#0F1422] text-white border border-slate-700/60 rounded-2xl p-5 flex flex-col justify-center text-left shadow-xl">
-            <h4 class="font-bold text-sm text-white mb-1">AGB</h4>
-            <p class="text-[11px] text-slate-300 leading-relaxed font-light">Asociación gremial de agencias de viaje con altos estándares de calidad y acreditación.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Fundador 3: BLACKBULLS -->
-      <div class="flip-card h-48 cursor-pointer select-none group" onclick="this.classList.toggle('flipped')">
-        <div class="flip-card-inner">
-          <div class="flip-card-front bg-white border border-slate-200/90 rounded-2xl p-5 flex items-center justify-center shadow-sm hover:shadow-md transition-shadow">
-            <h3 class="text-lg font-black text-slate-900 tracking-wider">BLACKBULLS</h3>
-          </div>
-          <div class="flip-card-back bg-[#0F1422] text-white border border-slate-700/60 rounded-2xl p-5 flex flex-col justify-center text-left shadow-xl">
-            <h4 class="font-bold text-sm text-white mb-1">BLACKBULLS</h4>
-            <p class="text-[11px] text-slate-300 leading-relaxed font-light">Innovación tecnológica, logística y soporte operativo de alta gama para expediciones.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Fundador 4: DOMOS -->
-      <div class="flip-card h-48 cursor-pointer select-none group" onclick="this.classList.toggle('flipped')">
-        <div class="flip-card-inner">
-          <div class="flip-card-front bg-white border border-slate-200/90 rounded-2xl p-5 flex items-center justify-center shadow-sm hover:shadow-md transition-shadow">
-            <h3 class="text-lg font-black text-slate-900 tracking-wider">DOMOS</h3>
-          </div>
-          <div class="flip-card-back bg-[#0F1422] text-white border border-slate-700/60 rounded-2xl p-5 flex flex-col justify-center text-left shadow-xl">
-            <h4 class="font-bold text-sm text-white mb-1">DOMOS</h4>
-            <p class="text-[11px] text-slate-300 leading-relaxed font-light">Arquitectura sostenible y hospedaje experiencial en entornos naturales protegidos.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Fundador 5: TIP -->
-      <div class="flip-card h-48 cursor-pointer select-none group sm:col-span-2 lg:col-span-1" onclick="this.classList.toggle('flipped')">
-        <div class="flip-card-inner">
-          <div class="flip-card-front bg-white border border-slate-200/90 rounded-2xl p-5 flex items-center justify-center shadow-sm hover:shadow-md transition-shadow">
-            <h3 class="text-lg font-black text-slate-900 tracking-wider">TIP</h3>
-          </div>
-          <div class="flip-card-back bg-[#0F1422] text-white border border-slate-700/60 rounded-2xl p-5 flex flex-col justify-center text-left shadow-xl">
-            <h4 class="font-bold text-sm text-white mb-1">TIP</h4>
-            <p class="text-[11px] text-slate-300 leading-relaxed font-light">Plataforma de articulación internacional y certificación turística de excelencia.</p>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-
-  <!-- ========================================================= -->
-  <!-- 5. SECCIÓN EMPRESAS Y ALIADOS UNIFICADOS (Marquee Infinito) -->
-  <!-- ========================================================= -->
-  <section id="empresas" class="py-16 bg-white border-t border-slate-200 overflow-hidden scroll-mt-20">
-    <div class="max-w-6xl mx-auto px-4 mb-8 text-center">
-      <h2 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
-        Empresas que ya forman parte
-      </h2>
-      <p class="text-sm text-slate-600 mt-2 max-w-lg mx-auto">
-        Operadoras, agencias y aliados que confían en la guía para llegar a más viajeros.
-      </p>
-    </div>
-
-    <!-- Carrusel Marquee Infinito (Overflow hidden) -->
-    <div class="relative w-full overflow-hidden py-4 bg-slate-50 border-y border-slate-200">
-      <div class="animate-marquee flex items-center gap-12 whitespace-nowrap">
-        
-        <div class="flex items-center gap-12 shrink-0">
-          <div class="px-6 py-3 bg-white rounded-xl shadow-sm border border-slate-200 font-extrabold text-slate-700 text-sm tracking-wider">ANDEAN TRAVEL</div>
-          <div class="px-6 py-3 bg-white rounded-xl shadow-sm border border-slate-200 font-extrabold text-slate-700 text-sm tracking-wider">PACIFIC EXPEDITIONS</div>
-          <div class="px-6 py-3 bg-white rounded-xl shadow-sm border border-slate-200 font-extrabold text-slate-700 text-sm tracking-wider">BOLIVIA WONDER</div>
-          <div class="px-6 py-3 bg-white rounded-xl shadow-sm border border-slate-200 font-extrabold text-slate-700 text-sm tracking-wider">ECOSHELTER SRL</div>
-          <div class="px-6 py-3 bg-white rounded-xl shadow-sm border border-slate-200 font-extrabold text-slate-700 text-sm tracking-wider">MERIDIAN TOUR</div>
-          <div class="px-6 py-3 bg-white rounded-xl shadow-sm border border-slate-200 font-extrabold text-slate-700 text-sm tracking-wider">GLOBAL TRANS</div>
-          <div class="px-6 py-3 bg-white rounded-xl shadow-sm border border-slate-200 font-extrabold text-slate-700 text-sm tracking-wider">ALTIPLANO DMC</div>
-          <div class="px-6 py-3 bg-white rounded-xl shadow-sm border border-slate-200 font-extrabold text-slate-700 text-sm tracking-wider">CHILE TOURIST</div>
-          <div class="px-6 py-3 bg-white rounded-xl shadow-sm border border-slate-200 font-extrabold text-slate-700 text-sm tracking-wider">AMAZONIA WILD</div>
-          <div class="px-6 py-3 bg-white rounded-xl shadow-sm border border-slate-200 font-extrabold text-slate-700 text-sm tracking-wider">SOUTHERN CROSS</div>
-        </div>
-
-        <div class="flex items-center gap-12 shrink-0" aria-hidden="true">
-          <div class="px-6 py-3 bg-white rounded-xl shadow-sm border border-slate-200 font-extrabold text-slate-700 text-sm tracking-wider">ANDEAN TRAVEL</div>
-          <div class="px-6 py-3 bg-white rounded-xl shadow-sm border border-slate-200 font-extrabold text-slate-700 text-sm tracking-wider">PACIFIC EXPEDITIONS</div>
-          <div class="px-6 py-3 bg-white rounded-xl shadow-sm border border-slate-200 font-extrabold text-slate-700 text-sm tracking-wider">BOLIVIA WONDER</div>
-          <div class="px-6 py-3 bg-white rounded-xl shadow-sm border border-slate-200 font-extrabold text-slate-700 text-sm tracking-wider">ECOSHELTER SRL</div>
-          <div class="px-6 py-3 bg-white rounded-xl shadow-sm border border-slate-200 font-extrabold text-slate-700 text-sm tracking-wider">MERIDIAN TOUR</div>
-          <div class="px-6 py-3 bg-white rounded-xl shadow-sm border border-slate-200 font-extrabold text-slate-700 text-sm tracking-wider">GLOBAL TRANS</div>
-          <div class="px-6 py-3 bg-white rounded-xl shadow-sm border border-slate-200 font-extrabold text-slate-700 text-sm tracking-wider">ALTIPLANO DMC</div>
-          <div class="px-6 py-3 bg-white rounded-xl shadow-sm border border-slate-200 font-extrabold text-slate-700 text-sm tracking-wider">CHILE TOURIST</div>
-          <div class="px-6 py-3 bg-white rounded-xl shadow-sm border border-slate-200 font-extrabold text-slate-700 text-sm tracking-wider">AMAZONIA WILD</div>
-          <div class="px-6 py-3 bg-white rounded-xl shadow-sm border border-slate-200 font-extrabold text-slate-700 text-sm tracking-wider">SOUTHERN CROSS</div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ========================================================= -->
-  <!-- 6. SECCIÓN MAPA INTERACTIVO 2D (Restaurado 100%)          -->
+  <!-- 3. SECCIÓN MAPA INTERACTIVO 2D                           -->
   <!-- ========================================================= -->
   <section id="seccion-mapa" class="relative min-h-[calc(100vh-4rem)] flex flex-col justify-between items-center px-4 py-8 sm:py-10 bg-[#07090E] text-white overflow-hidden scroll-mt-16 border-t border-slate-800">
     
@@ -687,7 +394,7 @@
     </div>
 
     <!-- Indicador de Scroll -->
-    <div class="relative z-10 flex flex-col items-center gap-1.5 cursor-pointer pb-2 text-slate-400 hover:text-white transition-colors select-none mt-3" onclick="document.getElementById('nosotros').scrollIntoView({ behavior: 'smooth' });">
+    <div class="relative z-10 flex flex-col items-center gap-1.5 cursor-pointer pb-2 text-slate-400 hover:text-white transition-colors select-none mt-3" onclick="document.getElementById('destinos').scrollIntoView({ behavior: 'smooth' });">
       <span class="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-slate-400">Seguir</span>
       <div class="w-8 h-8 rounded-full border border-white/20 bg-white/5 backdrop-blur-md flex items-center justify-center shadow-lg hover:border-white/50 transition-colors">
         <svg class="w-4 h-4 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -762,118 +469,293 @@
 
 
   <!-- ========================================================= -->
-  <!-- 7. SECCIÓN NOSOTROS                                       -->
+  <!-- 4. SECCIÓN DESTINOS (Carrusel)                          -->
   <!-- ========================================================= -->
-  <section id="nosotros" class="max-w-6xl mx-auto px-4 py-16 sm:py-24 scroll-mt-20">
-    <div class="text-center max-w-2xl mx-auto mb-16">
-      <span class="text-xs font-bold uppercase tracking-widest text-red-700 bg-red-50 border border-red-200 px-3 py-1 rounded-full">Institución</span>
-      <h2 class="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight mt-3">
-        Sobre Nosotros
+  <section id="destinos" class="py-16 sm:py-24 bg-slate-100 text-slate-900 overflow-hidden scroll-mt-20">
+    <!-- EJEMPLO: las calificaciones (★) son datos de prueba; sustituir por datos reales o quitar -->
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+        <div class="max-w-2xl">
+          <h2 class="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
+            Destinos para empezar
+          </h2>
+          <p class="text-sm sm:text-base text-slate-600 mt-3">
+            Del altiplano a la selva y los valles: lugares que muestran lo diverso que es Bolivia.
+          </p>
+        </div>
+        <!-- Controles del Carrusel -->
+        <div class="flex items-center justify-center gap-2 shrink-0">
+          <button type="button" onclick="moverCarruselDestinos(-1)" class="w-10 h-10 rounded-xl bg-white hover:bg-slate-50 border border-slate-300 flex items-center justify-center active:scale-[0.97] transition duration-150 cursor-pointer" aria-label="Destino anterior">
+            <svg class="w-5 h-5 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+          </button>
+          <button type="button" onclick="moverCarruselDestinos(1)" class="w-10 h-10 rounded-xl bg-white hover:bg-slate-50 border border-slate-300 flex items-center justify-center active:scale-[0.97] transition duration-150 cursor-pointer" aria-label="Destino siguiente">
+            <svg class="w-5 h-5 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Track del Carrusel (scroll-snap fluido, sin desbordes) -->
+      <div id="carrusel-destinos" class="flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar py-2">
+        
+        <!-- Destino 1 -->
+        <div class="destino-card snap-start shrink-0 w-[85%] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow group flex flex-col">
+          <div class="relative h-48 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1589556264800-08ae9e129a8c?auto=format&fit=crop&w=800&q=80" alt="Salar de Uyuni" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+            <span class="absolute top-3 left-3 bg-red-600 text-white text-[10px] font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider shadow">Bolivia</span>
+          </div>
+          <div class="p-6 flex flex-col grow justify-between">
+            <div>
+              <h3 class="text-xl font-bold text-slate-900 group-hover:text-red-700 transition-colors">Salar de Uyuni</h3>
+              <p class="text-sm text-slate-600 mt-2 leading-relaxed">El desierto de sal más grande del mundo: espejos de agua, hoteles de sal y travesías en 4x4.</p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-slate-200 flex items-center justify-between">
+              <span data-ejemplo="calificacion" class="text-xs text-amber-700 font-bold">★ 4.9</span>
+              <button type="button" onclick="prepararBusqueda('Uyuni', 'agencias')" class="text-xs font-bold text-red-700 hover:text-red-800 inline-flex items-center gap-1 cursor-pointer">Ver operadores →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Destino 2 -->
+        <div class="destino-card snap-start shrink-0 w-[85%] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow group flex flex-col">
+          <div class="relative h-48 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=800&q=80" alt="Lago Titicaca" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+            <span class="absolute top-3 left-3 bg-red-600 text-white text-[10px] font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider shadow">Bolivia / Perú</span>
+          </div>
+          <div class="p-6 flex flex-col grow justify-between">
+            <div>
+              <h3 class="text-xl font-bold text-slate-900 group-hover:text-red-700 transition-colors">Lago Titicaca & Copacabana</h3>
+              <p class="text-sm text-slate-600 mt-2 leading-relaxed">El lago navegable más alto del planeta. Isla del Sol, cultura viva y hospedajes comunitarios.</p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-slate-200 flex items-center justify-between">
+              <span data-ejemplo="calificacion" class="text-xs text-amber-700 font-bold">★ 4.8</span>
+              <button type="button" onclick="prepararBusqueda('Copacabana', 'hoteles')" class="text-xs font-bold text-red-700 hover:text-red-800 inline-flex items-center gap-1 cursor-pointer">Ver hoteles →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Destino 3 -->
+        <div class="destino-card snap-start shrink-0 w-[85%] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow group flex flex-col">
+          <div class="relative h-48 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=800&q=80" alt="Parque Madidi" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+            <span class="absolute top-3 left-3 bg-red-600 text-white text-[10px] font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider shadow">Amazonía</span>
+          </div>
+          <div class="p-6 flex flex-col grow justify-between">
+            <div>
+              <h3 class="text-xl font-bold text-slate-900 group-hover:text-red-700 transition-colors">Parque Nacional Madidi</h3>
+              <p class="text-sm text-slate-600 mt-2 leading-relaxed">Una de las zonas con más biodiversidad del mundo. Ecolodges en plena selva y expediciones de fauna y flora.</p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-slate-200 flex items-center justify-between">
+              <span data-ejemplo="calificacion" class="text-xs text-amber-700 font-bold">★ 4.9</span>
+              <button type="button" onclick="prepararBusqueda('Madidi', 'agencias')" class="text-xs font-bold text-red-700 hover:text-red-800 inline-flex items-center gap-1 cursor-pointer">Ver operadores →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Destino 4 -->
+        <div class="destino-card snap-start shrink-0 w-[85%] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow group flex flex-col">
+          <div class="relative h-48 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1526772662000-3f88f10405ff?auto=format&fit=crop&w=800&q=80" alt="Ruta del Vino Tarija" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+            <span class="absolute top-3 left-3 bg-red-600 text-white text-[10px] font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider shadow">Valles del Sur</span>
+          </div>
+          <div class="p-6 flex flex-col grow justify-between">
+            <div>
+              <h3 class="text-xl font-bold text-slate-900 group-hover:text-red-700 transition-colors">Ruta del Vino & Singani</h3>
+              <p class="text-sm text-slate-600 mt-2 leading-relaxed">Bodegas a más de 2.000 metros de altura, catas y un clima templado casi todo el año.</p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-slate-200 flex items-center justify-between">
+              <span data-ejemplo="calificacion" class="text-xs text-amber-700 font-bold">★ 5.0</span>
+              <button type="button" onclick="prepararBusqueda('Tarija', 'servicios-especiales')" class="text-xs font-bold text-red-700 hover:text-red-800 inline-flex items-center gap-1 cursor-pointer">Ver experiencias →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Destino 5 -->
+        <div class="destino-card snap-start shrink-0 w-[85%] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow group flex flex-col">
+          <div class="relative h-48 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80" alt="Conexiones Internacionales" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+            <span class="absolute top-3 left-3 bg-red-600 text-white text-[10px] font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider shadow">Internacional</span>
+          </div>
+          <div class="p-6 flex flex-col grow justify-between">
+            <div>
+              <h3 class="text-xl font-bold text-slate-900 group-hover:text-red-700 transition-colors">Conexiones con Sudamérica</h3>
+              <p class="text-sm text-slate-600 mt-2 leading-relaxed">Rutas y alianzas que conectan Bolivia con los países vecinos y con agencias del exterior.</p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-slate-200 flex items-center justify-between">
+              <span data-ejemplo="calificacion" class="text-xs text-amber-700 font-bold">★ 4.8</span>
+              <button type="button" onclick="prepararBusqueda('Internacional', 'operadores')" class="text-xs font-bold text-red-700 hover:text-red-800 inline-flex items-center gap-1 cursor-pointer">Ver red internacional →</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================= -->
+  <!-- 5. SECCIÓN EMPRESAS Y ALIADOS (Marquee)                  -->
+  <!-- ========================================================= -->
+  <!-- EJEMPLO: los nombres de empresas son de prueba; sustituir por los logos reales -->
+  <section id="empresas" class="py-16 bg-white border-t border-slate-200 overflow-hidden scroll-mt-20">
+    <div class="max-w-6xl mx-auto px-4 mb-8 text-center">
+      <h2 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+        Empresas que ya forman parte
       </h2>
-      <p class="text-sm text-slate-500 mt-2">
-        Conoce nuestra misión, visión y los valores que guían la plataforma turística global.
+      <p class="text-sm text-slate-600 mt-2 max-w-lg mx-auto">
+        Operadoras, agencias y aliados que confían en la guía para llegar a más viajeros.
       </p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <div class="bg-white border border-slate-200/90 rounded-3xl p-8 shadow-sm hover:shadow-md transition-shadow">
-        <div class="w-12 h-12 rounded-2xl bg-red-50 text-red-700 flex items-center justify-center font-bold mb-6">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+    <!-- Carrusel Marquee Infinito (Overflow hidden) -->
+    <div class="relative w-full overflow-hidden py-4 bg-slate-50 border-y border-slate-200">
+      <div class="animate-marquee flex items-center gap-12 whitespace-nowrap">
+        
+        <div class="flex items-center gap-12 shrink-0">
+          <div class="px-6 py-3 bg-white rounded-xl shadow-sm border border-slate-200 font-extrabold text-slate-700 text-sm tracking-wider">ANDEAN TRAVEL</div>
+          <div class="px-6 py-3 bg-white rounded-xl shadow-sm border border-slate-200 font-extrabold text-slate-700 text-sm tracking-wider">PACIFIC EXPEDITIONS</div>
+          <div class="px-6 py-3 bg-white rounded-xl shadow-sm border border-slate-200 font-extrabold text-slate-700 text-sm tracking-wider">BOLIVIA WONDER</div>
+          <div class="px-6 py-3 bg-white rounded-xl shadow-sm border border-slate-200 font-extrabold text-slate-700 text-sm tracking-wider">ECOSHELTER SRL</div>
+          <div class="px-6 py-3 bg-white rounded-xl shadow-sm border border-slate-200 font-extrabold text-slate-700 text-sm tracking-wider">MERIDIAN TOUR</div>
+          <div class="px-6 py-3 bg-white rounded-xl shadow-sm border border-slate-200 font-extrabold text-slate-700 text-sm tracking-wider">GLOBAL TRANS</div>
+          <div class="px-6 py-3 bg-white rounded-xl shadow-sm border border-slate-200 font-extrabold text-slate-700 text-sm tracking-wider">ALTIPLANO DMC</div>
+          <div class="px-6 py-3 bg-white rounded-xl shadow-sm border border-slate-200 font-extrabold text-slate-700 text-sm tracking-wider">CHILE TOURIST</div>
+          <div class="px-6 py-3 bg-white rounded-xl shadow-sm border border-slate-200 font-extrabold text-slate-700 text-sm tracking-wider">AMAZONIA WILD</div>
+          <div class="px-6 py-3 bg-white rounded-xl shadow-sm border border-slate-200 font-extrabold text-slate-700 text-sm tracking-wider">SOUTHERN CROSS</div>
         </div>
-        <h3 class="text-xl font-bold text-slate-900">Nuestra Misión</h3>
-        <p class="text-xs sm:text-sm text-slate-500 mt-3 leading-relaxed">
-          Articular y conectar de forma directa a viajeros, operadores y agencias turísticas globales, eliminando intermediarios y promoviendo un turismo certificado, seguro y descentralizado.
-        </p>
-      </div>
 
-      <div class="bg-white border border-slate-200/90 rounded-3xl p-8 shadow-sm hover:shadow-md transition-shadow">
-        <div class="w-12 h-12 rounded-2xl bg-red-50 text-red-700 flex items-center justify-center font-bold mb-6">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+        <div class="flex items-center gap-12 shrink-0" aria-hidden="true">
+          <div class="px-6 py-3 bg-white rounded-xl shadow-sm border border-slate-200 font-extrabold text-slate-700 text-sm tracking-wider">ANDEAN TRAVEL</div>
+          <div class="px-6 py-3 bg-white rounded-xl shadow-sm border border-slate-200 font-extrabold text-slate-700 text-sm tracking-wider">PACIFIC EXPEDITIONS</div>
+          <div class="px-6 py-3 bg-white rounded-xl shadow-sm border border-slate-200 font-extrabold text-slate-700 text-sm tracking-wider">BOLIVIA WONDER</div>
+          <div class="px-6 py-3 bg-white rounded-xl shadow-sm border border-slate-200 font-extrabold text-slate-700 text-sm tracking-wider">ECOSHELTER SRL</div>
+          <div class="px-6 py-3 bg-white rounded-xl shadow-sm border border-slate-200 font-extrabold text-slate-700 text-sm tracking-wider">MERIDIAN TOUR</div>
+          <div class="px-6 py-3 bg-white rounded-xl shadow-sm border border-slate-200 font-extrabold text-slate-700 text-sm tracking-wider">GLOBAL TRANS</div>
+          <div class="px-6 py-3 bg-white rounded-xl shadow-sm border border-slate-200 font-extrabold text-slate-700 text-sm tracking-wider">ALTIPLANO DMC</div>
+          <div class="px-6 py-3 bg-white rounded-xl shadow-sm border border-slate-200 font-extrabold text-slate-700 text-sm tracking-wider">CHILE TOURIST</div>
+          <div class="px-6 py-3 bg-white rounded-xl shadow-sm border border-slate-200 font-extrabold text-slate-700 text-sm tracking-wider">AMAZONIA WILD</div>
+          <div class="px-6 py-3 bg-white rounded-xl shadow-sm border border-slate-200 font-extrabold text-slate-700 text-sm tracking-wider">SOUTHERN CROSS</div>
         </div>
-        <h3 class="text-xl font-bold text-slate-900">Nuestra Visión</h3>
-        <p class="text-xs sm:text-sm text-slate-500 mt-3 leading-relaxed">
-          Ser la guía de referencia internacional más confiable y moderna para la difusión del turismo receptivo, corporativo y comunitario en Sudamérica y el mundo.
-        </p>
-      </div>
 
-      <div class="bg-white border border-slate-200/90 rounded-3xl p-8 shadow-sm hover:shadow-md transition-shadow">
-        <div class="w-12 h-12 rounded-2xl bg-red-50 text-red-700 flex items-center justify-center font-bold mb-6">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-        </div>
-        <h3 class="text-xl font-bold text-slate-900">Nuestros Valores</h3>
-        <p class="text-xs sm:text-sm text-slate-500 mt-3 leading-relaxed">
-          Transparencia operativa, validación rigurosa de acreditaciones, compromiso con el desarrollo sostenible local y accesibilidad digital sin comisiones ocultas.
-        </p>
       </div>
     </div>
   </section>
 
 
   <!-- ========================================================= -->
-  <!-- 8. SECCIÓN RECONOCIMIENTOS                                -->
+  <!-- 6. SECCIÓN INSTITUCIONAL: NOSOTROS Y FUNDADORES         -->
   <!-- ========================================================= -->
-  <section id="reconocimientos" class="bg-slate-50 border-t border-slate-200 py-16 sm:py-24 scroll-mt-20">
-    <div class="max-w-6xl mx-auto px-4">
-      <div class="text-center max-w-2xl mx-auto mb-12">
-        <span class="text-xs font-bold uppercase tracking-widest text-red-700 bg-red-50 border border-red-200 px-3 py-1 rounded-full">Premios & Calidad</span>
-        <h2 class="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight mt-3">
-          Reconocimientos Oficiales
+  <!-- PENDIENTE: confirmar nombre completo y descripción de cada fundador -->
+  <section id="nosotros" class="max-w-6xl mx-auto px-4 py-16 sm:py-24 scroll-mt-20 border-t border-slate-200">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+
+      <div class="lg:col-span-5">
+        <h2 class="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
+          Una guía hecha por el propio sector
         </h2>
-        <p class="text-sm text-slate-500 mt-2">
-          Certificaciones, trofeos e insignias otorgadas por ferias internacionales y cámaras de turismo.
+        <p class="text-sm sm:text-base text-slate-600 mt-3 leading-relaxed">
+          Nació de la unión de entidades y empresas del turismo boliviano para que viajeros y empresas se encuentren de forma directa.
         </p>
+
+        <dl class="mt-8 pt-8 border-t border-slate-200 space-y-6">
+          <div>
+            <dt class="text-xs font-bold uppercase tracking-wider text-red-700">Misión</dt>
+            <dd class="text-sm sm:text-base text-slate-700 mt-1.5 leading-relaxed">Conectar a viajeros con operadores, agencias y servicios turísticos verificados, sin intermediarios.</dd>
+          </div>
+          <div>
+            <dt class="text-xs font-bold uppercase tracking-wider text-red-700">Visión</dt>
+            <dd class="text-sm sm:text-base text-slate-700 mt-1.5 leading-relaxed">Ser la guía de referencia del turismo boliviano y su puerta de entrada a Sudamérica.</dd>
+          </div>
+          <div>
+            <dt class="text-xs font-bold uppercase tracking-wider text-red-700">Valores</dt>
+            <dd class="text-sm sm:text-base text-slate-700 mt-1.5 leading-relaxed">Transparencia, verificación de cada acreditación, desarrollo sostenible de las comunidades y acceso sin comisiones ocultas.</dd>
+          </div>
+        </dl>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div class="bg-white border border-slate-200/90 rounded-3xl p-6 shadow-sm flex items-start gap-4">
-          <div class="w-12 h-12 rounded-2xl bg-amber-50 text-amber-700 flex items-center justify-center font-bold shrink-0">🏆</div>
-          <div>
-            <span class="text-[10px] font-extrabold uppercase tracking-wider text-amber-700 bg-amber-50 px-2 py-0.5 rounded">Feria Internacional TIB</span>
-            <h3 class="text-base font-bold text-slate-900 mt-1">Premio a la Innovación Digital</h3>
-            <p class="text-xs text-slate-500 mt-1 leading-relaxed">Otorgado por la excelencia en la plataforma de directorios turísticos sin intermediarios.</p>
-          </div>
-        </div>
-
-        <div class="bg-white border border-slate-200/90 rounded-3xl p-6 shadow-sm flex items-start gap-4">
-          <div class="w-12 h-12 rounded-2xl bg-amber-50 text-amber-700 flex items-center justify-center font-bold shrink-0">🏅</div>
-          <div>
-            <span class="text-[10px] font-extrabold uppercase tracking-wider text-amber-700 bg-amber-50 px-2 py-0.5 rounded">Sello de Excelencia TIP</span>
-            <h3 class="text-base font-bold text-slate-900 mt-1">Certificación Operativa 2026</h3>
-            <p class="text-xs text-slate-500 mt-1 leading-relaxed">Aval institucional que garantiza la seguridad y formalidad de los operadores afiliados.</p>
-          </div>
-        </div>
-
-        <div class="bg-white border border-slate-200/90 rounded-3xl p-6 shadow-sm flex items-start gap-4">
-          <div class="w-12 h-12 rounded-2xl bg-amber-50 text-amber-700 flex items-center justify-center font-bold shrink-0">⭐</div>
-          <div>
-            <span class="text-[10px] font-extrabold uppercase tracking-wider text-amber-700 bg-amber-50 px-2 py-0.5 rounded">Cámara de Turismo</span>
-            <h3 class="text-base font-bold text-slate-900 mt-1">Reconocimiento al Mérito Turístico</h3>
-            <p class="text-xs text-slate-500 mt-1 leading-relaxed">Distinción por la promoción activa del turismo receptivo y sostenible en Sudamérica.</p>
-          </div>
-        </div>
+      <div id="fundadores" class="lg:col-span-7 scroll-mt-20">
+        <h3 class="text-sm font-bold uppercase tracking-wider text-slate-500">Quiénes la impulsan</h3>
+        <ul class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <li class="bg-white border border-slate-200 rounded-xl p-5">
+          <h4 class="text-lg font-black text-slate-900 tracking-wide">SCATUR</h4>
+          <p data-pendiente="descripcion" class="text-sm text-slate-600 mt-1.5 leading-relaxed">Cámara que impulsa el turismo receptivo y corporativo de la región.</p>
+        </li>
+        <li class="bg-white border border-slate-200 rounded-xl p-5">
+          <h4 class="text-lg font-black text-slate-900 tracking-wide">AGB</h4>
+          <p data-pendiente="descripcion" class="text-sm text-slate-600 mt-1.5 leading-relaxed">Asociación gremial de agencias de viaje, con acreditación y estándares de calidad.</p>
+        </li>
+        <li class="bg-white border border-slate-200 rounded-xl p-5">
+          <h4 class="text-lg font-black text-slate-900 tracking-wide">BLACKBULLS</h4>
+          <p data-pendiente="descripcion" class="text-sm text-slate-600 mt-1.5 leading-relaxed">Tecnología, logística y soporte operativo para expediciones.</p>
+        </li>
+        <li class="bg-white border border-slate-200 rounded-xl p-5">
+          <h4 class="text-lg font-black text-slate-900 tracking-wide">DOMOS</h4>
+          <p data-pendiente="descripcion" class="text-sm text-slate-600 mt-1.5 leading-relaxed">Arquitectura sostenible y hospedaje en entornos naturales protegidos.</p>
+        </li>
+        <li class="bg-white border border-slate-200 rounded-xl p-5 sm:col-span-2">
+          <h4 class="text-lg font-black text-slate-900 tracking-wide">TIP</h4>
+          <p data-pendiente="descripcion" class="text-sm text-slate-600 mt-1.5 leading-relaxed">Plataforma que articula y certifica el turismo a nivel internacional.</p>
+        </li>
+        </ul>
       </div>
+
     </div>
   </section>
 
 
   <!-- ========================================================= -->
-  <!-- 9. SECCIÓN QR Y REGISTRO DE EMPRESA                       -->
+  <!-- 7. SECCIÓN RECONOCIMIENTOS                                -->
+  <!-- ========================================================= -->
+  <!-- EJEMPLO: los reconocimientos son datos de prueba; sustituir por los reales (con fecha y fuente) o quitar la sección -->
+  <section id="reconocimientos" class="bg-slate-100 border-t border-slate-200 py-16 sm:py-24 scroll-mt-20">
+    <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
+      <div class="lg:col-span-4">
+        <h2 class="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
+          Reconocimientos
+        </h2>
+        <p class="text-sm sm:text-base text-slate-600 mt-3 leading-relaxed">
+          Distinciones que respaldan a la guía y a las empresas que forman parte de ella.
+        </p>
+      </div>
+      <ul class="lg:col-span-8 space-y-8">
+        <li data-ejemplo="reconocimiento" class="border-l-2 border-red-700 pl-5">
+          <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Feria Internacional TIB</p>
+          <h3 class="text-lg font-bold text-slate-900 mt-1">Premio a la Innovación Digital</h3>
+          <p class="text-sm text-slate-600 mt-1.5 leading-relaxed">Otorgado por la plataforma de directorios turísticos sin intermediarios.</p>
+        </li>
+        <li data-ejemplo="reconocimiento" class="border-l-2 border-red-700 pl-5">
+          <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Sello de Excelencia TIP</p>
+          <h3 class="text-lg font-bold text-slate-900 mt-1">Certificación Operativa 2026</h3>
+          <p class="text-sm text-slate-600 mt-1.5 leading-relaxed">Aval institucional sobre la seguridad y formalidad de los operadores afiliados.</p>
+        </li>
+        <li data-ejemplo="reconocimiento" class="border-l-2 border-red-700 pl-5">
+          <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Cámara de Turismo</p>
+          <h3 class="text-lg font-bold text-slate-900 mt-1">Reconocimiento al Mérito Turístico</h3>
+          <p class="text-sm text-slate-600 mt-1.5 leading-relaxed">Distinción por la promoción del turismo receptivo y sostenible en Sudamérica.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+
+  <!-- ========================================================= -->
+  <!-- 8. SECCIÓN REGISTRO DE EMPRESA                             -->
   <!-- ========================================================= -->
   <section id="seccion-registro" class="relative max-w-6xl mx-auto px-4 py-16 sm:py-24 scroll-mt-20">
-    <div class="bg-gradient-to-br from-slate-900 via-slate-800 to-red-950 rounded-3xl text-white p-8 sm:p-12 shadow-2xl relative overflow-hidden border border-slate-700">
-      <div class="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.08)_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none"></div>
+    <div class="bg-slate-900 rounded-2xl text-white p-8 sm:p-12 relative overflow-hidden">
 
       <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
         <div class="lg:col-span-7 space-y-4 text-left">
-          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-red-600 text-white uppercase tracking-wider shadow-md">
-            Directorio Abierto
-          </span>
           <h2 class="text-2xl sm:text-4xl font-black tracking-tight leading-tight">
-            ¿Tienes una empresa o agencia de turismo?
+            Tu empresa merece que la encuentren
           </h2>
-          <p class="text-xs sm:text-sm text-slate-300 font-light leading-relaxed max-w-xl">
-            Regístrate ahora en la <strong>Guía Internacional de Turismo</strong> y conecta directamente con miles de viajeros internacionales sin comisiones ni intermediarios.
+          <p class="text-sm sm:text-base text-slate-300 leading-relaxed max-w-xl">
+            Súmala a la Guía Internacional de Turismo y llega a viajeros de Bolivia y del mundo, sin comisiones ni intermediarios.
           </p>
+          <ul class="text-sm text-slate-200 space-y-2 pt-1">
+            <li class="flex items-start gap-2"><span class="text-amber-400 mt-0.5" aria-hidden="true">✓</span><span>Contacto directo con el viajero, sin comisiones</span></li>
+            <li class="flex items-start gap-2"><span class="text-amber-400 mt-0.5" aria-hidden="true">✓</span><span>Tu acreditación verificada y visible en tu ficha</span></li>
+            <li class="flex items-start gap-2"><span class="text-amber-400 mt-0.5" aria-hidden="true">✓</span><span>Presencia en el mapa y en la categoría que te corresponde</span></li>
+          </ul>
 
           <div class="pt-2 flex flex-wrap items-center gap-3">
             <a 
@@ -881,7 +763,7 @@
               href="https://forms.google.com" 
               target="_blank" 
               rel="noopener noreferrer"
-              class="px-6 py-3.5 bg-red-600 hover:bg-red-700 text-white font-bold text-xs sm:text-sm rounded-xl transition-colors shadow-lg shadow-red-900/40 flex items-center gap-2 cursor-pointer"
+              class="px-6 py-3.5 bg-red-600 hover:bg-red-700 text-white font-bold text-sm rounded-xl transition-colors shadow-lg shadow-red-900/40 flex items-center gap-2 cursor-pointer"
             >
               <span>Registrar mi empresa</span>
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
