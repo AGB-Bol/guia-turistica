@@ -1,6 +1,6 @@
 # 007 — Flip card: hover solo con ratón y giro más firme
 
-- **Status**: TODO
+- **Status**: DONE
 - **Commit**: fef93a2
 - **Severity**: MEDIUM
 - **Category**: Accesibilidad / Easing y duración

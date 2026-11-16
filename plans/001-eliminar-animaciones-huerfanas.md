@@ -1,6 +1,6 @@
 # 001 — Eliminar las animaciones de scroll huérfanas
 
-- **Status**: TODO
+- **Status**: DONE
 - **Commit**: fef93a2
 - **Severity**: HIGH
 - **Category**: Cohesión / código muerto

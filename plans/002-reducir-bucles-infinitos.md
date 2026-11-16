@@ -1,6 +1,6 @@
 # 002 — Reducir los bucles de animación infinitos
 
-- **Status**: TODO
+- **Status**: DONE
 - **Commit**: fef93a2
 - **Severity**: MEDIUM
 - **Category**: Propósito y frecuencia

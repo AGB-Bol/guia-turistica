@@ -1,6 +1,6 @@
 # 003 — Crear `js/motion.js` y unificar los 4 modales
 
-- **Status**: TODO
+- **Status**: DONE
 - **Commit**: fef93a2
 - **Severity**: HIGH
 - **Category**: Easing y duración / Cohesión y tokens / Interrumpibilidad

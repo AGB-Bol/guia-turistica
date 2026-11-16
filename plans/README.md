@@ -9,17 +9,17 @@ Planes generados a partir de una auditoría de las animaciones del proyecto (GSA
 
 | # | Plan | Severidad | Fase | Estado | Skills |
 | --- | --- | --- | --- | --- | --- |
-| 001 | [Eliminar las animaciones de scroll huérfanas](001-eliminar-animaciones-huerfanas.md) | Alta | 0. Limpieza | TODO | `remove-animations` |
-| 002 | [Reducir los bucles infinitos](002-reducir-bucles-infinitos.md) | Media | 0. Limpieza | TODO | `remove-animations` |
-| 003 | [Crear `js/motion.js` y unificar los 4 modales](003-motion-compartido-y-modales.md) | Alta | 1. Base | TODO | `animate`, `emil-design-eng`, `apple-design` |
-| 004 | [Respetar `prefers-reduced-motion`](004-respetar-reduced-motion.md) | Media | 2. Correcciones | TODO | `apple-design`, `animation-performance` |
-| 005 | [Fundido cruzado real en el fondo del hero](005-fundido-fondo-hero.md) | Media | 2. Correcciones | TODO | `animate`, `animation-performance` |
-| 006 | [Reemplazar `transition-all`](006-reemplazar-transition-all.md) | Media | 2. Correcciones | TODO | `animation-performance` |
-| 007 | [Flip card: hover solo con ratón](007-flip-card-hover-tactil.md) | Media | 2. Correcciones | TODO | `mobile-native`, `emil-design-eng` |
-| 008 | [Dropdown "Rubros" con transición](008-dropdown-rubros.md) | Baja | 3. Añadir | TODO | `animate`, `emil-design-eng` |
-| 009 | [Menú móvil con transición](009-menu-movil.md) | Baja | 3. Añadir | TODO | `animate`, `mobile-native` |
-| 010 | [Respuesta al pulsar en botones](010-feedback-de-pulsacion.md) | Baja | 3. Añadir | TODO | `emil-design-eng`, `apple-design`, `mobile-native` |
-| 011 | [Entradas de sección](011-entradas-de-seccion.md) | Baja | 3. Añadir | TODO | `choreograph`, `animate` |
+| 001 | [Eliminar las animaciones de scroll huérfanas](001-eliminar-animaciones-huerfanas.md) | Alta | 0. Limpieza | DONE | `remove-animations` |
+| 002 | [Reducir los bucles infinitos](002-reducir-bucles-infinitos.md) | Media | 0. Limpieza | DONE | `remove-animations` |
+| 003 | [Crear `js/motion.js` y unificar los 4 modales](003-motion-compartido-y-modales.md) | Alta | 1. Base | DONE | `animate`, `emil-design-eng`, `apple-design` |
+| 004 | [Respetar `prefers-reduced-motion`](004-respetar-reduced-motion.md) | Media | 2. Correcciones | DONE | `apple-design`, `animation-performance` |
+| 005 | [Fundido cruzado real en el fondo del hero](005-fundido-fondo-hero.md) | Media | 2. Correcciones | DONE | `animate`, `animation-performance` |
+| 006 | [Reemplazar `transition-all`](006-reemplazar-transition-all.md) | Media | 2. Correcciones | DONE | `animation-performance` |
+| 007 | [Flip card: hover solo con ratón](007-flip-card-hover-tactil.md) | Media | 2. Correcciones | DONE | `mobile-native`, `emil-design-eng` |
+| 008 | [Dropdown "Rubros" con transición](008-dropdown-rubros.md) | Baja | 3. Añadir | DONE | `animate`, `emil-design-eng` |
+| 009 | [Menú móvil con transición](009-menu-movil.md) | Baja | 3. Añadir | DONE | `animate`, `mobile-native` |
+| 010 | [Respuesta al pulsar en botones](010-feedback-de-pulsacion.md) | Baja | 3. Añadir | DONE | `emil-design-eng`, `apple-design`, `mobile-native` |
+| 011 | [Entradas de sección](011-entradas-de-seccion.md) | Baja | 3. Añadir | DONE | `choreograph`, `animate` |
 
 ## Orden recomendado
 

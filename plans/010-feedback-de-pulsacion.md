@@ -1,6 +1,6 @@
 # 010 — Respuesta al pulsar en botones y CTA
 
-- **Status**: TODO
+- **Status**: DONE
 - **Commit**: fef93a2
 - **Severity**: LOW
 - **Category**: Oportunidad (feedback)

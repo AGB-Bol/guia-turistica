@@ -1,6 +1,6 @@
 # 011 — Entradas de sección para las secciones actuales
 
-- **Status**: TODO
+- **Status**: DONE
 - **Commit**: fef93a2
 - **Severity**: LOW
 - **Category**: Oportunidad (entradas de grupo)

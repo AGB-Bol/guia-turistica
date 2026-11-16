@@ -1,6 +1,6 @@
 # 005 — Fundido cruzado real en el fondo del hero
 
-- **Status**: TODO
+- **Status**: DONE
 - **Commit**: fef93a2
 - **Severity**: MEDIUM
 - **Category**: Interrumpibilidad / evitar cambios bruscos

@@ -1,6 +1,6 @@
 # 009 — Menú móvil: abrir y cerrar con transición
 
-- **Status**: TODO
+- **Status**: DONE
 - **Commit**: fef93a2
 - **Severity**: LOW
 - **Category**: Oportunidad (evitar un cambio brusco)

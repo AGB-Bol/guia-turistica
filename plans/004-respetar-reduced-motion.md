@@ -1,6 +1,6 @@
 # 004 — Respetar `prefers-reduced-motion` con una versión suave
 
-- **Status**: TODO
+- **Status**: DONE
 - **Commit**: fef93a2
 - **Severity**: MEDIUM
 - **Category**: Accesibilidad

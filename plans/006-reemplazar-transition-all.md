@@ -1,6 +1,6 @@
 # 006 — Reemplazar `transition-all` por propiedades concretas
 
-- **Status**: TODO
+- **Status**: DONE
 - **Commit**: fef93a2
 - **Severity**: MEDIUM
 - **Category**: Rendimiento

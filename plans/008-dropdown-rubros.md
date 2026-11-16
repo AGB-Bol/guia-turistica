@@ -1,6 +1,6 @@
 # 008 — Dropdown "Rubros": transición desde su botón y flecha que gira
 
-- **Status**: TODO
+- **Status**: DONE
 - **Commit**: fef93a2
 - **Severity**: LOW
 - **Category**: Fisicalidad y origen / oportunidad
