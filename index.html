@@ -224,7 +224,7 @@
         </div>
 
         <div class="sm:col-span-3">
-          <button type="submit" class="w-full h-full min-h-[46px] bg-red-700 hover:bg-red-800 active:scale-[0.98] text-white font-bold text-xs sm:text-sm rounded-xl transition shadow-lg shadow-red-900/30 flex items-center justify-center gap-1.5 cursor-pointer">
+          <button type="submit" class="w-full h-full min-h-[46px] bg-red-700 hover:bg-red-800 active:scale-[0.97] text-white font-bold text-xs sm:text-sm rounded-xl transition duration-150 shadow-lg shadow-red-900/30 flex items-center justify-center gap-1.5 cursor-pointer">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
             </svg>
@@ -236,9 +236,9 @@
       <!-- Píldoras de búsqueda rápida -->
       <div id="hero-pills" class="flex flex-wrap items-center justify-center gap-2 mt-5 text-xs text-slate-300">
         <span class="font-medium text-slate-400">Rutas sugeridas:</span>
-        <button type="button" onclick="prepararBusqueda('Uyuni', 'agencias')" class="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white border border-white/20 backdrop-blur-md transition-colors cursor-pointer">Salar de Uyuni</button>
-        <button type="button" onclick="prepararBusqueda('Copacabana', 'hoteles')" class="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white border border-white/20 backdrop-blur-md transition-colors cursor-pointer">Lago Titicaca</button>
-        <button type="button" onclick="prepararBusqueda('Internacional', 'operadores')" class="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white border border-white/20 backdrop-blur-md transition-colors cursor-pointer">Rutas Internacionales</button>
+        <button type="button" onclick="prepararBusqueda('Uyuni', 'agencias')" class="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white border border-white/20 backdrop-blur-md active:scale-[0.97] transition duration-150 cursor-pointer">Salar de Uyuni</button>
+        <button type="button" onclick="prepararBusqueda('Copacabana', 'hoteles')" class="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white border border-white/20 backdrop-blur-md active:scale-[0.97] transition duration-150 cursor-pointer">Lago Titicaca</button>
+        <button type="button" onclick="prepararBusqueda('Internacional', 'operadores')" class="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white border border-white/20 backdrop-blur-md active:scale-[0.97] transition duration-150 cursor-pointer">Rutas Internacionales</button>
       </div>
 
     </div>
@@ -398,10 +398,10 @@
         </div>
         <!-- Controles del Carrusel -->
         <div class="flex items-center justify-center gap-2 shrink-0">
-          <button type="button" onclick="moverCarruselDestinos(-1)" class="w-10 h-10 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 flex items-center justify-center transition-colors cursor-pointer" aria-label="Destino anterior">
+          <button type="button" onclick="moverCarruselDestinos(-1)" class="w-10 h-10 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 flex items-center justify-center active:scale-[0.97] transition duration-150 cursor-pointer" aria-label="Destino anterior">
             <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
           </button>
-          <button type="button" onclick="moverCarruselDestinos(1)" class="w-10 h-10 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 flex items-center justify-center transition-colors cursor-pointer" aria-label="Destino siguiente">
+          <button type="button" onclick="moverCarruselDestinos(1)" class="w-10 h-10 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 flex items-center justify-center active:scale-[0.97] transition duration-150 cursor-pointer" aria-label="Destino siguiente">
             <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
           </button>
         </div>
@@ -706,7 +706,7 @@
         <img id="modal-lugar-img" src="" alt="Portada" class="w-full h-full object-cover">
         <div class="absolute inset-0 bg-gradient-to-t from-[#0F1422] via-[#0F1422]/40 to-transparent"></div>
         
-        <button type="button" onclick="ocultarModalLugar()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-black/60 hover:bg-black/90 text-white border border-white/20 flex items-center justify-center transition-colors cursor-pointer">
+        <button type="button" onclick="ocultarModalLugar()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-black/60 hover:bg-black/90 text-white border border-white/20 flex items-center justify-center active:scale-[0.97] transition duration-150 cursor-pointer">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
         </button>
 
@@ -743,11 +743,11 @@
             <span id="modal-lugar-precio" class="text-base font-bold text-amber-400"></span>
           </div>
           <div class="flex items-center gap-2">
-            <a id="modal-lugar-contacto" href="#" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-white/10 hover:bg-white/20 text-slate-200 border border-white/15 flex items-center gap-1.5 transition-colors">
+            <a id="modal-lugar-contacto" href="#" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-white/10 hover:bg-white/20 text-slate-200 border border-white/15 flex items-center gap-1.5 active:scale-[0.97] transition duration-150">
               <svg class="w-3.5 h-3.5 text-emerald-400" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 4V3z"/></svg>
               Contactar
             </a>
-            <a id="modal-lugar-enlace" href="hoteles.html" class="px-4 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-red-600 to-amber-600 hover:brightness-110 text-white shadow-lg shadow-red-600/30 flex items-center gap-1 transition">
+            <a id="modal-lugar-enlace" href="hoteles.html" class="px-4 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-red-600 to-amber-600 hover:brightness-110 text-white shadow-lg shadow-red-600/30 flex items-center gap-1 active:scale-[0.97] transition duration-150">
               <span>Ver Ficha</span>
               <span>→</span>
             </a>
@@ -887,7 +887,7 @@
             <button 
               type="button" 
               onclick="copiarEnlaceRegistro(this)" 
-              class="px-5 py-3.5 bg-white/10 hover:bg-white/20 text-white font-semibold text-xs sm:text-sm rounded-xl border border-white/15 transition-colors flex items-center gap-2 cursor-pointer"
+              class="px-5 py-3.5 bg-white/10 hover:bg-white/20 text-white font-semibold text-xs sm:text-sm rounded-xl border border-white/15 active:scale-[0.97] transition duration-150 flex items-center gap-2 cursor-pointer"
             >
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg>
               <span id="btn-copiar-texto">Copiar enlace</span>
@@ -947,7 +947,7 @@
             </p>
           </div>
 
-          <button type="button" onclick="cerrarModal()" class="text-slate-400 hover:text-white p-1.5 rounded-xl bg-white/10 hover:bg-white/20 transition-colors cursor-pointer shrink-0" aria-label="Cerrar">
+          <button type="button" onclick="cerrarModal()" class="text-slate-400 hover:text-white p-1.5 rounded-xl bg-white/10 hover:bg-white/20 active:scale-[0.97] transition duration-150 cursor-pointer shrink-0" aria-label="Cerrar">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
           </button>
         </div>
@@ -971,7 +971,7 @@
           <button type="button" onclick="cerrarModal()" class="px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-100 rounded-xl transition-colors cursor-pointer">
             Cerrar
           </button>
-          <a id="modal-btn-ir" href="agencias.html" class="grow sm:grow-0 px-5 py-2.5 text-xs font-bold bg-red-700 hover:bg-red-800 text-white rounded-xl transition-colors shadow-md shadow-red-900/20 flex items-center justify-center gap-1.5 cursor-pointer">
+          <a id="modal-btn-ir" href="agencias.html" class="grow sm:grow-0 px-5 py-2.5 text-xs font-bold bg-red-700 hover:bg-red-800 text-white rounded-xl active:scale-[0.97] transition duration-150 shadow-md shadow-red-900/20 flex items-center justify-center gap-1.5 cursor-pointer">
             <span id="modal-btn-texto">Ver catálogo completo</span>
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
           </a>
@@ -1234,7 +1234,7 @@
           <button 
             type="button" 
             onclick="buscar('${cat.key}')" 
-            class="px-3 py-1 rounded-full whitespace-nowrap font-semibold transition-colors cursor-pointer ${
+            class="px-3 py-1 rounded-full whitespace-nowrap font-semibold active:scale-[0.97] transition duration-150 cursor-pointer ${
               esActivo 
                 ? 'bg-red-600 text-white shadow-sm' 
                 : 'bg-white/10 hover:bg-white/20 text-slate-300'
@@ -1302,7 +1302,7 @@
           </div>
 
           <div class="shrink-0 flex sm:flex-col items-center sm:items-end justify-between border-t sm:border-t-0 pt-2 sm:pt-0 border-slate-100">
-            <a href="${item.enlace}" class="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-bold text-red-700 bg-red-50 hover:bg-red-700 hover:text-white rounded-lg transition-colors">
+            <a href="${item.enlace}" class="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-bold text-red-700 bg-red-50 hover:bg-red-700 hover:text-white rounded-lg active:scale-[0.97] transition duration-150">
               <span>Ver ficha</span>
               <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
             </a>

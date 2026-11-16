@@ -88,7 +88,7 @@
 
       <!-- Acción & Botón Mobile -->
       <div class="flex items-center gap-3">
-        <a href="${targetCtaHref}" class="hidden sm:inline-flex bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs px-3.5 py-2 rounded-lg transition-colors">
+        <a href="${targetCtaHref}" class="hidden sm:inline-flex bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs px-3.5 py-2 rounded-lg active:scale-[0.97] transition duration-150">
           ${ctaText}
         </a>
 
@@ -143,7 +143,7 @@
         <a href="${homePrefix}#reconocimientos" class="block text-sm font-semibold text-slate-700">Reconocimientos</a>
       </div>
       <div class="pt-2">
-        <a href="${targetCtaHref}" class="block text-center w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-2.5 rounded-lg transition-colors">
+        <a href="${targetCtaHref}" class="block text-center w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-2.5 rounded-lg active:scale-[0.97] transition duration-150">
           ${ctaText}
         </a>
       </div>
