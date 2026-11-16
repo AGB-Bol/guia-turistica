@@ -22,7 +22,8 @@
 
   function generateFooterHTML() {
     return `
-    <footer class="relative bg-[#090D16] text-slate-300 border-t border-slate-800/80 pt-12 pb-8 overflow-hidden select-none">
+    <footer class="relative bg-slate-900 text-slate-300 pt-14 pb-8 overflow-hidden select-none">
+      <div class="absolute top-0 inset-x-0 flex h-2" aria-hidden="true"><span class="flex-1 bg-red-600"></span><span class="flex-1 bg-amber-400"></span><span class="flex-1 bg-emerald-600"></span></div>
       
       <!-- Resplandores ambientales de fondo -->
       <div class="absolute top-0 left-1/4 w-96 h-96 bg-red-600/5 rounded-full blur-3xl pointer-events-none"></div>
@@ -85,13 +86,13 @@
             <a href="${homePrefix || 'index.html'}" class="inline-flex items-center gap-3 group">
               <img
                 src="img/logo.png"
-                alt="Logo Guía Turística"
+                alt="Logo Guía Internacional de Turismo"
                 onerror="this.onerror=null; this.src='img/logo-placeholder.svg';"
                 class="h-9 w-auto max-w-[140px] object-contain transition-transform group-hover:scale-105"
               >
               <div class="flex flex-col">
-                <span class="font-bold text-base tracking-tight text-white">
-                  Guía <span class="text-red-500">Turística</span>
+                <span class="font-display font-extrabold text-lg tracking-tight text-white uppercase">
+                  Guía <span class="text-amber-400">Internacional</span>
                 </span>
                 <span class="text-[10px] text-slate-400 font-mono uppercase tracking-widest">Bolivia · Edición Digital</span>
               </div>
@@ -222,7 +223,7 @@
       <!-- Barra Inferior de Derechos y Créditos -->
       <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 border-t border-slate-800/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
         <div class="flex items-center gap-2">
-          <span>&copy; <span id="footer-anio">${currentYear}</span> Guía Turística de Bolivia.</span>
+          <span>&copy; <span id="footer-anio">${currentYear}</span> Guía Internacional de Turismo.</span>
           <span class="hidden sm:inline text-slate-700">|</span>
           <span class="hidden sm:inline">Todos los derechos reservados.</span>
         </div>
@@ -234,32 +235,32 @@
     <!-- MODAL INTERACTIVO DE POLÍTICAS Y TÉRMINOS LEGALES          -->
     <!-- ========================================================= -->
     <div id="modal-legal-footer" class="fixed inset-0 z-[1200] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden select-none">
-      <div id="modal-legal-caja" class="relative w-full max-w-2xl bg-[#1C1917] border border-white/20 rounded-2xl shadow-2xl overflow-hidden text-white flex flex-col max-h-[85vh]">
+      <div id="modal-legal-caja" class="relative w-full max-w-2xl bg-slate-900 border-2 border-amber-400 rounded-2xl shadow-2xl overflow-hidden text-white flex flex-col max-h-[85vh]">
         
         <!-- Cabecera del modal -->
-        <div class="p-6 bg-gradient-to-r from-slate-900 to-[#1A2234] border-b border-white/10 flex items-center justify-between">
+        <div class="p-6 bg-slate-900 border-b-2 border-amber-400 flex items-center justify-between">
           <div>
-            <span class="text-[10px] font-mono font-bold tracking-widest text-red-500 uppercase block mb-1">
-              Guía Turística de Bolivia · Transparencia
+            <span class="text-xs font-bold tracking-widest text-amber-400 uppercase block mb-1">
+              Guía Internacional de Turismo · Transparencia
             </span>
-            <h3 id="modal-legal-titulo" class="text-xl font-bold text-white tracking-tight">
+            <h3 id="modal-legal-titulo" class="text-2xl font-extrabold text-white tracking-tight">
               Términos Legales
             </h3>
           </div>
-          <button type="button" onclick="window.cerrarModalLegal()" class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center active:scale-[0.97] transition duration-150 cursor-pointer" aria-label="Cerrar modal">
+          <button type="button" onclick="window.cerrarModalLegal()" class="w-9 h-9 rounded-full bg-amber-400 hover:bg-amber-300 text-slate-900 flex items-center justify-center active:scale-[0.97] transition duration-150 cursor-pointer" aria-label="Cerrar modal">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
           </button>
         </div>
 
         <!-- Contenido escroleable -->
-        <div id="modal-legal-cuerpo" class="p-6 overflow-y-auto space-y-4 text-xs sm:text-sm text-slate-300 leading-relaxed font-light">
+        <div id="modal-legal-cuerpo" class="p-6 overflow-y-auto space-y-4 text-sm text-slate-200 leading-relaxed">
           <!-- Inyectado dinámicamente -->
         </div>
 
         <!-- Pie del modal -->
         <div class="p-4 bg-slate-900/90 border-t border-white/10 flex items-center justify-between text-xs text-slate-400">
           <span>Actualizado al año ${currentYear}</span>
-          <button type="button" onclick="window.cerrarModalLegal()" class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white font-semibold active:scale-[0.97] transition duration-150 cursor-pointer">
+          <button type="button" onclick="window.cerrarModalLegal()" class="px-4 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-900 font-extrabold active:scale-[0.97] transition duration-150 cursor-pointer">
             Entendido y cerrar
           </button>
         </div>
@@ -331,7 +332,7 @@
     privacidad: {
       titulo: "Política de Privacidad y Manejo de Datos",
       html: `
-        <p><strong>1. Compromiso de Transparencia:</strong> En la <em>Guía Turística de Bolivia</em> valoramos y protegemos la privacidad de cada usuario y prestador turístico. No vendemos, comercializamos ni compartimos información privada con terceros sin consentimiento expreso.</p>
+        <p><strong>1. Compromiso de Transparencia:</strong> En la <em>Guía Internacional de Turismo</em> valoramos y protegemos la privacidad de cada usuario y prestador turístico. No vendemos, comercializamos ni compartimos información privada con terceros sin consentimiento expreso.</p>
         <p><strong>2. Datos del Registro de Empresas:</strong> La información provista en los formularios de registro (nombre de empresa, contacto público de WhatsApp, teléfono, tarifas referenciales y fotografías) se utiliza exclusivamente para la creación y exhibición de su ficha pública en el catálogo y mapa interactivo.</p>
         <p><strong>3. Enlaces Directos:</strong> Facilitamos el contacto directo e inmediato entre el viajero y el prestador mediante botones de llamada o WhatsApp. La plataforma no intermedia pagos bancarios ni retiene comisiones.</p>
         <p><strong>4. Derechos ARCO:</strong> Cualquier empresa o usuario puede solicitar la actualización o remoción inmediata de su ficha escribiendo a nuestro correo oficial de soporte.</p>
@@ -357,7 +358,7 @@
     faq: {
       titulo: "Preguntas Frecuentes (FAQ)",
       html: `
-        <p><strong>¿Tiene algún costo registrar mi empresa en el directorio?</strong><br>No, el registro básico en la Guía Turística de Bolivia es gratuito para operadores, hoteles y servicios debidamente constituidos.</p>
+        <p><strong>¿Tiene algún costo registrar mi empresa en el directorio?</strong><br>No, el registro básico en la Guía Internacional de Turismo es gratuito para operadores, hoteles y servicios debidamente constituidos.</p>
         <p><strong>¿Cómo se verifican los datos?</strong><br>Nuestro equipo revisa las solicitudes recibidas mediante el formulario de registro, confirmando número de contacto, fotografías y vigencia del servicio antes de su publicación en el mapa.</p>
         <p><strong>¿Cómo contactan los clientes a mi empresa?</strong><br>Directamente a través de tu número de WhatsApp, llamada telefónica o enlace web registrado en tu ficha, sin intermediarios.</p>
       `
