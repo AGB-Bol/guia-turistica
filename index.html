@@ -154,11 +154,16 @@
   <section id="hero-section" class="relative overflow-hidden min-h-[calc(100vh-4rem)] flex flex-col justify-between items-center px-4 py-8 sm:py-12 text-white">
     
     <!-- Fondo automático (Cross-fade / Ken Burns) -->
-    <div 
-      id="hero-bg-image" 
-      class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 transform scale-105" 
-      style="background-image: url('https://images.unsplash.com/photo-1589556264800-08ae9e129a8c?auto=format&fit=crop&w=2000&q=85');"
-    ></div>
+    <div id="hero-bg-image" class="absolute inset-0 transform scale-105">
+      <div
+        class="hero-bg-capa absolute inset-0 bg-cover bg-center transition-opacity duration-1000"
+        style="opacity: 1; background-image: url('https://images.unsplash.com/photo-1589556264800-08ae9e129a8c?auto=format&fit=crop&w=2000&q=85');"
+      ></div>
+      <div
+        class="hero-bg-capa absolute inset-0 bg-cover bg-center transition-opacity duration-1000"
+        style="opacity: 0;"
+      ></div>
+    </div>
 
     <!-- Capa de overlay degradado oscuro cinematográfico -->
     <div class="absolute inset-0 bg-gradient-to-b from-slate-950/85 via-slate-900/70 to-slate-950/90 backdrop-blur-[1.5px]"></div>
@@ -1054,27 +1059,38 @@
     ];
     let currentHeroIndex = 0;
     function iniciarHeroAutomatico() {
-      const bgImage = document.getElementById("hero-bg-image");
+      const capas = document.querySelectorAll("#hero-bg-image .hero-bg-capa");
       const dots = document.querySelectorAll(".hero-dot");
-      if (!bgImage) return;
+      if (capas.length < 2) return;
+
+      let capaVisible = 0;
 
       setInterval(() => {
-        currentHeroIndex = (currentHeroIndex + 1) % heroImages.length;
-        bgImage.style.opacity = "0.3";
-        setTimeout(() => {
-          bgImage.style.backgroundImage = `url('${heroImages[currentHeroIndex]}')`;
-          bgImage.style.opacity = "1";
-        }, 300);
+        const siguiente = (currentHeroIndex + 1) % heroImages.length;
+        const url = heroImages[siguiente];
 
-        dots.forEach((dot, idx) => {
-          if (idx === currentHeroIndex) {
-            dot.classList.remove("bg-white/40");
-            dot.classList.add("bg-red-600");
-          } else {
-            dot.classList.remove("bg-red-600");
-            dot.classList.add("bg-white/40");
-          }
-        });
+        // Precargar: solo se cambia cuando la imagen ya está descargada
+        const precarga = new Image();
+        precarga.onload = () => {
+          currentHeroIndex = siguiente;
+          const entra = capas[1 - capaVisible];
+          const sale = capas[capaVisible];
+          entra.style.backgroundImage = `url('${url}')`;
+          entra.style.opacity = "1";
+          sale.style.opacity = "0";
+          capaVisible = 1 - capaVisible;
+
+          dots.forEach((dot, idx) => {
+            if (idx === currentHeroIndex) {
+              dot.classList.remove("bg-white/40");
+              dot.classList.add("bg-red-600");
+            } else {
+              dot.classList.remove("bg-red-600");
+              dot.classList.add("bg-white/40");
+            }
+          });
+        };
+        precarga.src = url;
       }, 5000);
     }
     document.addEventListener("DOMContentLoaded", iniciarHeroAutomatico);
