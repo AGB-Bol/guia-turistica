@@ -172,9 +172,9 @@
     <!-- Indicadores pasivos de fondo automático -->
     <div class="relative z-10 w-full max-w-5xl flex items-center justify-end text-xs text-slate-300">
       <div id="hero-indicators" class="flex items-center gap-1.5 bg-black/40 p-1 rounded-xl border border-white/10 backdrop-blur-md text-[11px]">
-        <span class="hero-dot w-2 h-2 rounded-full bg-red-600 transition-all"></span>
-        <span class="hero-dot w-2 h-2 rounded-full bg-white/40 transition-all"></span>
-        <span class="hero-dot w-2 h-2 rounded-full bg-white/40 transition-all"></span>
+        <span class="hero-dot w-2 h-2 rounded-full bg-red-600 transition-colors"></span>
+        <span class="hero-dot w-2 h-2 rounded-full bg-white/40 transition-colors"></span>
+        <span class="hero-dot w-2 h-2 rounded-full bg-white/40 transition-colors"></span>
         <span class="ml-1 text-[10px] uppercase tracking-wider text-slate-300 font-medium">Destinos Globales</span>
       </div>
     </div>
@@ -224,7 +224,7 @@
         </div>
 
         <div class="sm:col-span-3">
-          <button type="submit" class="w-full h-full min-h-[46px] bg-red-700 hover:bg-red-800 active:scale-[0.98] text-white font-bold text-xs sm:text-sm rounded-xl transition-all shadow-lg shadow-red-900/30 flex items-center justify-center gap-1.5 cursor-pointer">
+          <button type="submit" class="w-full h-full min-h-[46px] bg-red-700 hover:bg-red-800 active:scale-[0.98] text-white font-bold text-xs sm:text-sm rounded-xl transition shadow-lg shadow-red-900/30 flex items-center justify-center gap-1.5 cursor-pointer">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
             </svg>
@@ -236,9 +236,9 @@
       <!-- Píldoras de búsqueda rápida -->
       <div id="hero-pills" class="flex flex-wrap items-center justify-center gap-2 mt-5 text-xs text-slate-300">
         <span class="font-medium text-slate-400">Rutas sugeridas:</span>
-        <button type="button" onclick="prepararBusqueda('Uyuni', 'agencias')" class="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white border border-white/20 backdrop-blur-md transition-all cursor-pointer">Salar de Uyuni</button>
-        <button type="button" onclick="prepararBusqueda('Copacabana', 'hoteles')" class="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white border border-white/20 backdrop-blur-md transition-all cursor-pointer">Lago Titicaca</button>
-        <button type="button" onclick="prepararBusqueda('Internacional', 'operadores')" class="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white border border-white/20 backdrop-blur-md transition-all cursor-pointer">Rutas Internacionales</button>
+        <button type="button" onclick="prepararBusqueda('Uyuni', 'agencias')" class="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white border border-white/20 backdrop-blur-md transition-colors cursor-pointer">Salar de Uyuni</button>
+        <button type="button" onclick="prepararBusqueda('Copacabana', 'hoteles')" class="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white border border-white/20 backdrop-blur-md transition-colors cursor-pointer">Lago Titicaca</button>
+        <button type="button" onclick="prepararBusqueda('Internacional', 'operadores')" class="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white border border-white/20 backdrop-blur-md transition-colors cursor-pointer">Rutas Internacionales</button>
       </div>
 
     </div>
@@ -273,7 +273,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       
       <!-- Rubro 1: Operadores -->
-      <a href="operadores.html" class="bg-white border border-slate-200/90 rounded-2xl p-6 hover:shadow-xl hover:border-red-600/40 transition-all group flex flex-col justify-between">
+      <a href="operadores.html" class="bg-white border border-slate-200/90 rounded-2xl p-6 hover:shadow-xl hover:border-red-600/40 transition group flex flex-col justify-between">
         <div>
           <div class="w-12 h-12 rounded-xl bg-red-50 text-red-700 flex items-center justify-center font-bold text-lg mb-4 group-hover:scale-110 transition-transform">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
@@ -288,7 +288,7 @@
       </a>
 
       <!-- Rubro 2: Agencias de Viaje -->
-      <a href="agencias.html" class="bg-white border border-slate-200/90 rounded-2xl p-6 hover:shadow-xl hover:border-red-600/40 transition-all group flex flex-col justify-between">
+      <a href="agencias.html" class="bg-white border border-slate-200/90 rounded-2xl p-6 hover:shadow-xl hover:border-red-600/40 transition group flex flex-col justify-between">
         <div>
           <div class="w-12 h-12 rounded-xl bg-red-50 text-red-700 flex items-center justify-center font-bold text-lg mb-4 group-hover:scale-110 transition-transform">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
@@ -303,7 +303,7 @@
       </a>
 
       <!-- Rubro 3: Hoteles -->
-      <a href="hoteles.html" class="bg-white border border-slate-200/90 rounded-2xl p-6 hover:shadow-xl hover:border-red-600/40 transition-all group flex flex-col justify-between">
+      <a href="hoteles.html" class="bg-white border border-slate-200/90 rounded-2xl p-6 hover:shadow-xl hover:border-red-600/40 transition group flex flex-col justify-between">
         <div>
           <div class="w-12 h-12 rounded-xl bg-red-50 text-red-700 flex items-center justify-center font-bold text-lg mb-4 group-hover:scale-110 transition-transform">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"/></svg>
@@ -318,7 +318,7 @@
       </a>
 
       <!-- Rubro 4: Transporte -->
-      <a href="transporte.html" class="bg-white border border-slate-200/90 rounded-2xl p-6 hover:shadow-xl hover:border-red-600/40 transition-all group flex flex-col justify-between">
+      <a href="transporte.html" class="bg-white border border-slate-200/90 rounded-2xl p-6 hover:shadow-xl hover:border-red-600/40 transition group flex flex-col justify-between">
         <div>
           <div class="w-12 h-12 rounded-xl bg-red-50 text-red-700 flex items-center justify-center font-bold text-lg mb-4 group-hover:scale-110 transition-transform">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
@@ -333,7 +333,7 @@
       </a>
 
       <!-- Rubro 5: Embajadas y Consulados -->
-      <a href="embajadas.html" class="bg-white border border-slate-200/90 rounded-2xl p-6 hover:shadow-xl hover:border-red-600/40 transition-all group flex flex-col justify-between">
+      <a href="embajadas.html" class="bg-white border border-slate-200/90 rounded-2xl p-6 hover:shadow-xl hover:border-red-600/40 transition group flex flex-col justify-between">
         <div>
           <div class="w-12 h-12 rounded-xl bg-red-50 text-red-700 flex items-center justify-center font-bold text-lg mb-4 group-hover:scale-110 transition-transform">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9"/></svg>
@@ -348,7 +348,7 @@
       </a>
 
       <!-- Rubro 6: Instituciones y Municipios -->
-      <a href="instituciones.html" class="bg-white border border-slate-200/90 rounded-2xl p-6 hover:shadow-xl hover:border-red-600/40 transition-all group flex flex-col justify-between">
+      <a href="instituciones.html" class="bg-white border border-slate-200/90 rounded-2xl p-6 hover:shadow-xl hover:border-red-600/40 transition group flex flex-col justify-between">
         <div>
           <div class="w-12 h-12 rounded-xl bg-red-50 text-red-700 flex items-center justify-center font-bold text-lg mb-4 group-hover:scale-110 transition-transform">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
@@ -363,7 +363,7 @@
       </a>
 
       <!-- Rubro 7: Otros Servicios -->
-      <a href="servicios-especiales.html" class="bg-white border border-slate-200/90 rounded-2xl p-6 hover:shadow-xl hover:border-red-600/40 transition-all group flex flex-col justify-between md:col-span-2 lg:col-span-1">
+      <a href="servicios-especiales.html" class="bg-white border border-slate-200/90 rounded-2xl p-6 hover:shadow-xl hover:border-red-600/40 transition group flex flex-col justify-between md:col-span-2 lg:col-span-1">
         <div>
           <div class="w-12 h-12 rounded-xl bg-red-50 text-red-700 flex items-center justify-center font-bold text-lg mb-4 group-hover:scale-110 transition-transform">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
@@ -398,10 +398,10 @@
         </div>
         <!-- Controles del Carrusel -->
         <div class="flex items-center justify-center gap-2 shrink-0">
-          <button type="button" onclick="moverCarruselDestinos(-1)" class="w-10 h-10 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 flex items-center justify-center transition-all cursor-pointer" aria-label="Destino anterior">
+          <button type="button" onclick="moverCarruselDestinos(-1)" class="w-10 h-10 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 flex items-center justify-center transition-colors cursor-pointer" aria-label="Destino anterior">
             <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
           </button>
-          <button type="button" onclick="moverCarruselDestinos(1)" class="w-10 h-10 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 flex items-center justify-center transition-all cursor-pointer" aria-label="Destino siguiente">
+          <button type="button" onclick="moverCarruselDestinos(1)" class="w-10 h-10 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 flex items-center justify-center transition-colors cursor-pointer" aria-label="Destino siguiente">
             <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
           </button>
         </div>
@@ -525,7 +525,7 @@
       <!-- Fundador 1: SCATUR -->
       <div class="flip-card h-48 cursor-pointer select-none group" onclick="this.classList.toggle('flipped')">
         <div class="flip-card-inner">
-          <div class="flip-card-front bg-white border border-slate-200/90 rounded-2xl p-5 flex items-center justify-center shadow-sm hover:shadow-md transition-all">
+          <div class="flip-card-front bg-white border border-slate-200/90 rounded-2xl p-5 flex items-center justify-center shadow-sm hover:shadow-md transition-shadow">
             <h3 class="text-lg font-black text-slate-900 tracking-wider">SCATUR</h3>
           </div>
           <div class="flip-card-back bg-[#0F1422] text-white border border-slate-700/60 rounded-2xl p-5 flex flex-col justify-center text-left shadow-xl">
@@ -538,7 +538,7 @@
       <!-- Fundador 2: AGB -->
       <div class="flip-card h-48 cursor-pointer select-none group" onclick="this.classList.toggle('flipped')">
         <div class="flip-card-inner">
-          <div class="flip-card-front bg-white border border-slate-200/90 rounded-2xl p-5 flex items-center justify-center shadow-sm hover:shadow-md transition-all">
+          <div class="flip-card-front bg-white border border-slate-200/90 rounded-2xl p-5 flex items-center justify-center shadow-sm hover:shadow-md transition-shadow">
             <h3 class="text-lg font-black text-slate-900 tracking-wider">AGB</h3>
           </div>
           <div class="flip-card-back bg-[#0F1422] text-white border border-slate-700/60 rounded-2xl p-5 flex flex-col justify-center text-left shadow-xl">
@@ -551,7 +551,7 @@
       <!-- Fundador 3: BLACKBULLS -->
       <div class="flip-card h-48 cursor-pointer select-none group" onclick="this.classList.toggle('flipped')">
         <div class="flip-card-inner">
-          <div class="flip-card-front bg-white border border-slate-200/90 rounded-2xl p-5 flex items-center justify-center shadow-sm hover:shadow-md transition-all">
+          <div class="flip-card-front bg-white border border-slate-200/90 rounded-2xl p-5 flex items-center justify-center shadow-sm hover:shadow-md transition-shadow">
             <h3 class="text-lg font-black text-slate-900 tracking-wider">BLACKBULLS</h3>
           </div>
           <div class="flip-card-back bg-[#0F1422] text-white border border-slate-700/60 rounded-2xl p-5 flex flex-col justify-center text-left shadow-xl">
@@ -564,7 +564,7 @@
       <!-- Fundador 4: DOMOS -->
       <div class="flip-card h-48 cursor-pointer select-none group" onclick="this.classList.toggle('flipped')">
         <div class="flip-card-inner">
-          <div class="flip-card-front bg-white border border-slate-200/90 rounded-2xl p-5 flex items-center justify-center shadow-sm hover:shadow-md transition-all">
+          <div class="flip-card-front bg-white border border-slate-200/90 rounded-2xl p-5 flex items-center justify-center shadow-sm hover:shadow-md transition-shadow">
             <h3 class="text-lg font-black text-slate-900 tracking-wider">DOMOS</h3>
           </div>
           <div class="flip-card-back bg-[#0F1422] text-white border border-slate-700/60 rounded-2xl p-5 flex flex-col justify-center text-left shadow-xl">
@@ -577,7 +577,7 @@
       <!-- Fundador 5: TIP -->
       <div class="flip-card h-48 cursor-pointer select-none group sm:col-span-2 lg:col-span-1" onclick="this.classList.toggle('flipped')">
         <div class="flip-card-inner">
-          <div class="flip-card-front bg-white border border-slate-200/90 rounded-2xl p-5 flex items-center justify-center shadow-sm hover:shadow-md transition-all">
+          <div class="flip-card-front bg-white border border-slate-200/90 rounded-2xl p-5 flex items-center justify-center shadow-sm hover:shadow-md transition-shadow">
             <h3 class="text-lg font-black text-slate-900 tracking-wider">TIP</h3>
           </div>
           <div class="flip-card-back bg-[#0F1422] text-white border border-slate-700/60 rounded-2xl p-5 flex flex-col justify-center text-left shadow-xl">
@@ -670,7 +670,7 @@
       <button 
         id="btn-volver-mundo" 
         type="button" 
-        class="hidden absolute top-4 left-4 z-[500] px-4 py-2.5 rounded-2xl text-xs font-bold bg-[#0B0F19]/90 hover:bg-white text-white hover:text-slate-900 border border-white/20 shadow-2xl backdrop-blur-md flex items-center gap-2 transition-all cursor-pointer select-none active:scale-95"
+        class="hidden absolute top-4 left-4 z-[500] px-4 py-2.5 rounded-2xl text-xs font-bold bg-[#0B0F19]/90 hover:bg-white text-white hover:text-slate-900 border border-white/20 shadow-2xl backdrop-blur-md flex items-center gap-2 transition cursor-pointer select-none active:scale-95"
         title="Regresar a vista global"
       >
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -747,7 +747,7 @@
               <svg class="w-3.5 h-3.5 text-emerald-400" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 4V3z"/></svg>
               Contactar
             </a>
-            <a id="modal-lugar-enlace" href="hoteles.html" class="px-4 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-red-600 to-amber-600 hover:brightness-110 text-white shadow-lg shadow-red-600/30 flex items-center gap-1 transition-all">
+            <a id="modal-lugar-enlace" href="hoteles.html" class="px-4 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-red-600 to-amber-600 hover:brightness-110 text-white shadow-lg shadow-red-600/30 flex items-center gap-1 transition">
               <span>Ver Ficha</span>
               <span>→</span>
             </a>
@@ -773,7 +773,7 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <div class="bg-white border border-slate-200/90 rounded-3xl p-8 shadow-sm hover:shadow-md transition-all">
+      <div class="bg-white border border-slate-200/90 rounded-3xl p-8 shadow-sm hover:shadow-md transition-shadow">
         <div class="w-12 h-12 rounded-2xl bg-red-50 text-red-700 flex items-center justify-center font-bold mb-6">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
         </div>
@@ -783,7 +783,7 @@
         </p>
       </div>
 
-      <div class="bg-white border border-slate-200/90 rounded-3xl p-8 shadow-sm hover:shadow-md transition-all">
+      <div class="bg-white border border-slate-200/90 rounded-3xl p-8 shadow-sm hover:shadow-md transition-shadow">
         <div class="w-12 h-12 rounded-2xl bg-red-50 text-red-700 flex items-center justify-center font-bold mb-6">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
         </div>
@@ -793,7 +793,7 @@
         </p>
       </div>
 
-      <div class="bg-white border border-slate-200/90 rounded-3xl p-8 shadow-sm hover:shadow-md transition-all">
+      <div class="bg-white border border-slate-200/90 rounded-3xl p-8 shadow-sm hover:shadow-md transition-shadow">
         <div class="w-12 h-12 rounded-2xl bg-red-50 text-red-700 flex items-center justify-center font-bold mb-6">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
         </div>
@@ -878,7 +878,7 @@
               href="https://forms.google.com" 
               target="_blank" 
               rel="noopener noreferrer"
-              class="px-6 py-3.5 bg-red-600 hover:bg-red-700 text-white font-bold text-xs sm:text-sm rounded-xl transition-all shadow-lg shadow-red-900/40 flex items-center gap-2 cursor-pointer"
+              class="px-6 py-3.5 bg-red-600 hover:bg-red-700 text-white font-bold text-xs sm:text-sm rounded-xl transition-colors shadow-lg shadow-red-900/40 flex items-center gap-2 cursor-pointer"
             >
               <span>Registrar mi empresa</span>
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
@@ -887,7 +887,7 @@
             <button 
               type="button" 
               onclick="copiarEnlaceRegistro(this)" 
-              class="px-5 py-3.5 bg-white/10 hover:bg-white/20 text-white font-semibold text-xs sm:text-sm rounded-xl border border-white/15 transition-all flex items-center gap-2 cursor-pointer"
+              class="px-5 py-3.5 bg-white/10 hover:bg-white/20 text-white font-semibold text-xs sm:text-sm rounded-xl border border-white/15 transition-colors flex items-center gap-2 cursor-pointer"
             >
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg>
               <span id="btn-copiar-texto">Copiar enlace</span>
@@ -947,7 +947,7 @@
             </p>
           </div>
 
-          <button type="button" onclick="cerrarModal()" class="text-slate-400 hover:text-white p-1.5 rounded-xl bg-white/10 hover:bg-white/20 transition-all cursor-pointer shrink-0" aria-label="Cerrar">
+          <button type="button" onclick="cerrarModal()" class="text-slate-400 hover:text-white p-1.5 rounded-xl bg-white/10 hover:bg-white/20 transition-colors cursor-pointer shrink-0" aria-label="Cerrar">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
           </button>
         </div>
@@ -971,7 +971,7 @@
           <button type="button" onclick="cerrarModal()" class="px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-100 rounded-xl transition-colors cursor-pointer">
             Cerrar
           </button>
-          <a id="modal-btn-ir" href="agencias.html" class="grow sm:grow-0 px-5 py-2.5 text-xs font-bold bg-red-700 hover:bg-red-800 text-white rounded-xl transition-all shadow-md shadow-red-900/20 flex items-center justify-center gap-1.5 cursor-pointer">
+          <a id="modal-btn-ir" href="agencias.html" class="grow sm:grow-0 px-5 py-2.5 text-xs font-bold bg-red-700 hover:bg-red-800 text-white rounded-xl transition-colors shadow-md shadow-red-900/20 flex items-center justify-center gap-1.5 cursor-pointer">
             <span id="modal-btn-texto">Ver catálogo completo</span>
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
           </a>
@@ -1234,7 +1234,7 @@
           <button 
             type="button" 
             onclick="buscar('${cat.key}')" 
-            class="px-3 py-1 rounded-full whitespace-nowrap font-semibold transition-all cursor-pointer ${
+            class="px-3 py-1 rounded-full whitespace-nowrap font-semibold transition-colors cursor-pointer ${
               esActivo 
                 ? 'bg-red-600 text-white shadow-sm' 
                 : 'bg-white/10 hover:bg-white/20 text-slate-300'
@@ -1272,7 +1272,7 @@
       }
 
       cuerpoHTML += resultados.map(item => `
-        <article class="bg-white border border-slate-200/90 rounded-2xl p-4 hover:border-slate-400 hover:shadow-md transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3 group">
+        <article class="bg-white border border-slate-200/90 rounded-2xl p-4 hover:border-slate-400 hover:shadow-md transition flex flex-col sm:flex-row sm:items-center justify-between gap-3 group">
           <div class="space-y-1.5 grow">
             <div class="flex items-center gap-2 flex-wrap">
               <span class="text-[10px] font-extrabold px-2 py-0.5 rounded-md bg-slate-100 text-slate-700">

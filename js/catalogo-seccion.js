@@ -154,7 +154,7 @@
         var logoSrc = item.logo || 'img/logo-cuadrado.svg';
 
         return [
-          '<article class="bg-white border border-slate-200 rounded-xl p-5 flex flex-col justify-between hover:border-slate-400 hover:shadow-md transition-all duration-200 group">',
+          '<article class="bg-white border border-slate-200 rounded-xl p-5 flex flex-col justify-between hover:border-slate-400 hover:shadow-md transition duration-200 group">',
           '  <div>',
           '    <!-- Fila superior: categoría y ciudad -->',
           '    <div class="flex items-center justify-between gap-2 mb-3">',
