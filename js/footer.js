@@ -181,7 +181,7 @@
                 </a>
               </li>
               <li><a href="${homePrefix}#socios" class="hover:text-slate-200 transition-colors">Socios y Aliados</a></li>
-              <li><a href="${homePrefix}#seccion-proposito" class="hover:text-slate-200 transition-colors">¿Qué somos?</a></li>
+              <li><a href="${homePrefix}#nosotros" class="hover:text-slate-200 transition-colors">¿Qué somos?</a></li>
               <li><a href="https://wa.me/59170000000" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-400 transition-colors">Soporte Anfitriones</a></li>
               <li><a href="#" onclick="event.preventDefault(); window.abrirModalLegal('faq');" class="hover:text-slate-200 transition-colors">Preguntas Frecuentes</a></li>
             </ul>
