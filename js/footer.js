@@ -90,7 +90,7 @@
                 class="h-9 w-auto max-w-[140px] object-contain transition-transform group-hover:scale-105"
               >
               <div class="flex flex-col">
-                <span class="font-black text-base tracking-tight text-white">
+                <span class="font-bold text-base tracking-tight text-white">
                   Guía <span class="text-red-500">Turística</span>
                 </span>
                 <span class="text-[10px] text-slate-400 font-mono uppercase tracking-widest">Bolivia · Edición Digital</span>
@@ -234,7 +234,7 @@
     <!-- MODAL INTERACTIVO DE POLÍTICAS Y TÉRMINOS LEGALES          -->
     <!-- ========================================================= -->
     <div id="modal-legal-footer" class="fixed inset-0 z-[1200] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden select-none">
-      <div id="modal-legal-caja" class="relative w-full max-w-2xl bg-[#0F1422] border border-white/20 rounded-3xl shadow-2xl overflow-hidden text-white flex flex-col max-h-[85vh]">
+      <div id="modal-legal-caja" class="relative w-full max-w-2xl bg-[#1C1917] border border-white/20 rounded-2xl shadow-2xl overflow-hidden text-white flex flex-col max-h-[85vh]">
         
         <!-- Cabecera del modal -->
         <div class="p-6 bg-gradient-to-r from-slate-900 to-[#1A2234] border-b border-white/10 flex items-center justify-between">
@@ -242,7 +242,7 @@
             <span class="text-[10px] font-mono font-bold tracking-widest text-red-500 uppercase block mb-1">
               Guía Turística de Bolivia · Transparencia
             </span>
-            <h3 id="modal-legal-titulo" class="text-xl font-black text-white tracking-tight">
+            <h3 id="modal-legal-titulo" class="text-xl font-bold text-white tracking-tight">
               Términos Legales
             </h3>
           </div>
