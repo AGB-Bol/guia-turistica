@@ -5,7 +5,7 @@
  * Características:
  *  1. Filtrado dinámico por texto, tipo de servicio y departamento.
  *  2. Paginación automática a 9 bloques por página.
- *  3. Tarjetas con "Representado por: [Nombre]" entre título y descripción.
+ *  3. Tarjetas con "Representante: [Nombre]" entre título y descripción.
  *  4. Logotipo o imagen cuadrada al lado del título.
  *  5. Modal interactivo con animación suave (fade & scale) para ver detalles y contacto directo.
  *  6. Cero dependencias de base de datos externa; funciona directamente con los mocks en /data/.
@@ -92,7 +92,9 @@
         var textoUnificado = (
           (item.nombre || '') + ' ' +
           (item.representado || '') + ' ' +
+          (item.cargo || '') + ' ' +
           (item.descripcion || '') + ' ' +
+          (item.pais || '') + ' ' +
           (item.ciudad || '') + ' ' +
           (item.departamento || '') + ' ' +
           (item.tags ? item.tags.join(' ') : '')
@@ -145,58 +147,52 @@
 
       var self = this;
       var html = itemsPagina.map(function (item) {
-        var tagsHtml = (item.tags && item.tags.length > 0)
-          ? item.tags.slice(0, 3).map(function (t) {
-              return '<span class="text-xs bg-amber-100 text-slate-800 border border-slate-900/20 px-2 py-0.5 rounded-md font-bold">' + t + '</span>';
-            }).join(' ')
+        var logoSrc = item.logo || 'img/logo-cuadrado.svg';
+        var ubicacion = self.ubicacion(item);
+
+        // Representante + cargo (etiquetas del Excel)
+        var representante = item.representado
+          ? '    <div class="text-xs text-slate-600 mb-2.5 pb-2.5 border-b border-slate-200">' +
+            '<span class="text-slate-400 font-medium">Representante:</span> ' +
+            '<strong class="font-semibold text-slate-700">' + self.esc(item.representado) + '</strong>' +
+            (item.cargo ? '<span class="block text-slate-500">' + self.esc(item.cargo) + '</span>' : '') +
+            '</div>'
+          : '    <div class="mb-2.5 pb-2.5 border-b border-slate-200"></div>';
+
+        var descripcion = item.descripcion
+          ? '    <p class="text-sm text-slate-700 leading-relaxed line-clamp-3 mb-3">' + self.esc(item.descripcion) + '</p>'
           : '';
 
-        var logoSrc = item.logo || 'img/logo-cuadrado.svg';
+        // Filas de datos de contacto con su etiqueta
+        var filas = [
+          self.fila('Teléfono', item.contacto),
+          self.fila('Correo', item.email),
+          self.fila('Dirección', item.direccion)
+        ].join('');
+
+        // Iconos de enlaces externos
+        var enlaces = self.enlacesExternos(item, true);
 
         return [
           '<article class="bg-white border-2 border-slate-900 rounded-2xl p-5 flex flex-col justify-between shadow-[4px_4px_0_0_#0f172a] hover:-translate-y-1 hover:shadow-[6px_6px_0_0_#0f172a] transition duration-200 group">',
           '  <div>',
-          '    <!-- Fila superior: categoría y ciudad -->',
           '    <div class="flex items-center justify-between gap-2 mb-3">',
-          '      <span class="text-xs font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-md border-2 ' + self.config.colorBadge + '">',
-          '        ' + (item.categoria || 'Directorio') + '',
-          '      </span>',
-          '      <span class="text-xs font-semibold text-slate-400 truncate text-right">',
-          '        ' + (item.ciudad || item.departamento || 'Bolivia') + '',
-          '      </span>',
+          '      <span class="text-xs font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-md border-2 ' + self.config.colorBadge + '">' + self.esc(item.categoria || 'Directorio') + '</span>',
+          '      <span class="text-xs font-semibold text-slate-400 truncate text-right">' + self.esc(ubicacion) + '</span>',
           '    </div>',
-          '',
-          '    <!-- Bloque Título con logotipo cuadrado pequeño al lado -->',
           '    <div class="flex items-center gap-3 mb-2.5">',
           '      <div class="w-12 h-12 rounded-xl border-2 border-slate-900 bg-white p-1 shrink-0 flex items-center justify-center overflow-hidden">',
-          '        <img src="' + logoSrc + '" alt="' + item.nombre + '" class="w-full h-full object-contain" onerror="this.src=\'img/logo-cuadrado.svg\'">',
+          '        <img src="' + self.esc(logoSrc) + '" alt="' + self.esc(item.nombre) + '" loading="lazy" class="w-full h-full object-contain" onerror="this.onerror=null;this.src=\'img/logo-cuadrado.svg\'">',
           '      </div>',
-          '      <h2 class="font-display text-lg font-extrabold text-slate-900 group-hover:text-red-700 transition-colors leading-snug line-clamp-2">',
-          '        ' + item.nombre + '',
-          '      </h2>',
+          '      <h2 class="font-display text-lg font-extrabold text-slate-900 group-hover:text-red-700 transition-colors leading-snug line-clamp-2">' + self.esc(item.nombre) + '</h2>',
           '    </div>',
-          '',
-          '    <!-- Representado por: [Nombre] -->',
-          '    <div class="text-xs text-slate-600 mb-2.5 pb-2.5 border-b border-slate-200 flex items-center gap-1.5 flex-wrap">',
-          '      <span class="text-slate-400 font-medium">Representado por:</span>',
-          '      <strong class="font-semibold text-slate-700">' + (item.representado || 'Acreditación Directa') + '</strong>',
-          '    </div>',
-          '',
-          '    <!-- Descripción breve -->',
-          '    <p class="text-sm text-slate-700 leading-relaxed line-clamp-3 mb-3">',
-          '      ' + item.descripcion + '',
-          '    </p>',
-          '',
-          '    <!-- Tags -->',
-          '    <div class="flex flex-wrap gap-1 mt-auto">',
-          '      ' + tagsHtml + '',
-          '    </div>',
+          representante,
+          descripcion,
+          '    <dl class="space-y-1 text-xs">' + filas + '</dl>',
           '  </div>',
-          '',
-          '  <!-- Pie de Tarjeta: Precio y Botón de Modal -->',
-          '  <div class="mt-4 pt-3 border-t border-slate-200 flex items-center justify-between text-sm">',
-          '    <span class="font-bold text-slate-800">' + (item.precio || 'Consultar') + '</span>',
-          '    <button type="button" onclick="CatalogoSeccion.abrirModal(\'' + item.id + '\')" class="font-extrabold text-slate-900 bg-amber-300 hover:bg-amber-200 border-2 border-slate-900 px-3 py-1.5 rounded-lg inline-flex items-center gap-1 active:scale-[0.97] transition duration-150">',
+          '  <div class="mt-4 pt-3 border-t border-slate-200 flex items-center justify-between gap-2 text-sm">',
+          '    <div class="flex items-center gap-1.5">' + enlaces + '</div>',
+          '    <button type="button" onclick="CatalogoSeccion.abrirModal(\'' + item.id + '\')" class="font-extrabold text-slate-900 bg-amber-300 hover:bg-amber-200 border-2 border-slate-900 px-3 py-1.5 rounded-lg inline-flex items-center gap-1 active:scale-[0.97] transition duration-150 shrink-0">',
           '      Ver detalle',
           '      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>',
           '    </button>',
@@ -206,6 +202,59 @@
       }).join('');
 
       grid.innerHTML = html;
+    },
+
+    esc: function (s) {
+      return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+      });
+    },
+
+    ubicacion: function (item) {
+      var partes = [];
+      if (item.ciudad) partes.push(item.ciudad);
+      if (item.pais && String(item.pais).toLowerCase() !== 'bolivia') partes.push(item.pais);
+      return partes.length ? partes.join(', ') : (item.departamento || 'Bolivia');
+    },
+
+    // Fila "Etiqueta: valor" (solo si hay valor)
+    fila: function (etiqueta, valor) {
+      if (!valor) return '';
+      return '<div class="flex gap-1.5"><dt class="text-slate-400 font-medium shrink-0">' + etiqueta + ':</dt>' +
+        '<dd class="text-slate-700 font-semibold truncate" title="' + this.esc(valor) + '">' + this.esc(valor) + '</dd></div>';
+    },
+
+    // Iconos de sitio web / redes (compactos para la tarjeta, o botones para el modal)
+    enlacesExternos: function (item, compacto) {
+      var self = this;
+      var defs = [
+        ['web', 'Sitio web', 'M21 12a9 9 0 11-18 0 9 9 0 0118 0zM3.6 9h16.8M3.6 15h16.8M12 3a14 14 0 010 18M12 3a14 14 0 000 18'],
+        ['facebook', 'Facebook', 'M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z'],
+        ['instagram', 'Instagram', 'M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm5 5a5 5 0 100 10 5 5 0 000-10zm5.5-1.5h.01'],
+        ['tiktok', 'TikTok', 'M9 12a4 4 0 104 4V3a5 5 0 005 5']
+      ];
+      return defs.map(function (d) {
+        var href = item[d[0]];
+        if (!href) return '';
+        var clase = compacto
+          ? 'w-8 h-8 rounded-lg border-2 border-slate-900 bg-white hover:bg-amber-200 flex items-center justify-center transition-colors'
+          : 'px-3 py-2 rounded-xl border-2 border-slate-900 bg-white hover:bg-amber-200 text-xs font-bold text-slate-900 inline-flex items-center gap-1.5 transition-colors';
+        return '<a href="' + self.esc(href) + '" target="_blank" rel="noopener noreferrer" title="' + d[1] + '" aria-label="' + d[1] + '" class="' + clase + '">' +
+          '<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="' + d[2] + '"/></svg>' +
+          (compacto ? '' : '<span>' + d[1] + '</span>') + '</a>';
+      }).join('');
+    },
+
+    // Primer número de teléfono utilizable (para tel: y WhatsApp)
+    primerTelefono: function (item) {
+      var bruto = String(item.contacto || '');
+      var m = bruto.match(/\+?\(?\d[\d\s().-]{5,}/);
+      var num = m ? m[0] : bruto;
+      var digitos = num.replace(/[^0-9]/g, '');
+      if (!digitos) return { tel: '', wa: '' };
+      var conPrefijo = num.trim().charAt(0) === '+';
+      if (!conPrefijo && digitos.indexOf('591') !== 0 && item.departamento !== 'internacional') digitos = '591' + digitos;
+      return { tel: '+' + digitos, wa: digitos };
     },
 
     renderizarPaginacion: function () {
@@ -315,8 +364,9 @@
         '      <div>',
         '        <h2 id="modal-titulo" class="font-display text-xl sm:text-2xl font-extrabold text-slate-900 leading-snug"></h2>',
         '        <div class="text-xs text-slate-500 mt-1">',
-        '          <span class="text-slate-400 font-medium">Representado por:</span>',
+        '          <span class="text-slate-400 font-medium">Representante:</span>',
         '          <strong id="modal-representado" class="font-semibold text-slate-800 ml-1"></strong>',
+        '          <span id="modal-cargo" class="block text-slate-500"></span>',
         '        </div>',
         '      </div>',
         '    </div>',
@@ -325,22 +375,26 @@
         '    <div class="my-4 text-sm text-slate-700 leading-relaxed bg-amber-50 border-2 border-slate-900/20 rounded-xl p-4" id="modal-descripcion">',
         '    </div>',
         '',
-        '    <!-- Bloque de Precios y Contacto -->',
+        '    <!-- Datos de contacto (campos del Excel) -->',
         '    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 my-4 text-xs">',
         '      <div class="p-3 bg-white border-2 border-slate-900 rounded-xl">',
-        '        <span class="text-xs font-bold uppercase tracking-wider text-slate-500 block mb-0.5">Tarifa / Arancel</span>',
-        '        <span id="modal-precio" class="font-extrabold text-slate-900 text-sm"></span>',
+        '        <span class="text-xs font-bold uppercase tracking-wider text-slate-500 block mb-0.5">Teléfono</span>',
+        '        <span id="modal-telefono" class="font-extrabold text-slate-900 text-sm break-words"></span>',
         '      </div>',
         '      <div class="p-3 bg-white border-2 border-slate-900 rounded-xl">',
+        '        <span class="text-xs font-bold uppercase tracking-wider text-slate-500 block mb-0.5">Correo</span>',
+        '        <span id="modal-email" class="font-semibold text-slate-700 leading-snug block break-all"></span>',
+        '      </div>',
+        '      <div class="p-3 bg-white border-2 border-slate-900 rounded-xl sm:col-span-2">',
         '        <span class="text-xs font-bold uppercase tracking-wider text-slate-500 block mb-0.5">Ubicación / Dirección</span>',
-        '        <span id="modal-direccion" class="font-semibold text-slate-700 leading-snug block truncate"></span>',
+        '        <span id="modal-direccion" class="font-semibold text-slate-700 leading-snug block"></span>',
         '      </div>',
         '    </div>',
         '',
-        '    <!-- Tags / Especialidades -->',
-        '    <div class="mb-5">',
-        '      <span class="text-xs font-bold uppercase tracking-wider text-slate-500 block mb-1.5">Atributos y Servicios</span>',
-        '      <div id="modal-tags" class="flex flex-wrap gap-1.5"></div>',
+        '    <!-- Sitio web y redes -->',
+        '    <div class="mb-5" id="modal-enlaces-bloque">',
+        '      <span class="text-xs font-bold uppercase tracking-wider text-slate-500 block mb-1.5">Sitio web y redes</span>',
+        '      <div id="modal-enlaces" class="flex flex-wrap gap-2"></div>',
         '    </div>',
         '',
         '    <!-- Botones de Acción Directa -->',
@@ -385,41 +439,41 @@
       // Inyectar datos
       document.getElementById('modal-badge-categoria').textContent = item.categoria || 'Directorio';
       document.getElementById('modal-badge-categoria').className = 'text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded border ' + this.config.colorBadge;
-      document.getElementById('modal-badge-ciudad').textContent = item.ciudad || item.departamento || 'Bolivia';
-      
+      document.getElementById('modal-badge-ciudad').textContent = this.ubicacion(item);
+
       document.getElementById('modal-logo').src = item.logo || 'img/logo-cuadrado.svg';
+      document.getElementById('modal-logo').onerror = function () { this.onerror = null; this.src = 'img/logo-cuadrado.svg'; };
       document.getElementById('modal-titulo').textContent = item.nombre;
-      document.getElementById('modal-representado').textContent = item.representado || 'Acreditación Directa';
-      
+      document.getElementById('modal-representado').textContent = item.representado || 'No registrado';
+      document.getElementById('modal-cargo').textContent = item.cargo || '';
+
       var desc = item.descripcionDetallada || item.descripcion;
-      document.getElementById('modal-descripcion').innerHTML = '<p>' + desc + '</p>';
-      
-      document.getElementById('modal-precio').textContent = item.precio || 'Tarifa oficial / Consultar';
-      document.getElementById('modal-direccion').textContent = item.direccion || (item.ciudad + ', Bolivia');
+      var descEl = document.getElementById('modal-descripcion');
+      descEl.style.display = desc ? '' : 'none';
+      descEl.textContent = desc || '';
 
-      // Tags
-      var tagsContainer = document.getElementById('modal-tags');
-      if (tagsContainer) {
-        tagsContainer.innerHTML = (item.tags && item.tags.length > 0)
-          ? item.tags.map(function (t) {
-              return '<span class="text-[10px] bg-slate-100 text-slate-700 px-2.5 py-1 rounded-md font-semibold">' + t + '</span>';
-            }).join('')
-          : '<span class="text-xs text-slate-400">Sin etiquetas adicionales</span>';
-      }
+      document.getElementById('modal-telefono').textContent = item.contacto || 'No registrado';
+      document.getElementById('modal-email').textContent = item.email || 'No registrado';
+      document.getElementById('modal-direccion').textContent = item.direccion || this.ubicacion(item);
 
-      // Enlaces
+      var enlaces = this.enlacesExternos(item, false);
+      document.getElementById('modal-enlaces').innerHTML = enlaces;
+      document.getElementById('modal-enlaces-bloque').style.display = enlaces ? '' : 'none';
+
+      // Botones de contacto directo
       var btnWa = document.getElementById('modal-btn-whatsapp');
       var btnTel = document.getElementById('modal-btn-tel');
-      var telLimpio = (item.contacto || '').replace(/[^0-9]/g, '');
+      var tels = this.primerTelefono(item);
 
       if (btnWa) {
-        var numWa = telLimpio.startsWith('591') ? telLimpio : ('591' + telLimpio);
-        var msgWa = encodeURIComponent('Hola, me comunico a través de la Guía Turística de Bolivia para consultar información sobre ' + item.nombre);
-        btnWa.href = 'https://wa.me/' + numWa + '?text=' + msgWa;
+        var msgWa = encodeURIComponent('Hola, me comunico a través de la Guía Internacional de Turismo para consultar información sobre ' + item.nombre);
+        btnWa.href = tels.wa ? 'https://wa.me/' + tels.wa + '?text=' + msgWa : '#';
+        btnWa.style.display = tels.wa ? '' : 'none';
       }
-
       if (btnTel) {
-        btnTel.href = 'tel:' + (item.contacto || '+59122000000');
+        btnTel.href = tels.tel ? 'tel:' + tels.tel : (item.email ? 'mailto:' + item.email : '#');
+        btnTel.querySelector('span').textContent = tels.tel ? 'Llamar Directo' : 'Enviar correo';
+        btnTel.style.display = (tels.tel || item.email) ? '' : 'none';
       }
 
       // Animación suave de apertura (GSAP si está disponible, o CSS fallback)

@@ -38,6 +38,11 @@
       animation-play-state: paused;
     }
 
+    .animate-marquee-reverse { animation-direction: reverse; }
+    .animate-marquee-lento { animation-duration: 60s; }
+    .animate-marquee-medio { animation-duration: 48s; }
+    .animate-marquee-rapido { animation-duration: 40s; }
+
     /* Movimiento reducido: sin marquee */
     @media (prefers-reduced-motion: reduce) {
       .animate-marquee { animation: none; }
@@ -71,7 +76,7 @@
     <div id="hero-bg-image" class="absolute inset-0 transform scale-105">
       <div
         class="hero-bg-capa absolute inset-0 bg-cover bg-center transition-opacity duration-1000"
-        style="opacity: 1; background-image: url('https://images.unsplash.com/photo-1589556264800-08ae9e129a8c?auto=format&fit=crop&w=2000&q=85');"
+        style="opacity: 1; background-image: url('img/paisajes/salar-uyuni-1.webp');"
       ></div>
       <div
         class="hero-bg-capa absolute inset-0 bg-cover bg-center transition-opacity duration-1000"
@@ -85,10 +90,7 @@
     <!-- Indicadores pasivos de fondo automático -->
     <div class="relative z-10 w-full max-w-5xl flex items-center justify-end text-xs text-slate-300">
       <div id="hero-indicators" class="flex items-center gap-1.5 bg-black/40 p-1 rounded-xl border border-white/10 backdrop-blur-md text-xs">
-        <span class="hero-dot w-2 h-2 rounded-full bg-red-600 transition-colors"></span>
-        <span class="hero-dot w-2 h-2 rounded-full bg-white/40 transition-colors"></span>
-        <span class="hero-dot w-2 h-2 rounded-full bg-white/40 transition-colors"></span>
-      </div>
+        </div>
     </div>
 
     <!-- Contenedor central -->
@@ -299,7 +301,188 @@
 
 
   <!-- ========================================================= -->
-  <!-- 3. SECCIÓN MAPA INTERACTIVO 2D                           -->
+  <!-- 3. SECCIÓN EMPRESAS (carrusel de logos en 3 filas)        -->
+  <!-- ========================================================= -->
+  <!-- Los logos salen de data/patrocinadores.js (LOGOS_EMPRESAS) y se pintan con js/empresas-aliados.js -->
+  <section id="empresas" class="py-16 sm:py-24 bg-white overflow-hidden scroll-mt-20">
+    <div class="max-w-6xl mx-auto px-4 mb-10 text-center">
+      <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight">
+        Empresas que ya forman <span class="inline-block bg-emerald-300 px-2.5 -rotate-1 rounded-lg">parte</span>
+      </h2>
+      <p class="text-sm sm:text-base text-slate-600 mt-3 max-w-2xl mx-auto">
+        Agencias, hoteles, gremios e instituciones que ya están en la Guía Internacional de Turismo.
+      </p>
+    </div>
+
+    <div id="empresas-filas" class="relative w-full overflow-hidden py-8 space-y-6 bg-emerald-100 border-y-2 border-slate-900" aria-label="Logos de empresas">
+      <!-- Se inyectan 3 filas de logos mediante js/empresas-aliados.js -->
+    </div>
+  </section>
+
+
+
+  <!-- ========================================================= -->
+  <!-- 4. SECCIÓN DESTINOS (Carrusel)                          -->
+  <!-- ========================================================= -->
+  <section id="destinos" class="py-16 sm:py-24 bg-amber-300 text-slate-900 border-y-4 border-slate-900 overflow-hidden scroll-mt-20">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+        <div class="max-w-2xl">
+          <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight">
+            Destinos para <span class="inline-block bg-red-600 text-white px-2.5 rotate-1 rounded-lg">empezar</span>
+          </h2>
+          <p class="text-sm sm:text-base text-slate-800 mt-3 font-medium">
+            Del altiplano a la selva y los valles: lugares que muestran lo diverso que es Bolivia.
+          </p>
+        </div>
+        <!-- Controles del Carrusel -->
+        <div class="flex items-center justify-center gap-2 shrink-0">
+          <button type="button" onclick="moverCarruselDestinos(-1)" class="w-10 h-10 rounded-xl bg-white hover:bg-slate-100 border-2 border-slate-900 flex items-center justify-center active:scale-[0.97] transition duration-150 cursor-pointer" aria-label="Destino anterior">
+            <svg class="w-5 h-5 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+          </button>
+          <button type="button" onclick="moverCarruselDestinos(1)" class="w-10 h-10 rounded-xl bg-white hover:bg-slate-100 border-2 border-slate-900 flex items-center justify-center active:scale-[0.97] transition duration-150 cursor-pointer" aria-label="Destino siguiente">
+            <svg class="w-5 h-5 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Track del Carrusel (scroll-snap fluido, sin desbordes) -->
+      <div id="carrusel-destinos" class="flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar pt-2 pb-4 pr-2">
+
+        <div class="destino-card snap-start shrink-0 w-[85%] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] bg-white border-2 border-slate-900 rounded-2xl overflow-hidden shadow-[5px_5px_0_0_#0f172a] hover:-translate-y-1 transition group flex flex-col">
+          <div class="relative h-48 overflow-hidden">
+            <img src="img/paisajes/salar-uyuni-1.webp" alt="Salar de Uyuni" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+            <span class="absolute top-3 left-3 bg-red-600 text-white text-xs font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider border-2 border-white">Bolivia</span>
+          </div>
+          <div class="p-6 flex flex-col grow justify-between">
+            <div>
+              <h3 class="text-xl font-bold text-slate-900 group-hover:text-red-700 transition-colors">Salar de Uyuni</h3>
+              <p class="text-sm text-slate-600 mt-2 leading-relaxed">El desierto de sal más grande del mundo: espejos de agua, hoteles de sal y travesías en 4x4.</p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-slate-200 flex items-center justify-end">
+              <button type="button" onclick="prepararBusqueda('Uyuni', 'agencias')" class="text-xs font-bold text-red-700 hover:text-red-800 inline-flex items-center gap-1 cursor-pointer">Ver operadores →</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="destino-card snap-start shrink-0 w-[85%] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] bg-white border-2 border-slate-900 rounded-2xl overflow-hidden shadow-[5px_5px_0_0_#0f172a] hover:-translate-y-1 transition group flex flex-col">
+          <div class="relative h-48 overflow-hidden">
+            <img src="img/paisajes/copacabana.webp" alt="Copacabana, Lago Titicaca" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+            <span class="absolute top-3 left-3 bg-emerald-600 text-white text-xs font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider border-2 border-white">Bolivia / Perú</span>
+          </div>
+          <div class="p-6 flex flex-col grow justify-between">
+            <div>
+              <h3 class="text-xl font-bold text-slate-900 group-hover:text-red-700 transition-colors">Lago Titicaca & Copacabana</h3>
+              <p class="text-sm text-slate-600 mt-2 leading-relaxed">El lago navegable más alto del planeta: Isla del Sol, cultura viva y hospedajes comunitarios.</p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-slate-200 flex items-center justify-end">
+              <button type="button" onclick="prepararBusqueda('Copacabana', 'hoteles')" class="text-xs font-bold text-red-700 hover:text-red-800 inline-flex items-center gap-1 cursor-pointer">Ver hoteles →</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="destino-card snap-start shrink-0 w-[85%] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] bg-white border-2 border-slate-900 rounded-2xl overflow-hidden shadow-[5px_5px_0_0_#0f172a] hover:-translate-y-1 transition group flex flex-col">
+          <div class="relative h-48 overflow-hidden">
+            <img src="img/paisajes/rurrenabaque.webp" alt="Río Beni en Rurrenabaque" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+            <span class="absolute top-3 left-3 bg-slate-900 text-white text-xs font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider border-2 border-white">Amazonía</span>
+          </div>
+          <div class="p-6 flex flex-col grow justify-between">
+            <div>
+              <h3 class="text-xl font-bold text-slate-900 group-hover:text-red-700 transition-colors">Rurrenabaque y Madidi</h3>
+              <p class="text-sm text-slate-600 mt-2 leading-relaxed">Puerta de entrada a una de las zonas con más biodiversidad del mundo: ecolodges y expediciones por río y selva.</p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-slate-200 flex items-center justify-end">
+              <button type="button" onclick="prepararBusqueda('Rurrenabaque', 'agencias')" class="text-xs font-bold text-red-700 hover:text-red-800 inline-flex items-center gap-1 cursor-pointer">Ver operadores →</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="destino-card snap-start shrink-0 w-[85%] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] bg-white border-2 border-slate-900 rounded-2xl overflow-hidden shadow-[5px_5px_0_0_#0f172a] hover:-translate-y-1 transition group flex flex-col">
+          <div class="relative h-48 overflow-hidden">
+            <img src="img/paisajes/la-paz.webp" alt="Ciudad de La Paz" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+            <span class="absolute top-3 left-3 bg-red-600 text-white text-xs font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider border-2 border-white">Sede de gobierno</span>
+          </div>
+          <div class="p-6 flex flex-col grow justify-between">
+            <div>
+              <h3 class="text-xl font-bold text-slate-900 group-hover:text-red-700 transition-colors">La Paz, capital del cielo</h3>
+              <p class="text-sm text-slate-600 mt-2 leading-relaxed">Una ciudad entre montañas, con teleféricos, mercados, museos y la Cordillera Real como telón de fondo.</p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-slate-200 flex items-center justify-end">
+              <button type="button" onclick="prepararBusqueda('La Paz', 'hoteles')" class="text-xs font-bold text-red-700 hover:text-red-800 inline-flex items-center gap-1 cursor-pointer">Ver hoteles →</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="destino-card snap-start shrink-0 w-[85%] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] bg-white border-2 border-slate-900 rounded-2xl overflow-hidden shadow-[5px_5px_0_0_#0f172a] hover:-translate-y-1 transition group flex flex-col">
+          <div class="relative h-48 overflow-hidden">
+            <img src="img/paisajes/altiplano.webp" alt="Plaza y templo en el altiplano" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+            <span class="absolute top-3 left-3 bg-emerald-600 text-white text-xs font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider border-2 border-white">Altiplano</span>
+          </div>
+          <div class="p-6 flex flex-col grow justify-between">
+            <div>
+              <h3 class="text-xl font-bold text-slate-900 group-hover:text-red-700 transition-colors">Altiplano boliviano</h3>
+              <p class="text-sm text-slate-600 mt-2 leading-relaxed">Pueblos de arquitectura andina, volcanes y cielos abiertos a más de 3.600 metros de altura.</p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-slate-200 flex items-center justify-end">
+              <button type="button" onclick="prepararBusqueda('Potosí', 'agencias')" class="text-xs font-bold text-red-700 hover:text-red-800 inline-flex items-center gap-1 cursor-pointer">Ver operadores →</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="destino-card snap-start shrink-0 w-[85%] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] bg-white border-2 border-slate-900 rounded-2xl overflow-hidden shadow-[5px_5px_0_0_#0f172a] hover:-translate-y-1 transition group flex flex-col">
+          <div class="relative h-48 overflow-hidden">
+            <img src="img/paisajes/lago-titicaca.webp" alt="Costa del Lago Titicaca" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+            <span class="absolute top-3 left-3 bg-slate-900 text-white text-xs font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider border-2 border-white">Lago Titicaca</span>
+          </div>
+          <div class="p-6 flex flex-col grow justify-between">
+            <div>
+              <h3 class="text-xl font-bold text-slate-900 group-hover:text-red-700 transition-colors">Orillas del Titicaca</h3>
+              <p class="text-sm text-slate-600 mt-2 leading-relaxed">Terrazas agrícolas, bahías y caminatas con vista al lago sagrado de los Andes.</p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-slate-200 flex items-center justify-end">
+              <button type="button" onclick="prepararBusqueda('Titicaca', 'hoteles')" class="text-xs font-bold text-red-700 hover:text-red-800 inline-flex items-center gap-1 cursor-pointer">Ver hoteles →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================= -->
+  <!-- 5. SECCIÓN ALIADOS (tarjetas fijas, slider de 9 en 9)     -->
+  <!-- ========================================================= -->
+  <!-- Los aliados salen de data/patrocinadores.js (ALIADOS) y se pintan con js/empresas-aliados.js -->
+  <section id="aliados" class="max-w-6xl mx-auto px-4 py-16 sm:py-24 scroll-mt-20">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+      <div class="max-w-2xl">
+        <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight">
+          Nuestros <span class="inline-block bg-red-200 px-2.5 rotate-1 rounded-lg">aliados</span>
+        </h2>
+        <p class="text-sm sm:text-base text-slate-600 mt-3">
+          Instituciones, cámaras, gremios y universidades que respaldan a la Guía Internacional de Turismo.
+        </p>
+      </div>
+      <div class="flex items-center gap-3 shrink-0">
+        <span id="aliados-pagina" class="text-xs font-bold text-slate-500 tabular-nums" aria-live="polite"></span>
+        <button type="button" id="aliados-prev" class="w-10 h-10 rounded-xl bg-white hover:bg-amber-100 border-2 border-slate-900 flex items-center justify-center active:scale-[0.97] transition duration-150 cursor-pointer" aria-label="Aliados anteriores">
+          <svg class="w-5 h-5 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        </button>
+        <button type="button" id="aliados-next" class="w-10 h-10 rounded-xl bg-white hover:bg-amber-100 border-2 border-slate-900 flex items-center justify-center active:scale-[0.97] transition duration-150 cursor-pointer" aria-label="Aliados siguientes">
+          <svg class="w-5 h-5 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div id="aliados-track" class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar -mx-2 px-2 pb-4">
+      <!-- Páginas de 9 aliados mediante js/empresas-aliados.js -->
+    </div>
+  </section>
+
+
+
+  <!-- ========================================================= -->
+  <!-- 6. SECCIÓN MAPA INTERACTIVO 2D                           -->
   <!-- ========================================================= -->
   <section id="seccion-mapa" class="relative min-h-[calc(100vh-4rem)] flex flex-col justify-between items-center px-4 py-8 sm:py-10 bg-[#07090E] text-white overflow-hidden scroll-mt-16 border-t border-slate-800">
     
@@ -432,233 +615,65 @@
 
 
   <!-- ========================================================= -->
-  <!-- 4. SECCIÓN DESTINOS (Carrusel)                          -->
+  <!-- 7. NOSOTROS: ¿QUÉ SOMOS?                                  -->
   <!-- ========================================================= -->
-  <section id="destinos" class="py-16 sm:py-24 bg-amber-300 text-slate-900 border-y-4 border-slate-900 overflow-hidden scroll-mt-20">
-    <!-- EJEMPLO: las calificaciones (★) son datos de prueba; sustituir por datos reales o quitar -->
+  <section id="nosotros" class="max-w-4xl mx-auto px-4 py-16 sm:py-24 text-center scroll-mt-20">
+    <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight">
+      Una guía hecha por el <span class="inline-block bg-red-200 px-2.5 rotate-1 rounded-lg">propio sector</span>
+    </h2>
+    <p class="text-base sm:text-lg text-slate-600 mt-5 leading-relaxed">
+      Nació de la unión de entidades y empresas del turismo boliviano para que viajeros y empresas se encuentren de forma directa, sin intermediarios y con información verificada.
+    </p>
+  </section>
+
+
+  <!-- ========================================================= -->
+  <!-- 8. MISIÓN Y VISIÓN                                        -->
+  <!-- ========================================================= -->
+  <section id="mision-vision" class="bg-amber-200 border-y-4 border-slate-900 py-16 sm:py-24 scroll-mt-20">
     <div class="max-w-6xl mx-auto px-4">
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
-        <div class="max-w-2xl">
-          <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight">
-            Destinos para <span class="inline-block bg-red-600 text-white px-2.5 rotate-1 rounded-lg">empezar</span>
-          </h2>
-          <p class="text-sm sm:text-base text-slate-800 mt-3 font-medium">
-            Del altiplano a la selva y los valles: lugares que muestran lo diverso que es Bolivia.
-          </p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white border-2 border-slate-900 rounded-2xl p-6 sm:p-8 shadow-[5px_5px_0_0_#0f172a]">
+          <h3 class="inline-block bg-slate-900 text-white text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-md -rotate-1">Misión</h3>
+          <p class="text-sm sm:text-base text-slate-800 mt-4 leading-relaxed">Conectar a viajeros con operadores, agencias y servicios turísticos verificados, sin intermediarios.</p>
         </div>
-        <!-- Controles del Carrusel -->
-        <div class="flex items-center justify-center gap-2 shrink-0">
-          <button type="button" onclick="moverCarruselDestinos(-1)" class="w-10 h-10 rounded-xl bg-white hover:bg-slate-100 border-2 border-slate-900 flex items-center justify-center active:scale-[0.97] transition duration-150 cursor-pointer" aria-label="Destino anterior">
-            <svg class="w-5 h-5 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
-          </button>
-          <button type="button" onclick="moverCarruselDestinos(1)" class="w-10 h-10 rounded-xl bg-white hover:bg-slate-100 border-2 border-slate-900 flex items-center justify-center active:scale-[0.97] transition duration-150 cursor-pointer" aria-label="Destino siguiente">
-            <svg class="w-5 h-5 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-          </button>
+        <div class="bg-white border-2 border-slate-900 rounded-2xl p-6 sm:p-8 shadow-[5px_5px_0_0_#0f172a]">
+          <h3 class="inline-block bg-slate-900 text-white text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-md rotate-1">Visión</h3>
+          <p class="text-sm sm:text-base text-slate-800 mt-4 leading-relaxed">Ser la guía de referencia del turismo boliviano y su puerta de entrada a Sudamérica.</p>
         </div>
-      </div>
-
-      <!-- Track del Carrusel (scroll-snap fluido, sin desbordes) -->
-      <div id="carrusel-destinos" class="flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar pt-2 pb-4 pr-2">
-        
-        <!-- Destino 1 -->
-        <div class="destino-card snap-start shrink-0 w-[85%] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] bg-white border-2 border-slate-900 rounded-2xl overflow-hidden shadow-[5px_5px_0_0_#0f172a] hover:-translate-y-1 transition group flex flex-col">
-          <div class="relative h-48 overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1589556264800-08ae9e129a8c?auto=format&fit=crop&w=800&q=80" alt="Salar de Uyuni" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-            <span class="absolute top-3 left-3 bg-red-600 text-white text-xs font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider border-2 border-white">Bolivia</span>
-          </div>
-          <div class="p-6 flex flex-col grow justify-between">
-            <div>
-              <h3 class="text-xl font-bold text-slate-900 group-hover:text-red-700 transition-colors">Salar de Uyuni</h3>
-              <p class="text-sm text-slate-600 mt-2 leading-relaxed">El desierto de sal más grande del mundo: espejos de agua, hoteles de sal y travesías en 4x4.</p>
-            </div>
-            <div class="mt-6 pt-4 border-t border-slate-200 flex items-center justify-between">
-              <span data-ejemplo="calificacion" class="text-xs text-amber-700 font-bold">★ 4.9</span>
-              <button type="button" onclick="prepararBusqueda('Uyuni', 'agencias')" class="text-xs font-bold text-red-700 hover:text-red-800 inline-flex items-center gap-1 cursor-pointer">Ver operadores →</button>
-            </div>
-          </div>
+        <div class="bg-white border-2 border-slate-900 rounded-2xl p-6 sm:p-8 shadow-[5px_5px_0_0_#0f172a]">
+          <h3 class="inline-block bg-slate-900 text-white text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-md -rotate-1">Valores</h3>
+          <p class="text-sm sm:text-base text-slate-800 mt-4 leading-relaxed">Transparencia, verificación de cada acreditación, desarrollo sostenible de las comunidades y acceso sin comisiones ocultas.</p>
         </div>
-
-        <!-- Destino 2 -->
-        <div class="destino-card snap-start shrink-0 w-[85%] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] bg-white border-2 border-slate-900 rounded-2xl overflow-hidden shadow-[5px_5px_0_0_#0f172a] hover:-translate-y-1 transition group flex flex-col">
-          <div class="relative h-48 overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=800&q=80" alt="Lago Titicaca" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-            <span class="absolute top-3 left-3 bg-emerald-600 text-white text-xs font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider border-2 border-white">Bolivia / Perú</span>
-          </div>
-          <div class="p-6 flex flex-col grow justify-between">
-            <div>
-              <h3 class="text-xl font-bold text-slate-900 group-hover:text-red-700 transition-colors">Lago Titicaca & Copacabana</h3>
-              <p class="text-sm text-slate-600 mt-2 leading-relaxed">El lago navegable más alto del planeta. Isla del Sol, cultura viva y hospedajes comunitarios.</p>
-            </div>
-            <div class="mt-6 pt-4 border-t border-slate-200 flex items-center justify-between">
-              <span data-ejemplo="calificacion" class="text-xs text-amber-700 font-bold">★ 4.8</span>
-              <button type="button" onclick="prepararBusqueda('Copacabana', 'hoteles')" class="text-xs font-bold text-red-700 hover:text-red-800 inline-flex items-center gap-1 cursor-pointer">Ver hoteles →</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Destino 3 -->
-        <div class="destino-card snap-start shrink-0 w-[85%] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] bg-white border-2 border-slate-900 rounded-2xl overflow-hidden shadow-[5px_5px_0_0_#0f172a] hover:-translate-y-1 transition group flex flex-col">
-          <div class="relative h-48 overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=800&q=80" alt="Parque Madidi" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-            <span class="absolute top-3 left-3 bg-slate-900 text-white text-xs font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider border-2 border-white">Amazonía</span>
-          </div>
-          <div class="p-6 flex flex-col grow justify-between">
-            <div>
-              <h3 class="text-xl font-bold text-slate-900 group-hover:text-red-700 transition-colors">Parque Nacional Madidi</h3>
-              <p class="text-sm text-slate-600 mt-2 leading-relaxed">Una de las zonas con más biodiversidad del mundo. Ecolodges en plena selva y expediciones de fauna y flora.</p>
-            </div>
-            <div class="mt-6 pt-4 border-t border-slate-200 flex items-center justify-between">
-              <span data-ejemplo="calificacion" class="text-xs text-amber-700 font-bold">★ 4.9</span>
-              <button type="button" onclick="prepararBusqueda('Madidi', 'agencias')" class="text-xs font-bold text-red-700 hover:text-red-800 inline-flex items-center gap-1 cursor-pointer">Ver operadores →</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Destino 4 -->
-        <div class="destino-card snap-start shrink-0 w-[85%] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] bg-white border-2 border-slate-900 rounded-2xl overflow-hidden shadow-[5px_5px_0_0_#0f172a] hover:-translate-y-1 transition group flex flex-col">
-          <div class="relative h-48 overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1526772662000-3f88f10405ff?auto=format&fit=crop&w=800&q=80" alt="Ruta del Vino Tarija" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-            <span class="absolute top-3 left-3 bg-red-600 text-white text-xs font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider border-2 border-white">Valles del Sur</span>
-          </div>
-          <div class="p-6 flex flex-col grow justify-between">
-            <div>
-              <h3 class="text-xl font-bold text-slate-900 group-hover:text-red-700 transition-colors">Ruta del Vino & Singani</h3>
-              <p class="text-sm text-slate-600 mt-2 leading-relaxed">Bodegas a más de 2.000 metros de altura, catas y un clima templado casi todo el año.</p>
-            </div>
-            <div class="mt-6 pt-4 border-t border-slate-200 flex items-center justify-between">
-              <span data-ejemplo="calificacion" class="text-xs text-amber-700 font-bold">★ 5.0</span>
-              <button type="button" onclick="prepararBusqueda('Tarija', 'servicios-especiales')" class="text-xs font-bold text-red-700 hover:text-red-800 inline-flex items-center gap-1 cursor-pointer">Ver experiencias →</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Destino 5 -->
-        <div class="destino-card snap-start shrink-0 w-[85%] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] bg-white border-2 border-slate-900 rounded-2xl overflow-hidden shadow-[5px_5px_0_0_#0f172a] hover:-translate-y-1 transition group flex flex-col">
-          <div class="relative h-48 overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80" alt="Conexiones Internacionales" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-            <span class="absolute top-3 left-3 bg-emerald-600 text-white text-xs font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider border-2 border-white">Internacional</span>
-          </div>
-          <div class="p-6 flex flex-col grow justify-between">
-            <div>
-              <h3 class="text-xl font-bold text-slate-900 group-hover:text-red-700 transition-colors">Conexiones con Sudamérica</h3>
-              <p class="text-sm text-slate-600 mt-2 leading-relaxed">Rutas y alianzas que conectan Bolivia con los países vecinos y con agencias del exterior.</p>
-            </div>
-            <div class="mt-6 pt-4 border-t border-slate-200 flex items-center justify-between">
-              <span data-ejemplo="calificacion" class="text-xs text-amber-700 font-bold">★ 4.8</span>
-              <button type="button" onclick="prepararBusqueda('Internacional', 'operadores')" class="text-xs font-bold text-red-700 hover:text-red-800 inline-flex items-center gap-1 cursor-pointer">Ver red internacional →</button>
-            </div>
-          </div>
-        </div>
-
       </div>
     </div>
   </section>
 
 
   <!-- ========================================================= -->
-  <!-- 5. SECCIÓN EMPRESAS Y ALIADOS (Marquee)                  -->
-  <!-- ========================================================= -->
-  <!-- EJEMPLO: cada recuadro es un espacio de logo; sustituir el src por el logo real (p. ej. img/empresas/nombre.png) y duplicar el grupo -->
-  <section id="empresas" class="py-16 bg-white overflow-hidden scroll-mt-20">
-    <div class="max-w-6xl mx-auto px-4 mb-10 text-center">
-      <h2 class="text-2xl sm:text-4xl font-bold text-slate-900 tracking-tight">
-        Empresas que ya forman <span class="inline-block bg-emerald-300 px-2.5 -rotate-1 rounded-lg">parte</span>
-      </h2>
-    </div>
-
-    <!-- Carrusel infinito de logos -->
-    <div class="relative w-full overflow-hidden py-6 bg-emerald-100 border-y-2 border-slate-900">
-      <div class="animate-marquee flex items-center gap-8">
-
-        <div class="flex items-center gap-8 shrink-0 pr-8">
-          <div class="w-40 h-20 shrink-0 bg-white rounded-xl border-2 border-slate-900 shadow-[3px_3px_0_0_#0f172a] flex items-center justify-center p-3"><img src="img/logo-placeholder.svg" alt="Logo de empresa aliada" class="max-h-full max-w-full object-contain"></div>
-          <div class="w-40 h-20 shrink-0 bg-white rounded-xl border-2 border-slate-900 shadow-[3px_3px_0_0_#0f172a] flex items-center justify-center p-3"><img src="img/logo-placeholder.svg" alt="Logo de empresa aliada" class="max-h-full max-w-full object-contain"></div>
-          <div class="w-40 h-20 shrink-0 bg-white rounded-xl border-2 border-slate-900 shadow-[3px_3px_0_0_#0f172a] flex items-center justify-center p-3"><img src="img/logo-placeholder.svg" alt="Logo de empresa aliada" class="max-h-full max-w-full object-contain"></div>
-          <div class="w-40 h-20 shrink-0 bg-white rounded-xl border-2 border-slate-900 shadow-[3px_3px_0_0_#0f172a] flex items-center justify-center p-3"><img src="img/logo-placeholder.svg" alt="Logo de empresa aliada" class="max-h-full max-w-full object-contain"></div>
-          <div class="w-40 h-20 shrink-0 bg-white rounded-xl border-2 border-slate-900 shadow-[3px_3px_0_0_#0f172a] flex items-center justify-center p-3"><img src="img/logo-placeholder.svg" alt="Logo de empresa aliada" class="max-h-full max-w-full object-contain"></div>
-          <div class="w-40 h-20 shrink-0 bg-white rounded-xl border-2 border-slate-900 shadow-[3px_3px_0_0_#0f172a] flex items-center justify-center p-3"><img src="img/logo-placeholder.svg" alt="Logo de empresa aliada" class="max-h-full max-w-full object-contain"></div>
-          <div class="w-40 h-20 shrink-0 bg-white rounded-xl border-2 border-slate-900 shadow-[3px_3px_0_0_#0f172a] flex items-center justify-center p-3"><img src="img/logo-placeholder.svg" alt="Logo de empresa aliada" class="max-h-full max-w-full object-contain"></div>
-          <div class="w-40 h-20 shrink-0 bg-white rounded-xl border-2 border-slate-900 shadow-[3px_3px_0_0_#0f172a] flex items-center justify-center p-3"><img src="img/logo-placeholder.svg" alt="Logo de empresa aliada" class="max-h-full max-w-full object-contain"></div>
-          <div class="w-40 h-20 shrink-0 bg-white rounded-xl border-2 border-slate-900 shadow-[3px_3px_0_0_#0f172a] flex items-center justify-center p-3"><img src="img/logo-placeholder.svg" alt="Logo de empresa aliada" class="max-h-full max-w-full object-contain"></div>
-          <div class="w-40 h-20 shrink-0 bg-white rounded-xl border-2 border-slate-900 shadow-[3px_3px_0_0_#0f172a] flex items-center justify-center p-3"><img src="img/logo-placeholder.svg" alt="Logo de empresa aliada" class="max-h-full max-w-full object-contain"></div>
-        </div>
-
-        <div class="flex items-center gap-8 shrink-0 pr-8" aria-hidden="true">
-          <div class="w-40 h-20 shrink-0 bg-white rounded-xl border-2 border-slate-900 shadow-[3px_3px_0_0_#0f172a] flex items-center justify-center p-3"><img src="img/logo-placeholder.svg" alt="" class="max-h-full max-w-full object-contain"></div>
-          <div class="w-40 h-20 shrink-0 bg-white rounded-xl border-2 border-slate-900 shadow-[3px_3px_0_0_#0f172a] flex items-center justify-center p-3"><img src="img/logo-placeholder.svg" alt="" class="max-h-full max-w-full object-contain"></div>
-          <div class="w-40 h-20 shrink-0 bg-white rounded-xl border-2 border-slate-900 shadow-[3px_3px_0_0_#0f172a] flex items-center justify-center p-3"><img src="img/logo-placeholder.svg" alt="" class="max-h-full max-w-full object-contain"></div>
-          <div class="w-40 h-20 shrink-0 bg-white rounded-xl border-2 border-slate-900 shadow-[3px_3px_0_0_#0f172a] flex items-center justify-center p-3"><img src="img/logo-placeholder.svg" alt="" class="max-h-full max-w-full object-contain"></div>
-          <div class="w-40 h-20 shrink-0 bg-white rounded-xl border-2 border-slate-900 shadow-[3px_3px_0_0_#0f172a] flex items-center justify-center p-3"><img src="img/logo-placeholder.svg" alt="" class="max-h-full max-w-full object-contain"></div>
-          <div class="w-40 h-20 shrink-0 bg-white rounded-xl border-2 border-slate-900 shadow-[3px_3px_0_0_#0f172a] flex items-center justify-center p-3"><img src="img/logo-placeholder.svg" alt="" class="max-h-full max-w-full object-contain"></div>
-          <div class="w-40 h-20 shrink-0 bg-white rounded-xl border-2 border-slate-900 shadow-[3px_3px_0_0_#0f172a] flex items-center justify-center p-3"><img src="img/logo-placeholder.svg" alt="" class="max-h-full max-w-full object-contain"></div>
-          <div class="w-40 h-20 shrink-0 bg-white rounded-xl border-2 border-slate-900 shadow-[3px_3px_0_0_#0f172a] flex items-center justify-center p-3"><img src="img/logo-placeholder.svg" alt="" class="max-h-full max-w-full object-contain"></div>
-          <div class="w-40 h-20 shrink-0 bg-white rounded-xl border-2 border-slate-900 shadow-[3px_3px_0_0_#0f172a] flex items-center justify-center p-3"><img src="img/logo-placeholder.svg" alt="" class="max-h-full max-w-full object-contain"></div>
-          <div class="w-40 h-20 shrink-0 bg-white rounded-xl border-2 border-slate-900 shadow-[3px_3px_0_0_#0f172a] flex items-center justify-center p-3"><img src="img/logo-placeholder.svg" alt="" class="max-h-full max-w-full object-contain"></div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ========================================================= -->
-  <!-- 6. SECCIÓN INSTITUCIONAL: NOSOTROS Y FUNDADORES         -->
+  <!-- 9. ALIADOS ESTRATÉGICOS (fundadores)                      -->
   <!-- ========================================================= -->
   <!-- PENDIENTE: confirmar el nombre completo de cada fundador (o reemplazar por su logo) -->
-  <section id="nosotros" class="max-w-6xl mx-auto px-4 py-16 sm:py-24 scroll-mt-20">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
-
-      <div class="lg:col-span-5">
-        <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight">
-          Una guía hecha por el <span class="inline-block bg-red-200 px-2.5 rotate-1 rounded-lg">propio sector</span>
-        </h2>
-        <p class="text-sm sm:text-base text-slate-600 mt-3 leading-relaxed">
-          Nació de la unión de entidades y empresas del turismo boliviano para que viajeros y empresas se encuentren de forma directa.
-        </p>
-
-        <dl class="mt-8 pt-8 border-t border-slate-200 space-y-6">
-          <div>
-            <dt class="inline-block bg-slate-900 text-white text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-md -rotate-1">Misión</dt>
-            <dd class="text-sm sm:text-base text-slate-700 mt-1.5 leading-relaxed">Conectar a viajeros con operadores, agencias y servicios turísticos verificados, sin intermediarios.</dd>
-          </div>
-          <div>
-            <dt class="inline-block bg-slate-900 text-white text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-md -rotate-1">Visión</dt>
-            <dd class="text-sm sm:text-base text-slate-700 mt-1.5 leading-relaxed">Ser la guía de referencia del turismo boliviano y su puerta de entrada a Sudamérica.</dd>
-          </div>
-          <div>
-            <dt class="inline-block bg-slate-900 text-white text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-md -rotate-1">Valores</dt>
-            <dd class="text-sm sm:text-base text-slate-700 mt-1.5 leading-relaxed">Transparencia, verificación de cada acreditación, desarrollo sostenible de las comunidades y acceso sin comisiones ocultas.</dd>
-          </div>
-        </dl>
-      </div>
-
-      <div id="fundadores" class="lg:col-span-7 scroll-mt-20">
-        <h3 class="text-sm font-extrabold uppercase tracking-wider text-slate-900">Quiénes la impulsan</h3>
-        <ul class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <li class="bg-red-100 border-2 border-slate-900 rounded-xl p-5 min-h-[96px] flex items-center justify-center text-center shadow-[4px_4px_0_0_#0f172a]">
-          <h4 class="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-wide">SCATUR</h4>
-        </li>
-        <li class="bg-amber-200 border-2 border-slate-900 rounded-xl p-5 min-h-[96px] flex items-center justify-center text-center shadow-[4px_4px_0_0_#0f172a]">
-          <h4 class="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-wide">AGB</h4>
-        </li>
-        <li class="bg-emerald-100 border-2 border-slate-900 rounded-xl p-5 min-h-[96px] flex items-center justify-center text-center shadow-[4px_4px_0_0_#0f172a]">
-          <h4 class="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-wide">BLACKBULLS</h4>
-        </li>
-        <li class="bg-red-100 border-2 border-slate-900 rounded-xl p-5 min-h-[96px] flex items-center justify-center text-center shadow-[4px_4px_0_0_#0f172a]">
-          <h4 class="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-wide">DOMOS</h4>
-        </li>
-        <li class="bg-amber-200 border-2 border-slate-900 rounded-xl p-5 min-h-[96px] flex items-center justify-center text-center shadow-[4px_4px_0_0_#0f172a] sm:col-span-2">
-          <h4 class="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-wide">TIP</h4>
-        </li>
-        </ul>
-      </div>
-
+  <section id="fundadores" class="max-w-6xl mx-auto px-4 py-16 sm:py-24 scroll-mt-20">
+    <div class="text-center max-w-2xl mx-auto mb-10">
+      <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight">
+        Aliados <span class="inline-block bg-emerald-300 px-2.5 -rotate-1 rounded-lg">estratégicos</span>
+      </h2>
+      <p class="text-sm sm:text-base text-slate-600 mt-3">Quiénes impulsan la guía.</p>
     </div>
+    <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <li class="bg-red-100 border-2 border-slate-900 rounded-xl p-5 min-h-[96px] flex items-center justify-center text-center shadow-[4px_4px_0_0_#0f172a]"><h4 class="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-wide">SCATUR</h4></li>
+      <li class="bg-amber-200 border-2 border-slate-900 rounded-xl p-5 min-h-[96px] flex items-center justify-center text-center shadow-[4px_4px_0_0_#0f172a]"><h4 class="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-wide">AGB</h4></li>
+      <li class="bg-emerald-100 border-2 border-slate-900 rounded-xl p-5 min-h-[96px] flex items-center justify-center text-center shadow-[4px_4px_0_0_#0f172a]"><h4 class="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-wide">BLACKBULLS</h4></li>
+      <li class="bg-red-100 border-2 border-slate-900 rounded-xl p-5 min-h-[96px] flex items-center justify-center text-center shadow-[4px_4px_0_0_#0f172a]"><h4 class="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-wide">DOMOS</h4></li>
+      <li class="bg-amber-200 border-2 border-slate-900 rounded-xl p-5 min-h-[96px] flex items-center justify-center text-center shadow-[4px_4px_0_0_#0f172a] sm:col-span-2 lg:col-span-2"><h4 class="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-wide">TIP</h4></li>
+    </ul>
   </section>
 
 
+
   <!-- ========================================================= -->
-  <!-- 7. SECCIÓN RECONOCIMIENTOS                                -->
+  <!-- 10. SECCIÓN RECONOCIMIENTOS                              -->
   <!-- ========================================================= -->
   <!-- EJEMPLO: los reconocimientos son datos de prueba; sustituir por los reales (con fecha y fuente) o quitar la sección -->
   <section id="reconocimientos" class="bg-emerald-600 border-y-4 border-slate-900 py-16 sm:py-24 scroll-mt-20">
@@ -693,7 +708,7 @@
 
 
   <!-- ========================================================= -->
-  <!-- 8. SECCIÓN REGISTRO DE EMPRESA                             -->
+  <!-- 11. SECCIÓN REGISTRO DE EMPRESA                           -->
   <!-- ========================================================= -->
   <section id="seccion-registro" class="relative max-w-6xl mx-auto px-4 py-16 sm:py-24 scroll-mt-20">
     <div class="bg-red-600 rounded-2xl text-white p-8 sm:p-12 relative overflow-hidden border-2 border-slate-900 shadow-[8px_8px_0_0_#0f172a]">
@@ -760,8 +775,10 @@
   <div id="main-footer"></div>
   <script src="js/motion.js"></script>
   <script src="js/selects.js"></script>
-  <script src="js/mascota.js"></script>
+  <script src="js/panel-lateral.js"></script>
   <script src="js/footer.js"></script>
+  <script src="data/patrocinadores.js"></script>
+  <script src="js/empresas-aliados.js"></script>
 
 
   <!-- ========================================================= -->
@@ -894,13 +911,23 @@
 
     // Hero Automático Continuo (Cross-fade cada 5 segundos)
     const heroImages = [
-      'https://images.unsplash.com/photo-1589556264800-08ae9e129a8c?auto=format&fit=crop&w=2000&q=85',
-      'https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=2000&q=85',
-      'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=2000&q=85'
+      'img/paisajes/salar-uyuni-1.webp',
+      'img/paisajes/copacabana.webp',
+      'img/paisajes/la-paz.webp',
+      'img/paisajes/rurrenabaque.webp',
+      'img/paisajes/lago-titicaca.webp',
+      'img/paisajes/altiplano.webp',
+      'img/paisajes/salar-uyuni-3.webp'
     ];
     let currentHeroIndex = 0;
     function iniciarHeroAutomatico() {
       const capas = document.querySelectorAll("#hero-bg-image .hero-bg-capa");
+      const contDots = document.getElementById("hero-indicators");
+      if (contDots) {
+        contDots.innerHTML = heroImages.map((_, i) =>
+          `<span class="hero-dot w-2 h-2 rounded-full ${i === 0 ? 'bg-red-600' : 'bg-white/40'} transition-colors"></span>`
+        ).join("");
+      }
       const dots = document.querySelectorAll(".hero-dot");
       if (capas.length < 2) return;
 
