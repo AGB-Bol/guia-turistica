@@ -21,7 +21,7 @@ window.DATOS_EMBAJADAS = [
     contacto: "+591 2 277 2212",
     web: "https://embamex.sre.gob.mx/bolivia/",
     direccion: "Claudio Aliaga N.º 1155, Edificio Ríos Tapia, San Miguel, La Paz, Bolivia",
-    logo: "img/logo-cuadrado.svg"
+    logo: "img/banderas/mx.svg"
   },
   {
     id: "emb-02",
@@ -37,7 +37,7 @@ window.DATOS_EMBAJADAS = [
     contacto: "+591 2 214 5404",
     email: "embcr-bo@rree.go.cr",
     direccion: "Calle 14 de Achumani esquina Quenallata N.º 18, Zona de Achumani, La Paz, Bolivia",
-    logo: "img/logo-cuadrado.svg"
+    logo: "img/banderas/cr.svg"
   },
   {
     id: "emb-03",
@@ -51,6 +51,6 @@ window.DATOS_EMBAJADAS = [
     contacto: "+591 2 241 9110",
     web: "https://www.bo.emb-japan.go.jp/",
     direccion: "Calle Rosendo Gutiérrez N.º 497, esquina Av. Sánchez Lima, La Paz, Bolivia",
-    logo: "img/logo-cuadrado.svg"
+    logo: "img/banderas/jp.svg"
   },
 ];

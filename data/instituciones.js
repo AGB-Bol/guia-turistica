@@ -70,7 +70,7 @@ window.DATOS_INSTITUCIONES = [
     descripcion: "Gobierno Autónomo Municipal de Sorata; portal oficial con información y actividades turísticas.",
     contacto: "22134240",
     web: "https://sorata.bo/",
-    logo: "img/logo-cuadrado.svg"
+    logo: "img/instituciones/bandera-sorata.webp"
   },
   {
     id: "inst-05",
@@ -84,7 +84,7 @@ window.DATOS_INSTITUCIONES = [
     ciudad: "Coripata",
     descripcion: "Gobierno Autónomo Municipal de Coripata.",
     contacto: "77733934",
-    logo: "img/logo-cuadrado.svg"
+    logo: "img/instituciones/bandera-coripata.webp"
   },
   {
     id: "inst-06",
